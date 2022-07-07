@@ -2,6 +2,8 @@ package es.eoi.java2022.recuerdamelon.service;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Calendar;
 import es.eoi.java2022.recuerdamelon.data.repository.CalendarRepository;
+import es.eoi.java2022.recuerdamelon.dto.CalendarDTO;
+import es.eoi.java2022.recuerdamelon.service.mapper.CalendarServiceMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,11 @@ import java.util.List;
 @Service
 public class CalendarService {
     private final CalendarRepository repository;
+    private final CalendarServiceMapper mapper;
 
-    public CalendarService(CalendarRepository repository) {
+    public CalendarService(CalendarRepository repository, CalendarServiceMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     public List<Calendar> findAll(Pageable pageable) {
@@ -35,11 +39,11 @@ public class CalendarService {
         return repository.save(calendar);
     }
 
-    public Calendar save(Calendar calendar) {
+    public CalendarDTO save(CalendarDTO calendar) {
         if (calendar.getId() != null) {
             throw new RuntimeException("El Identificador no puede ser nulo");
         }
-        return repository.save(calendar);
+        return mapper.toDto(repository.save(mapper.toEntity(calendar)));
     }
 
 }

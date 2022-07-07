@@ -1,7 +1,7 @@
-INSERT INTO Calendar (ID,NAME) VALUES(1,'calendario1');
-INSERT INTO Calendar (ID,NAME) VALUES(2,'calendario2');
-INSERT INTO Calendar (ID,NAME) VALUES(3,'calendario3');
-INSERT INTO Calendar (ID,NAME) VALUES(4,'calendario4');
+INSERT INTO Calendar (ID,NAME, TASK_DATE) VALUES(1,'calendario1', '2022-07-07 09:48:00.0');
+INSERT INTO Calendar (ID,NAME, TASK_DATE) VALUES(2,'calendario2', '2022-07-07 09:48:00.0');
+INSERT INTO Calendar (ID,NAME, TASK_DATE) VALUES(3,'calendario3', '2022-07-07 09:48:00.0');
+INSERT INTO Calendar (ID,NAME, TASK_DATE) VALUES(4,'calendario4', '2022-07-07 09:48:00.0');
 
 INSERT INTO Notification (ID,notification_Time,notified) VALUES(1,2,false);
 INSERT INTO Notification (ID,notification_Time,notified) VALUES(3,4,false);
