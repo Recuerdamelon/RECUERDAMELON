@@ -2,9 +2,11 @@
 package es.eoi.java2022.recuerdamelon.web.rest;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Calendar;
+import es.eoi.java2022.recuerdamelon.dto.CalendarDTO;
 import es.eoi.java2022.recuerdamelon.service.CalendarService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,30 +27,31 @@ public class CalendarRestController {
 
     //Métodos...
     @GetMapping("/calendar")
-    public List<Calendar> findAll (@RequestParam("page") Optional<Integer> page,
-                                   @RequestParam("size") Optional<Integer> size){
+    public List<Calendar> findAll(@RequestParam("page") Optional<Integer> page,
+                                  @RequestParam("size") Optional<Integer> size) {
         // Convierte parámetros page y size a pageable
         Pageable pageable = PageRequest.of(page.orElse(1) - 1, size.orElse(10));
         return calendarService.findAll(pageable);
     }
 
     @GetMapping("/calendar/{id}")
-    public Calendar findById (@PathVariable (value="id") Integer id){
+    public Calendar findById(@PathVariable(value = "id") Integer id) {
         return calendarService.findById(id);
     } //Optional¿?¿
 
     @DeleteMapping("/calendar/{id}")
-    public void deleteById (@PathVariable (value = "id") Integer id){
+    public void deleteById(@PathVariable(value = "id") Integer id) {
         calendarService.deleteById(id);
     }
 
+    @Transactional
     @PostMapping("/calendar")
-    public Calendar save (Calendar calendar){
+    public CalendarDTO save(@RequestBody CalendarDTO calendar) {
         return calendarService.save(calendar);
     }
 
     @PutMapping("/calendar")
-    public Calendar update (Calendar calendar){
+    public Calendar update(Calendar calendar) {
         return calendarService.update(calendar);
     }
 }
