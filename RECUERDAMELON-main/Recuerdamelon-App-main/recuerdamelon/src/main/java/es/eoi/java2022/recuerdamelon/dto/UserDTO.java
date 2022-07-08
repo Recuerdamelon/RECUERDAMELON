@@ -1,5 +1,7 @@
 package es.eoi.java2022.recuerdamelon.dto;
 
+import java.util.List;
+
 public class UserDTO {
     private Integer id;
     private String username;
@@ -9,6 +11,8 @@ public class UserDTO {
     private String password;
     private boolean active;
     private byte[] avatar;
+
+    private List<UserRoleDTO> roles;
 
     public Integer getId() {
         return id;
@@ -72,5 +76,13 @@ public class UserDTO {
 
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
+    }
+
+    public List<UserRoleDTO> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<UserRoleDTO> roles) {
+        this.roles = roles;
     }
 }
