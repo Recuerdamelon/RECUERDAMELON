@@ -8,11 +8,12 @@ public class UserDTO {
     private String name;
     private String surname;
     private String email;
-    private String password;
     private boolean active;
     private byte[] avatar;
 
     private List<UserRoleDTO> roles;
+
+    private List<TaskDTO> task;
 
     public Integer getId() {
         return id;
@@ -54,14 +55,6 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public boolean isActive() {
         return active;
     }
@@ -84,5 +77,13 @@ public class UserDTO {
 
     public void setRoles(List<UserRoleDTO> roles) {
         this.roles = roles;
+    }
+
+    public List<TaskDTO> getTask() {
+        return task;
+    }
+
+    public void setTask(List<TaskDTO> task) {
+        this.task = task;
     }
 }
