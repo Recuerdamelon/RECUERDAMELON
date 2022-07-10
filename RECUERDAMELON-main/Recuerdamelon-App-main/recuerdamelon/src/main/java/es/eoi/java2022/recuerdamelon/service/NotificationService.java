@@ -2,20 +2,25 @@ package es.eoi.java2022.recuerdamelon.service;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Notification;
 import es.eoi.java2022.recuerdamelon.data.repository.NotificacionRepository;
+import es.eoi.java2022.recuerdamelon.dto.NotificationDTO;
+import es.eoi.java2022.recuerdamelon.service.mapper.NotificationServiceMapper;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class NotificationService {
     private final NotificacionRepository repository;
+    private final NotificationServiceMapper mapper;
 
-    public NotificationService(NotificacionRepository repository) {
+    public NotificationService(NotificacionRepository repository, NotificationServiceMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
-    public List<Notification> findAll(PageRequest of) {
-        return repository.findAll();
+    public List<Notification> findAll(Pageable pageable) {
+        return repository.findAll(pageable).toList();
 
     }
 
@@ -32,11 +37,11 @@ public class NotificationService {
         }
         return repository.save(notification);
     }
-    public Notification save(Notification notification) {
-        if (notification.getId() != null){
+    public NotificationDTO save(NotificationDTO notificationDTO) {
+        if (notificationDTO.getId() != null){
             throw new RuntimeException("El Identificador no puede ser nulo");
         }
-        return repository.save(notification);
+        return mapper.toDto(repository.save(mapper.toEntity(notificationDTO)));
     }
 
 }

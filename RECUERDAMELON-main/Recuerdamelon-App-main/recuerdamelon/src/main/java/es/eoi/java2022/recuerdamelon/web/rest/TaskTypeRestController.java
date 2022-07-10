@@ -1,6 +1,7 @@
 package es.eoi.java2022.recuerdamelon.web.rest;
 
 import es.eoi.java2022.recuerdamelon.data.entity.TaskType;
+import es.eoi.java2022.recuerdamelon.dto.TaskTypeDTO;
 import es.eoi.java2022.recuerdamelon.service.TaskTypeService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +37,8 @@ public class TaskTypeRestController {
     }
 
     @PostMapping("/tasktype")
-    public TaskType save(TaskType taskType) {
-        return taskTypeService.save(taskType);
+    public TaskTypeDTO save(TaskTypeDTO taskTypeDTO) {
+        return taskTypeService.save(taskTypeDTO);
     }
 
     @PutMapping("/tasktype")

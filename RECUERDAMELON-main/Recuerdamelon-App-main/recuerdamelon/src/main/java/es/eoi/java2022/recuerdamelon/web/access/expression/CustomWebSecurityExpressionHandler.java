@@ -1,4 +1,4 @@
-package es.eoi.java2022.recuerdamelon.web;
+package es.eoi.java2022.recuerdamelon.web.access.expression;
 
 import org.springframework.security.access.expression.SecurityExpressionOperations;
 import org.springframework.security.authentication.AuthenticationTrustResolver;

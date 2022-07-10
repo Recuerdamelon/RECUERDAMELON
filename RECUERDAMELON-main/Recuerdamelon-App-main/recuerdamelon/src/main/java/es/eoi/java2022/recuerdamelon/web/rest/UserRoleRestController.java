@@ -2,6 +2,7 @@ package es.eoi.java2022.recuerdamelon.web.rest;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Notification;
 import es.eoi.java2022.recuerdamelon.data.entity.UserRole;
+import es.eoi.java2022.recuerdamelon.dto.UserRoleDTO;
 import es.eoi.java2022.recuerdamelon.service.UserRoleService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +38,8 @@ public class UserRoleRestController {
     }
 
     @PostMapping("/userrole")
-    public UserRole save(UserRole userRole) {
-        return userRoleService.save(userRole);
+    public UserRoleDTO save(UserRoleDTO userRoleDTO) {
+        return userRoleService.save(userRoleDTO);
     }
 
     @PutMapping("/userrole")

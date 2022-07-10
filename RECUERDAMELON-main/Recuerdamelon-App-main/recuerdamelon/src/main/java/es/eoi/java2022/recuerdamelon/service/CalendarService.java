@@ -4,8 +4,11 @@ import es.eoi.java2022.recuerdamelon.data.entity.Calendar;
 import es.eoi.java2022.recuerdamelon.data.repository.CalendarRepository;
 import es.eoi.java2022.recuerdamelon.dto.CalendarDTO;
 import es.eoi.java2022.recuerdamelon.service.mapper.CalendarServiceMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -39,11 +42,11 @@ public class CalendarService {
         return repository.save(calendar);
     }
 
-    public CalendarDTO save(CalendarDTO calendar) {
-        if (calendar.getId() != null) {
+    public CalendarDTO save(CalendarDTO calendarDTO) {
+        if (calendarDTO.getId() != null) {
             throw new RuntimeException("El Identificador no puede ser nulo");
         }
-        return mapper.toDto(repository.save(mapper.toEntity(calendar)));
+        return mapper.toDto(repository.save(mapper.toEntity(calendarDTO)));
     }
 
 }

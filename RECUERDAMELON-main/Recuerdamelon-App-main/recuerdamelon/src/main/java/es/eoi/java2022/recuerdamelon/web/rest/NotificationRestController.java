@@ -2,6 +2,7 @@ package es.eoi.java2022.recuerdamelon.web.rest;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Notification;
 import es.eoi.java2022.recuerdamelon.data.repository.NotificacionRepository;
+import es.eoi.java2022.recuerdamelon.dto.NotificationDTO;
 import es.eoi.java2022.recuerdamelon.service.NotificationService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +38,8 @@ public class NotificationRestController {
     }
 
     @PostMapping ("/notification")
-    public Notification save (Notification notification){
-        return notificationService.save(notification);
+    public NotificationDTO save (NotificationDTO notificationDTO){
+        return notificationService.save(notificationDTO);
     }
 
     @PutMapping ("/notification")
