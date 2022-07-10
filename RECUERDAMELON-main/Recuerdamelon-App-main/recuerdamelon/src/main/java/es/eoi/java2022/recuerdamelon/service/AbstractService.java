@@ -1,6 +1,6 @@
 package es.eoi.java2022.recuerdamelon.service;
 
-import es.eoi.java2022.recuerdamelon.service.mapper.AbstractServiceMapper;
+import es.eoi.java2022.recuerdamelon.service.mapper.IEntityMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public abstract class AbstractService<E, ID, DTO, REPO extends JpaRepository<E, ID>, MAPPER extends AbstractServiceMapper<E, DTO>>  {
+public abstract class AbstractService<E, ID, DTO, REPO extends JpaRepository<E, ID>, MAPPER extends IEntityMapper<E, DTO>>  {
     private final REPO repository;
     private final MAPPER serviceMapper;
 

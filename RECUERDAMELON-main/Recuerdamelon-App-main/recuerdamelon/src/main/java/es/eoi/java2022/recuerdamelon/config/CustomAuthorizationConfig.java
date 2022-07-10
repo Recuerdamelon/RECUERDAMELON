@@ -1,6 +1,6 @@
 package es.eoi.java2022.recuerdamelon.config;
 
-import es.eoi.java2022.recuerdamelon.web.CustomWebSecurityExpressionHandler;
+import es.eoi.java2022.recuerdamelon.web.access.expression.CustomWebSecurityExpressionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;

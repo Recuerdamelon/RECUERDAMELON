@@ -46,8 +46,8 @@ public class CalendarRestController {
 
     @Transactional
     @PostMapping("/calendar")
-    public CalendarDTO save(@RequestBody CalendarDTO calendar) {
-        return calendarService.save(calendar);
+    public CalendarDTO save(@RequestBody CalendarDTO calendarDTO) {
+        return calendarService.save(calendarDTO);
     }
 
     @PutMapping("/calendar")

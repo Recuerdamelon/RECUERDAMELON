@@ -11,5 +11,5 @@ import org.springframework.stereotype.Service;
 
 
 @Mapper(componentModel = "spring", uses = {TaskTypeServiceMapper.class})
-    public interface TaskServiceMapper extends IEntityMapper<TaskType, TaskTypeDTO> {
+    public interface TaskServiceMapper extends IEntityMapper<Task, TaskDTO> {
 }

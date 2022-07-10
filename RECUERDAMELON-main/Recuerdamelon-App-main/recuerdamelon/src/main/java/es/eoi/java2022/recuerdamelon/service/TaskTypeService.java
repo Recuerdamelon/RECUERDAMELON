@@ -2,20 +2,25 @@ package es.eoi.java2022.recuerdamelon.service;
 
 import es.eoi.java2022.recuerdamelon.data.entity.TaskType;
 import es.eoi.java2022.recuerdamelon.data.repository.TaskTypeRepository;
+import es.eoi.java2022.recuerdamelon.dto.TaskTypeDTO;
+import es.eoi.java2022.recuerdamelon.service.mapper.TaskTypeServiceMapper;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class TaskTypeService {
     private final TaskTypeRepository repository;
+    private final TaskTypeServiceMapper mapper;
 
-    public TaskTypeService(TaskTypeRepository repository) {
+    public TaskTypeService(TaskTypeRepository repository, TaskTypeServiceMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
-    public List<TaskType> findAll(PageRequest of) {
-        return repository.findAll();
+    public List<TaskType> findAll(Pageable pageable) {
+        return repository.findAll(pageable).toList();
 
     }
 
@@ -32,11 +37,11 @@ public class TaskTypeService {
         }
         return repository.save(taskType);
     }
-    public TaskType save(TaskType taskType) {
-        if (taskType.getId() != null){
+    public TaskTypeDTO save(TaskTypeDTO taskTypeDTO) {
+        if (taskTypeDTO.getId() != null){
             throw new RuntimeException("El Identificador no puede ser nulo");
         }
-        return repository.save(taskType);
+        return mapper.toDto(repository.save(mapper.toEntity(taskTypeDTO)));
     }
 
 }

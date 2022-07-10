@@ -2,20 +2,25 @@ package es.eoi.java2022.recuerdamelon.service;
 
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
+import es.eoi.java2022.recuerdamelon.dto.UserDTO;
+import es.eoi.java2022.recuerdamelon.service.mapper.UserServiceMapper;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class UserService {
     private final UserRepository repository;
+    private final UserServiceMapper mapper;
 
-    public UserService(UserRepository repository) {
+    public UserService(UserRepository repository, UserServiceMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
-    public List<User> findAll(PageRequest of) {
-        return repository.findAll();
+    public List<User> findAll(Pageable pageable) {
+        return repository.findAll(pageable).toList();
 
     }
 
@@ -32,11 +37,11 @@ public class UserService {
         }
         return repository.save(user);
     }
-    public User save(User user) {
-        if (user.getId() != null){
+    public UserDTO save(UserDTO userDTO) {
+        if (userDTO.getId() != null){
             throw new RuntimeException("El Identificador no puede ser nulo");
         }
-        return repository.save(user);
+        return mapper.toDto(repository.save(mapper.toEntity(userDTO)));
     }
 
 }
