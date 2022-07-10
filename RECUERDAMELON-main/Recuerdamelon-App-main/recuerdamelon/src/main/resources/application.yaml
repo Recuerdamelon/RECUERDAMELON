@@ -14,10 +14,10 @@ spring:
     mode: HTML
     encoding: UTF-8
     prefix: file:src/main/resources/templates/
-  resources:
-    static-locations: file:src/main/resources/static/
-    cache:
-      period: 0
+    resources:
+      static-locations: file:src/main/resources/static/
+      cache:
+        period: 0
   jpa:
     hibernate:
       ddl-auto: create-drop
