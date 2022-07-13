@@ -4,7 +4,7 @@
 
 ## PONLO EN MARCHA
 Ejecutar `mvn spring-boot:run`
-#### Ejecución en el puerto 8080 del entorno local [Url de ejecución](http://localhost:8080)
+#### A continuación, inicie su navegador favorito y vaya a [Url de ejecución](http://localhost:8080)
 
 ## LENGUAJES DE PROGRAMACIÓN USADOS
 ### JAVA - Arquitectura de la aplicación
