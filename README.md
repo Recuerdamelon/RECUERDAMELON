@@ -2,50 +2,59 @@
 ## INTRO
 #### Applicación web desarrollada en Spring para el registro de tareas
 
+## REQUISITOS
+
+* Java >= 11
+* Maven >= 11
+
 ## PONLO EN MARCHA
+
 Ejecutar `mvn spring-boot:run`
 
 A continuación, inicie su navegador favorito y vaya a `http://localhost:8080` [Url de ejecución](http://localhost:8080)
 
 ## LENGUAJES DE PROGRAMACIÓN USADOS
-### JAVA - Arquitectura de la aplicación
-### HTML - Visualización Web
-### CSS - Estilo HTML
+
+* JAVA - Arquitectura de la aplicación
+* HTML - Visualización Web
+* CSS - Estilo HTML
 
 ## Diagrama de la Base de Datos (H2)
+
 <img width="265" alt="h2" src="https://user-images.githubusercontent.com/106087948/175396589-bf3743c3-9a07-466a-b28d-82bc9b5522e5.png">
 
 [Url de ejecución](http://localhost:8080/h2-console)
 
 ## CONTENIDO hasta ahora...
 
-# POM
-##### Dependencias de: maven, jpa, thymeleaf, starter web, spring security, h2 DDBB, MySql, test, openapi-ui (rest)
+## POM
 
-# JAVA
+* Dependencias de: maven, jpa, thymeleaf, starter web, spring security, h2 DDBB, MySql, test, openapi-ui (rest)
+
+## JAVA
 ----------------------------------------------------------------------------
-#### DATA
-##### Entity
-##### Repository
+* DATA
+* Entity
+* Repository
 ----------------------------------------------------------------------------
-#### DTO
+* DTO
 ----------------------------------------------------------------------------
-#### SERVICE
-##### Mapper
-##### AbstractService
-##### Service
+* SERVICE
+* Mapper
+* AbstractService
+* Service
 ----------------------------------------------------------------------------
-#### UTILS
-##### DateUtil
+* UTILS
+* DateUtil
 ----------------------------------------------------------------------------
-#### WEB
-##### Rest
+* WEB
+* Rest
 
 [Url de ejecución](http://localhost:8080/swagger-ui/index.html#/)
 
 ----------------------------------------------------------------------------
 
 
-# RESOURCES
-##### data.sql
-##### yaml
+## RESOURCES
+* data.sql
+* yaml
