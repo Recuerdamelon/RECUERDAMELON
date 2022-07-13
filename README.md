@@ -1,6 +1,9 @@
 # RECUERDAMELON
 ## INTRO
 #### Applicación web desarrollada en Spring para el registro de tareas
+
+# PONLO EN MARCHA
+Ejecutar mvn spring-boot:run
 #### Ejecución en el puerto 8080 del entorno local
 [Url de ejecución](http://localhost:8080)
 
