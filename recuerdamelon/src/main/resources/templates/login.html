@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sd="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layoutLog}">
+
+<!--
+    TODO: Como importar layoutLog y el de TL?? hace falta el de TL??
+-->
+    <head>
+        <title>Login</title>
+    </head>
+
+    <body>
+
+        <main>
+
+            <!-- VIDEOS Y LETRAS BACKGROUND ESTATICO APROVECHANDO EL layoutLog.html -->
+
+            <!--<div class="background-video">
+                <video id="background-video" autoplay loop muted >
+                    <source src="./asset/video/pexels-polina-kovaleva-7258391.webm" type="video/mp4">
+                </video>
+            </div>
+            <article class="imagenes">
+                <img th:src="@{/img/9-removebg-preview.png}" alt="letras1">
+                <img th:src="@{/img/10-removebg-preview.png}" alt="letras2">
+                <img th:src="@{/img/11-removebg-preview.png}" alt="letras3">
+            </article>-->
+
+            <div layout:fragment="content">
+                <article class="login">
+                    <section>
+                        <img th:src="@{/img/logotipo.png}" alt="Imagen">
+                    </section>
+                    <section>
+
+                        <form action="#" th:action="@{/login}" method="post">
+
+                            <p th:if="${errors}" th:text="#{Login.Error}"></p>
+
+                            <div class="texto-formulario">
+                                <h2 th:text="#{Login.Title}"></h2> <!--<h2> <b th:text="#{Login.Title}"></b> </h2>-->
+                            </div>
+
+                            <div class="input">
+                                <label for="Meloner" th:text="#{Login.Username}" ></label>   <!-- Meloner</label>  -->
+                                <input placeholder="Identificate Meloner" type="text" id="Meloner">
+                            </div>
+                            <div class="input">
+                                <label for="contraseña" th:text="#{Login.Password}"></label>      <!-- Contraseña</label> -->
+                                <input placeholder="Ingresa tu contraseña" type="password" id="contraseña">
+                            </div>
+                            <div class="password-olvidada"> <!--.... FALTA RECUPERAR html-->
+                                <a th:href = "@{/recuperar.html}" th:text="#{Login.Recuperar.Password}"></a> <!--"¡Olbidaste tu contraceña melon!"-->
+                            </div>
+                            <div class="input">
+                                <!-- <input type="submit" value="Login"> -->
+                               <button type="submit" th:text="#{Login.Button.Submit}"></button>  <!-- >Login</button>  -->
+                            </div>
+                            <div class="reguistro-usuario">
+                                <a th:href = "@{/registro.html}" th:text="#{Login.Registrarse}"></a>   <!--"¿Aún no eres Meloner?"-->
+                            </div>
+                        </form>
+
+                    </section>
+                </article>
+
+
+            </div>
+        </main>
+
+    </body>
+</html>
