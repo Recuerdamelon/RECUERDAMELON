@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+    <meta name="viewport" content="width=device-width"></meta>
+
+
+    <title layout:title-pattern="$LAYOUT_TITLE :: $CONTENT_TITLE" th:text="#{LayoutLog.Title}"></title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+    <!-- ESTILOS PROPIOS -->
+    <link rel="stylesheet" href="#" th:href="@{/css/loginStyle.css}"/>
+    <link rel="stylesheet" href="#" th:href="@{/css/normalize.css}"/>
+
+    <!--- UTILIZAMOS ESTAS LIB???????????????????? TODO: --->
+<!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="#" th:href="@{/css/select2.min.css}"/>
+    <link rel="stylesheet" href="#" th:href="@{/css/select2-bootstrap.min.css}"/>
+
+    <link rel="stylesheet" href="#" th:href="@{/css/AdminLTE.css}"/>
+    <link rel="stylesheet" href="#" th:href="@{/css/skins/_all-skins.min.css}"/>
+-->
+
+    <!--Bootstrap Select-->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"/>
+
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="icon" href="#" th:href="@{/img/logo.ico}" type="image/x-icon"/>
+
+
+    <!-- jQuery--> <!-- TODO: -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.min.js"></script>
+-->
+
+    <!-- TODO: -->
+    <!-- Latest compiled and minified JavaScript -->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+           crossorigin="anonymous"></script>
+ -->
+    <!-- TODO: -->
+<!--
+    <script src="#" th:src="@{/js/app.min.js}"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
+    <script src="#" th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+-->
+
+    <!-- TODO: -->
+    <!-- BootStrap DatePicker -->
+
+<!--
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-datepicker.standalone.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-datetimepicker.min.css}"/>
+-->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var menudd = Cookies.get('menu-dd');
+
+            if (menudd != null) {
+                $("#" + menudd).addClass("active");
+            } else {
+                Cookies.set('menu-dd', "user");
+            }
+
+            $(".treeview").each(function () {
+                $(this).click(function () {
+                    $(this.id).addClass("active");
+                    $("#" + Cookies.get('menu-dd')).removeClass("active");
+                    Cookies.set('menu-dd', this.id);
+                });
+            });
+
+            $('.datetimepicker').datetimepicker({
+                "allowInputToggle": true,
+                "showClose": true,
+                "showClear": true,
+                "showTodayButton": true,
+                "format": "YYYY-MM-DD HH:mm:ss",
+            });
+        });
+    </script>
+
+</head>
+<!--
+<body class="hold-transition skin-blue fixed sidebar-mini fuelux">
+-->
+<body>
+    <main>
+        <!-- Main Header -->
+        <header class="main-header"> </header> <!-- BORRAR --->
+
+        <!-- VIDEOS Y LETRAS BACKGROUND -->
+        <div class="background-video">
+            <video id="background-video" autoplay loop muted >
+                <source src="./asset/video/pexels-polina-kovaleva-7258391.webm" type="video/mp4">
+            </video>
+        </div>
+        <article class="imagenes">
+            <img th:src="@{/img/9-removebg-preview.png}" alt="letras1">
+            <img th:src="@{/img/10-removebg-preview.png}" alt="letras2">
+            <img th:src="@{/img/11-removebg-preview.png}" alt="letras3">
+        </article>
+
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <section class="content" layout:fragment="content"></section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+<!-- NO SE PA KÉ
+        <div class="control-sidebar-bg"></div>
+-->
+    </main>
+
+    <!--Bootstrap Select-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
+    <!--Bootstrap DatePicker-->
+    <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+</body>
+</html>
