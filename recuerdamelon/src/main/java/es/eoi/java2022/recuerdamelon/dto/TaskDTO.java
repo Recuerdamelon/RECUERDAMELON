@@ -14,7 +14,7 @@ public class TaskDTO {
     private String locationUrl;
     private Boolean delete;
 
-    private List<TaskTypeDTO> taskType;
+    private TaskTypeDTO taskType;
 
     private List<UserDTO> user;
 
@@ -74,11 +74,11 @@ public class TaskDTO {
         this.delete = delete;
     }
 
-    public List<TaskTypeDTO> getTaskType() {
+    public TaskTypeDTO getTaskType() {
         return taskType;
     }
 
-    public void setTaskType(List<TaskTypeDTO> taskType) {
+    public void setTaskType(TaskTypeDTO taskType) {
         this.taskType = taskType;
     }
 

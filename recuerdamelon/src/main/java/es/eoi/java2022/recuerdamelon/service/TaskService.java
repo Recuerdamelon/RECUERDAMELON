@@ -14,7 +14,7 @@ public class TaskService {
     private final TaskRepository repository;
     private final TaskServiceMapper mapper;
 
-    public TaskService(TaskRepository repository, TaskServiceMapper mapper, TaskTypeDTO type) {
+    public TaskService(TaskRepository repository, TaskServiceMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
