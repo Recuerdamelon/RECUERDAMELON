@@ -17,7 +17,7 @@ public class CustomAuthorizationConfig {
 
     @Description("ConsensusBased AccessDecisionManager for Authorization voting")
     @Bean
-    public AccessDecisionManager accessDecisionManager(
+    public AccessDecisionManager accessDecisionManager(ssdfdsafsdafasdf
             CustomWebSecurityExpressionHandler customWebSecurityExpressionHandler) {
         List<AccessDecisionVoter<? extends Object>> decisionVoters
                 = Arrays.asList(
