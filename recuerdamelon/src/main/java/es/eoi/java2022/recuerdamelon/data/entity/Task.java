@@ -34,8 +34,6 @@ public class Task {
     )
     private Set<User> users;
 
-
-
     @OneToMany(mappedBy = "task")
     private Set<Notification> notifications;
 

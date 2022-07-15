@@ -50,7 +50,7 @@ public class UserRoleController {
     }
 
     //# UPDATE % CREATE...
-    @GetMapping("/user/{id}/edit")//get de update -create&update-//
+    @GetMapping("/userrole/{id}/edit")//get de update -create&update-//
     @PostAuthorize("hasRole('ROLE_ADMIN')") //Just Admin
     public String update (@PathVariable("id") Integer id, ModelMap model) {
         model.addAttribute("userrole", this.userRoleService.findById(id));

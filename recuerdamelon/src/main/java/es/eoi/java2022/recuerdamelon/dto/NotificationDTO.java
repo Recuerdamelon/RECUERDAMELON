@@ -8,9 +8,9 @@ public class NotificationDTO {
     private Integer notificationTime;
     private boolean notified;
 
-    private List<UserDTO> user;
+    private UserDTO user;
 
-    private List<TaskDTO> task;
+    private TaskDTO task;
     public Integer getId() {
         return id;
     }
@@ -35,19 +35,19 @@ public class NotificationDTO {
         this.notified = notified;
     }
 
-    public List<UserDTO> getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(List<UserDTO> user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
-    public List<TaskDTO> getTask() {
+    public TaskDTO getTask() {
         return task;
     }
 
-    public void setTask(List<TaskDTO> task) {
+    public void setTask(TaskDTO task) {
         this.task = task;
     }
 }

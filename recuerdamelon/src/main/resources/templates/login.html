@@ -45,12 +45,12 @@
                             </div>
 
                             <div class="input">
-                                <label for="Meloner" th:text="#{Login.Username}" ></label>   <!-- Meloner</label>  -->
-                                <input placeholder="Identificate Meloner" type="text" id="Meloner">
+                                <label for="username" th:text="#{Login.Username}" ></label>   <!-- Meloner</label>  -->
+                                <input placeholder="Identificate Meloner" type="text" id="username" name="username">
                             </div>
                             <div class="input">
-                                <label for="contraseña" th:text="#{Login.Password}"></label>      <!-- Contraseña</label> -->
-                                <input placeholder="Ingresa tu contraseña" type="password" id="contraseña">
+                                <label for="password" th:text="#{Login.Password}"></label>      <!-- Contraseña</label> -->
+                                <input placeholder="Ingresa tu contraseña" type="password" id="password" name="password">
                             </div>
                             <div class="password-olvidada"> <!--.... FALTA RECUPERAR html-->
                                 <a th:href = "@{/recuperar.html}" th:text="#{Login.Recuperar.Password}"></a> <!--"¡Olbidaste tu contraceña melon!"-->

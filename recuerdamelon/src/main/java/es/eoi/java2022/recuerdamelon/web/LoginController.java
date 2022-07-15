@@ -5,8 +5,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.PostConstruct;
+
 @Controller
 public class LoginController {
+
+    @PostConstruct
+    public void init(){
+        System.out.println("HOla mundo");
+    }
 
     @GetMapping("/login")
     public String getLogin() {
