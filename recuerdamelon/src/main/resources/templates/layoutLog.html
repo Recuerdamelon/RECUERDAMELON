@@ -16,6 +16,7 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 
     <!-- ESTILOS PROPIOS -->
+
     <link rel="stylesheet" href="#" th:href="@{/css/loginStyle.css}"/>
     <link rel="stylesheet" href="#" th:href="@{/css/normalize.css}"/>
 
@@ -67,7 +68,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-datetimepicker.min.css}"/>
 -->
 
-    <script type="text/javascript">
+<!--    <script type="text/javascript">
         $(document).ready(function () {
             var menudd = Cookies.get('menu-dd');
 
@@ -93,7 +94,7 @@
                 "format": "YYYY-MM-DD HH:mm:ss",
             });
         });
-    </script>
+    </script>-->
 
 </head>
 <!--
@@ -101,13 +102,15 @@
 -->
 <body>
     <main>
+        <div class="content-wrapper">
+        <section class="content" layout:fragment="content"></section>
         <!-- Main Header -->
         <header class="main-header"> </header> <!-- BORRAR --->
 
         <!-- VIDEOS Y LETRAS BACKGROUND -->
         <div class="background-video">
             <video id="background-video" autoplay loop muted >
-                <source src="./asset/video/pexels-polina-kovaleva-7258391.webm" type="video/mp4">
+                <source th:src="@{/img/videoBgLog.webm}" type="video/mp4">
             </video>
         </div>
         <article class="imagenes">
@@ -118,8 +121,7 @@
 
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <section class="content" layout:fragment="content"></section>
+
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
