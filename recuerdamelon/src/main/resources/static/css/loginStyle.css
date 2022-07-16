@@ -76,6 +76,9 @@ video {
     height: 90%;
     border-radius: 25px;
     padding-top: 1.5%;
+    position: absolute;
+    left: 70%;
+    top: 5%;
 }
 
 .login>section>img {
@@ -189,7 +192,7 @@ a,
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1000px) {
     main {
         justify-content: normal;
         align-items: center;
