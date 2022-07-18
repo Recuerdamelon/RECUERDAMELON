@@ -22,7 +22,6 @@ html {
 
 main {
     height: 100vh;
-    display: flex;
     justify-content: space-between;
     align-items: center;
 }
@@ -136,22 +135,21 @@ a,
 }
 
 .input button[type="submit"] {
-    background-color: var(--verdeGris);
+    background-color: var(--button);
     color: var(--blanco);
     font-weight: bold;
     font-size: larger;
     border: none;
     margin-top: 20px;
     transition: background-color .3s ease-in-out;
-    border-radius: 50px;
+    border-radius: 40px;
     width: 100%;
-    height: 2.5em
+    height: 2.5em;
 }
 
 .input button[type="submit"]:hover {
     cursor: pointer;
-    color: var(--verde);
-    background-color: var(--blanco);
+    background-color: var(--pressButton);
 }
 
 
