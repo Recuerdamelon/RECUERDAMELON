@@ -3,6 +3,7 @@ package es.eoi.java2022.recuerdamelon.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
@@ -30,6 +31,20 @@ public class LoginController {
     @GetMapping("/recoverPassword")
     public String getRecoverPassword() {
         return "recoverPassword";
+
+    }
+    @GetMapping("/emailSentNewPassword")
+    public String getEmailSentNewPassword() {
+        return "emailSentNewPassword";
+    }
+    @PostMapping("/recoverPassword")
+    public String postRecoverPassword() {
+        return "emailSentNewPassword";
+    }
+
+    @GetMapping("/enterNewPassword")
+    public String getEnterNewPassword() {
+        return "enterNewPassword";
     }
 
 }
