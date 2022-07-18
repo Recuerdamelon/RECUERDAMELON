@@ -26,4 +26,10 @@ public class LoginController {
         model.addAttribute("errors", true);
         return "login";
     }
+
+    @GetMapping("/recoverPassword")
+    public String getRecoverPassword() {
+        return "recoverPassword";
+    }
+
 }

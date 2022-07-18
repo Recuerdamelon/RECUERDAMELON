@@ -1,10 +1,13 @@
 :root {
     --verde: #6BF178;
     --verdeOscuro: #288E4C;
-    --verdeGris: #88ad58;
+    --verdeGris: #8DFFB5;
     --blanco: #FFFFFF;
     --negro: #000000;
     --fuente: 'Quicksand', sans-serif;
+    --button: #88ad58;
+    --pressButton: #b9af5b;
+    --linkButton: #c0e242;
 }
 
 html {
