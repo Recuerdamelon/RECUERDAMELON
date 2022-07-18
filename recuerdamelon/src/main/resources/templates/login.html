@@ -2,7 +2,9 @@
 <html
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
       xmlns:sd="http://www.w3.org/1999/xhtml"
+
       layout:decorate="~{layoutLog}">
 
 <!--
@@ -10,11 +12,13 @@
 -->
     <head>
         <title>Login</title>
+
     </head>
 
     <body>
 
         <main>
+
 
             <!-- VIDEOS Y LETRAS BACKGROUND ESTATICO APROVECHANDO EL layoutLog.html -->
 
@@ -46,20 +50,20 @@
 
                             <div class="input">
                                 <label for="username" th:text="#{Login.Username}" ></label>   <!-- Meloner</label>  -->
-                                <input placeholder="Identificate Meloner" type="text" id="username" name="username">
+                                <input placeholder="Introduce tu usuario" type="text" id="username" name="username">
                             </div>
                             <div class="input">
                                 <label for="password" th:text="#{Login.Password}"></label>      <!-- Contraseña</label> -->
-                                <input placeholder="Ingresa tu contraseña" type="password" id="password" name="password">
+                                <input placeholder="Introduce tu contraseña" type="password" id="password" name="password">
                             </div>
                             <div class="password-olvidada"> <!--.... FALTA RECUPERAR html-->
-                                <a th:href = "@{/recuperar.html}" th:text="#{Login.Recuperar.Password}"></a> <!--"¡Olbidaste tu contraceña melon!"-->
+                                <a th:href = "@{/recuperar.html}" th:text="#{Login.Recuperar.Password}"></a> <!--"¡Olvidaste tu contraseña melón!"-->
                             </div>
                             <div class="input">
                                 <!-- <input type="submit" value="Login"> -->
                                <button type="submit" th:text="#{Login.Button.Submit}"></button>  <!-- >Login</button>  -->
                             </div>
-                            <div class="reguistro-usuario">
+                            <div class="registro-usuario">
                                 <a th:href = "@{/registro.html}" th:text="#{Login.Registrarse}"></a>   <!--"¿Aún no eres Meloner?"-->
                             </div>
                         </form>
