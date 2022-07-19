@@ -28,6 +28,10 @@ public class UserService {
         return repository.findById(id).orElseThrow(() -> new RuntimeException(String.format("El Id %d no existe", id)));
     }
 
+    public User findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
