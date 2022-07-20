@@ -4,6 +4,7 @@ package es.eoi.java2022.recuerdamelon.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.mail.SimpleMailMessage;
@@ -15,8 +16,9 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.util.Properties;
 
+@Configuration
 @ComponentScan(basePackages = { "es.eoi.java2022.recuerdamelon.service" })
-@PropertySource(value={"classpath:email.properties"})
+@PropertySource(value={"classpath:application.yaml"})
 public class EmailConfiguration {
 
     @Value("${spring.mail.host}")
@@ -37,11 +39,8 @@ public class EmailConfiguration {
     @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
     private String mailServerStartTls;
 
-    @Value("${spring.mail.templates.path}")
-    private String mailTemplatesPath;
-
     @Bean
-    public JavaMailSender getJavaMailSender() {
+    public JavaMailSender getEmailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
         mailSender.setHost(mailServerHost);
@@ -74,15 +73,6 @@ public class EmailConfiguration {
         return templateEngine;
     }
 
-    @Bean
-    public ITemplateResolver thymeleafClassLoaderTemplateResolver() {
-        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setPrefix(mailTemplatesPath + "/");
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode("HTML");
-        templateResolver.setCharacterEncoding("UTF-8");
-        return templateResolver;
-    }
 
     @Bean
     public ResourceBundleMessageSource emailMessageSource() {
