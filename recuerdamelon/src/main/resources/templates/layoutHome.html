@@ -31,7 +31,7 @@
   <script th:src="@{node_modules/bootstrap/dist/js/bootstrap.min.css}"></script>
 
   <!-- Logotipo -->
-  <link rel="icon" type="image/ico" th:href="@{/img/logoBlanco.png}" />
+  <link rel="icon" type="image/ico" th:href="@{/img/logoletranegra.png}" />
 </head>
 
 <body>
@@ -43,7 +43,7 @@
     <div class="navbar">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="nav-link active" th:href="@{home.html}">MyTasks</a>
+          <a class="nav-link-current" th:href="@{home.html}">MyTasks</a>
         </li>
 
         <li class="nav-item">
@@ -61,16 +61,12 @@
             <li><a class="dropdown-item" href="index.html">Cerrar sesión</a></li>
           </ul>
         </li>
-        <!--
-            <li class="nav-item">
-                <a class="nav-link disabled" class="cursor-na" href="#">Extras</a>
-            </li>
-        -->
+            
       </ul>
     </div>
     <!-- LOGO -->
     <div class="logo">
-      <img th:src="@{/img/LogoBlanco.png}" alt="Imagen">
+      <img th:src="@{/img/logoletranegra.png}" alt="Imagen">
     </div>
     <!-------------------------   **************  ----------------------------->
 
