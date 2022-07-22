@@ -31,10 +31,10 @@ public class LoginController {
     @Resource
     UserService userService;
 
-    @PostConstruct
-    public void init(){
-        System.out.println("HOla mundo");
-    }
+//    @PostConstruct
+//    public void init(){
+//        System.out.println("HOla mundo");
+//    }
 
     @GetMapping("/login")
     public String getLogin() {

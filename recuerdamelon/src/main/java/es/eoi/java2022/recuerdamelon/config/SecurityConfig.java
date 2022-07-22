@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/recoverPassword").permitAll()
                 .antMatchers("/emailSentNewPassword").permitAll()
                 .antMatchers("/enterNewPassword").permitAll()
-                .antMatchers("/api/*").authenticated()
+                .antMatchers("/*", "/api/*").authenticated()
         ;
     }
 
