@@ -58,12 +58,12 @@ public class EmailConfiguration {
         return mailSender;
     }
 
-    @Bean
-    public SimpleMailMessage templateSimpleMessage() {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setText("This is the test email template for your email:\n%s\n");
-        return message;
-    }
+//    @Bean
+//    public SimpleMailMessage templateSimpleMessage() {
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setText("This is the test email template for your email:\n%s\n");
+//        return message;
+//    }
 
     //Template los emails
 //     @Bean
@@ -75,11 +75,10 @@ public class EmailConfiguration {
 //     }
 
 
-//     @Bean
-//     public ResourceBundleMessageSource emailMessageSource() {
-//         final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-//         messageSource.setBasename("mailMessages");
-//         return messageSource;
-//     }
-
+     @Bean
+     public ResourceBundleMessageSource emailMessageSource() {
+         final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+         messageSource.setBasename("mailMessages");
+         return messageSource;
+     }
 }
