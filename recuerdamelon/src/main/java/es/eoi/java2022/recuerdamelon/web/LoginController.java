@@ -112,4 +112,10 @@ public class LoginController {
         }
         return modelAndView;
     }
+
+    @GetMapping("/registro")
+    public String getRegistro() {
+        return "registro";
+
+    }
 }
