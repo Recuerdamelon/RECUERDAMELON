@@ -65,20 +65,21 @@ public class EmailConfiguration {
         return message;
     }
 
-    @Bean
-    public SpringTemplateEngine thymeleafTemplateEngine(ITemplateResolver templateResolver) {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver);
-        templateEngine.setTemplateEngineMessageSource(emailMessageSource());
-        return templateEngine;
-    }
+    //Template los emails
+//     @Bean
+//     public SpringTemplateEngine thymeleafTemplateEngine(ITemplateResolver templateResolver) {
+//         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+//         templateEngine.setTemplateResolver(templateResolver);
+//         templateEngine.setTemplateEngineMessageSource(emailMessageSource());
+//         return templateEngine;
+//     }
 
 
-    @Bean
-    public ResourceBundleMessageSource emailMessageSource() {
-        final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("mailMessages");
-        return messageSource;
-    }
+//     @Bean
+//     public ResourceBundleMessageSource emailMessageSource() {
+//         final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+//         messageSource.setBasename("mailMessages");
+//         return messageSource;
+//     }
 
 }
