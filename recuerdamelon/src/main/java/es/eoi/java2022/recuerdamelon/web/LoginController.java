@@ -59,8 +59,8 @@ public class LoginController {
     }
     @PostMapping("/recoverPassword")
     public String postRecoverPassword(Model model, @RequestParam(name = "email") String email) {
-//        emailService.sendSimpleMessage("barbii.f26@gmail.com", "Prueba recuperacion", "Esta es una prueba de recuperacion"); // PARA PROBAR QUE ENVÍA, ¡¡BORRAR CUANDO HAYA REGISTROS
         User user = userService.findByEmail(email);
+        model.addAttribute("userDoesNotExist", false);
         if (user == null) {
             model.addAttribute("userDoesNotExist", true);
             return "emailSentNewPassword";
@@ -69,8 +69,8 @@ public class LoginController {
         ConfirmationToken confirmationToken = new ConfirmationToken(user);
         // Save it
         confirmationTokenRepository.save(confirmationToken);
-        emailService.sendSimpleMessage(email, "Recuperar Contraseña", "Haz click en el siguiente enlace para cambiar tu contraseña. " + "http://localhost:8080/recoverPassword?token="+confirmationToken.getConfirmationToken()); // FUNCIONA ENVÍA EL EMAIL SI ESTÁ REGISTRADO DEFINITIVO
-        return "enterNewPassword";
+        emailService.sendSimpleMessage(email, "Recuperar Contraseña", "Haz click en el siguiente enlace para cambiar tu contraseña. " + "http://localhost:8080/enterNewPassword?token="+confirmationToken.getConfirmationToken()); // FUNCIONA ENVÍA EL EMAIL SI ESTÁ REGISTRADO DEFINITIVO
+        return "emailSentNewPassword";
     }
 
     @GetMapping("/enterNewPassword")
