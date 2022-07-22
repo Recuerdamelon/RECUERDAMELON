@@ -1,0 +1,259 @@
+:root {
+    --verde: #6BF178;
+    --verdeOscuro: #288E4C;
+    --verdeGris: #88ad58;
+    --amarilloMel: #EBC247;
+    --blanco: #FFFFFF;
+    --negro: #000000;
+    --fuente: 'Quicksand', sans-serif;
+}
+
+
+
+.container {
+    display: inline-block;
+    color: var(--blanco);
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 36rem) {
+    .container {
+        transform: translateY(-50%) rotate(90deg) translateX(-50%);
+    }
+}
+
+.buy,
+.try {
+    vertical-align: middle;
+}
+
+
+/*------------ SEARCH TASK ----------------*/
+.dropbtn {
+    background-color: var(--verdeGris);
+    color: white;
+    padding-inline: 16px;
+    padding-block: 10px;
+
+    border-top-left-radius: 40%;
+    border-top-right-radius: 40%;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+
+  }
+
+  .dropbtn:hover{
+    background-color: var(--amarilloMel);
+    color: var(--blanco)
+  }
+
+  #myInput {
+    box-sizing: border-box;
+
+    background-image: url('../img/icons/search-iconG.svg');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #myInput:focus {outline: 3px solid var(--blanco);}
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--blanco);
+    min-width: 230px;
+    width: 15%;
+    overflow: auto;
+    border: 1px solid var(--verdeGris);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: var(--verdeGris);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+
+  }
+
+  .dropdown-content a:hover {color: var(--amarilloMel);}
+  .show {display: block;}
+
+
+/*------------ CONTROL TASK ----------------*/
+.follow{
+    top: 0%;
+    width: 60%;
+
+}
+
+.follow img {
+    width: 50%;
+}
+
+.follow,
+.share {
+    display: inline-block;
+    cursor: default;
+    padding-top: 0;
+    margin: 0 0.5em;
+    position: relative;
+    text-align: center;
+}
+
+.follow:hover .label,
+.share:hover .label {
+    opacity: 0;
+    transition: opacity 0.2s 0.1s ease-out;
+}
+
+.follow:hover .icon,
+.share:hover .icon {
+    border-radius: 5em;
+    margin: 0 0;
+}
+
+.icon,
+.label {
+    background-color: var(--verdeGris);
+    line-height: 2.5rem;
+}
+
+.label {
+    border-radius: 1rem;
+    position: absolute;
+    font-size: 1em;
+    font-weight: 900;
+    letter-spacing: 0.0816em;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+    pointer-events: none;
+    text-transform: uppercase;
+    transition: opacity 0.5s 0.75s ease-out;
+}
+
+.icon {
+    border-radius: 0;
+    cursor: pointer;
+    display: inline-flex;
+    height: 2.5em;
+    margin: 0 -0.5em;
+    transition: background-color 0.5s ease-out, border-radius 0.5s 0.25s ease-out, margin 0.5s 0.25s ease-out;
+    width: 2.5em;
+    justify-content: center;
+}
+
+.icon.first {
+    border-bottom-left-radius: 1em;
+    border-top-left-radius: 1em;
+    margin-left: 0;
+}
+
+.icon.last {
+    border-bottom-right-radius: 1em;
+    border-top-right-radius: 1em;
+    margin-right: 0;
+}
+
+.icon:hover {
+    background-color: var(--amarilloMel);
+    color: #111;
+}
+
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    border: 0;
+    background-color: hsl(180deg, 60%, 30%);
+    color: #EEE;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 900;
+    letter-spacing: 0.0816em;
+    position: relative;
+    text-transform: uppercase;
+    transition: background-color 0.25s ease-out, transform 0.5s ease-out;
+}
+
+button:hover {
+    background-color: var(--amarilloMel);
+    color: #111;
+}
+
+.try {
+    font-size: 0.618rem;
+    height: 3rem;
+    width: 3rem;
+    margin: 0 0.5rem;
+}
+
+.try:hover {
+    transform: scale(1.3333);
+}
+
+.try:hover .text {
+    display: inline-block;
+    transform: scale(0.75);
+}
+
+.try:hover~.buy {
+    transform: scale(0.75);
+}
+
+.try .text {
+    transition: transform 0.5s ease-out;
+    transform: scale(1);
+}
+
+.buy {
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--amarilloMel);
+    color: #111;
+}
+
+.buy .price,
+.buy .text {
+    transition: opacity 0.25s ease-out;
+}
+
+.buy .price {
+    font-size: 1.618em;
+    opacity: 1;
+}
+
+.buy .text {
+    display: block;
+    font-size: 0.618em;
+    font-weight: 900;
+    letter-spacing: 0.0816em;
+    position: absolute;
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    vertical-align: baseline;
+}
+
+.buy:hover .price {
+    opacity: 0;
+}
+
+.buy:hover .text {
+    opacity: 1;
+}
