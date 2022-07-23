@@ -195,6 +195,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 --(2,'task2','2007-12-03','2007-12-11','description2','url2',false),
 --(3,'task3','2007-12-03','2007-12-09','description3','url3',false),
 --(4,'task4','2007-12-03','2007-12-09','description4','url4',false);
+
 --
 --INSERT INTO USER (ID,USER_NAME,NAME, SURNAME, EMAIL, PASSWORD, ACTIVE)
 --VALUES(1,'user1','name1','surname1','email1','$2a$04$5sT3dri6bOOG2b9P1LETEujUeYMR46G/OVybuBjxBAohlEtDsxmi2',true);
