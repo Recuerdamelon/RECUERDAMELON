@@ -33,14 +33,14 @@ public class TaskController {
 //********************************************    CRUD     *******************************************//
     //             ---------------------------GET Methods-----------------------------         //
     //# READ...
-    @GetMapping("/task")
-    @PostAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/tasks")
+//    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[tasks].ownerId == authentication.principal.id")
     public String findAll(@RequestParam("page") Optional<Integer> page,
                           @RequestParam("size") Optional<Integer> size, Model model) {
         // Convierte parámetros page y size a pageable
         Pageable pageable = PageRequest.of(page.orElse(1) - 1, size.orElse(10));
-        model.addAttribute("list", taskService.findAll(pageable));
-        return "task/list";
+        model.addAttribute("tasks", taskService.findAll(pageable));
+        return "tasks";
     }
 
     @GetMapping("/task/{id}")

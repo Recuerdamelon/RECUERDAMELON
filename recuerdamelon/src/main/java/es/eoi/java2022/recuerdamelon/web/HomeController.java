@@ -12,6 +12,7 @@ public class HomeController {
         return "home";
     }
 
+
     @GetMapping("/perfil")
     public String perfil() {
         return "perfil";

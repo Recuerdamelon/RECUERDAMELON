@@ -25,7 +25,8 @@ public class TaskService {
     }
 
     public Task findById(Integer id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException(String.format("El Id %d no existe", id)));
+        return repository.findById(id).orElseThrow(() ->
+                new RuntimeException(String.format("El Id %d no existe", id)));
     }
 
     public void deleteById(Integer id) {

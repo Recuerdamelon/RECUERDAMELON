@@ -102,27 +102,65 @@
                 </label>
 
                 <!-- task 2 -->
-                <input id='label-2' type='checkbox' checked/>
-                <label for='label-2'>
-                    <h2>
-                        <div class="task-tittle">
-                            <img th:src="@{/img/icons/working.png}" alt="Imagen">
-                            e-mail processing  -  Fin: 33/07/2022
-                        </div>
-                        <div class="task-controls">
-                            <button type="button" class="btn-edit" id="btEdit1">
-                                <span>.</span>
-                            </button>
-                            <button type="button" class="btn-select" id="btSelect1">
-                                <span>Select</span>
-                            </button>
-                        </div>
+<!--                <input id='label-2' type='checkbox' checked/>-->
+<!--                <label for='label-2'>-->
+<!--                    <tr th:each="task,iter : ${tasks}">-->
+<!--                    <h2>-->
+<!--                        <div class="task-title">-->
+<!--                            <img th:src="@{/img/icons/working.png}" alt="Imagen">-->
+<!--                            <label th:text="${task.title}"></label>-->
+<!--                        </div>-->
+<!--                        <div class="task-controls">-->
+<!--                            <button type="button" class="btn-edit" id="btEdit1">-->
+<!--                                <span>.</span>-->
+<!--                            </button>-->
+<!--                            <button type="button" class="btn-select" id="btSelect1">-->
+<!--                                <span>Select</span>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <label th:text="${task.description}"></label>-->
+<!--                    </h2>-->
+<!--                </label>-->
 
-                        <span>art &amp; code, personal</span>
-                    </h2>
-                </label>
+
+
+
+                            <tr th:each="task,iter : ${tasks}">
+                                <td>
+                                    <input id='label-2' type='checkbox' checked/>
+                                    <label for='label-2'>
+
+                                        <div class="typetask"> </div>
+
+                                        <h2>
+                                            <div class="task-tittle">
+                                                <img th:src="@{/img/icons/working.png}" alt="Imagen">
+                                                <span th:text="${task.title}"/>
+                                            </div>
+                                            <div class="task-controls">
+                                                <!--    <img src="./asset/img/icons/edit-iconW.svg" alt="Imagen"> -->
+                                                <button type="button" class="btn-edit" id="btEdit1">
+                                                    <span>.</span>
+                                                </button>
+                                                <button type="button" class="btn-select" id="btSelect1">
+                                                    <span>Select</span>
+                                                </button>
+
+                                                <!--  SELECT BUTTON -->
+                                                <!--
+                                                    <input class="btn-check" type="radio" value="" id="select-1">
+                                                    <label class="btn btn-primary" for="select-1">select</label>
+                                                -->
+                                            </div>
+                                            <span th:text="${task.description}"/>
+                                        </h2>
+                                    </label>
+                                </td>
+
+                            </tr>
 
             </div>
+
         </div>
 
     </div>

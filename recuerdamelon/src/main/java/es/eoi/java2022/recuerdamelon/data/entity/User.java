@@ -22,7 +22,7 @@ public class User {
     private boolean active;
     private byte[] avatar;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "ownerId")
     private Set<Task> ownedTasks;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )

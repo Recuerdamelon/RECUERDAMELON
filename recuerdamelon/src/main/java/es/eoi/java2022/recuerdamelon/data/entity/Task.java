@@ -24,7 +24,7 @@ public class Task {
     @ManyToOne
     private Calendar calendar;
     @ManyToOne
-    private User owner;
+    private User ownerId;
 
     @ManyToMany
     @JoinTable(
@@ -109,12 +109,12 @@ public class Task {
         this.calendar = calendar;
     }
 
-    public User getOwner() {
-        return owner;
+    public User getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwnerId(User ownerId) {
+        this.ownerId = ownerId;
     }
 
     public Set<User> getUsers() {
