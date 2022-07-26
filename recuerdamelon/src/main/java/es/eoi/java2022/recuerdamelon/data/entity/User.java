@@ -14,6 +14,7 @@ public class User {
     private String name;
     @Column(nullable = false)
     private String surname;
+
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
@@ -22,7 +23,7 @@ public class User {
     private boolean active;
     private byte[] avatar;
 
-    @OneToMany(mappedBy = "ownerId")
+    @OneToMany(mappedBy = "owner")
     private Set<Task> ownedTasks;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )
@@ -47,6 +48,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Notification> notifications;
 
+    @ManyToOne
+    private Business empresa;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private BusinessUser businessUser;
 
     public Integer getId() {
         return id;
@@ -54,14 +61,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getName() {
@@ -150,5 +149,30 @@ public class User {
 
     public void setNotifications(Set<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Business getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Business empresa) {
+        this.empresa = empresa;
+    }
+
+    public BusinessUser getBusinessUser() {
+        return businessUser;
+    }
+
+    public void setBusinessUser(BusinessUser businessUser) {
+        this.businessUser = businessUser;
     }
 }

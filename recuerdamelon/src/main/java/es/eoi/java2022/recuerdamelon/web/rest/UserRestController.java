@@ -1,6 +1,5 @@
 package es.eoi.java2022.recuerdamelon.web.rest;
 
-import es.eoi.java2022.recuerdamelon.data.entity.Notification;
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.dto.UserDTO;
 import es.eoi.java2022.recuerdamelon.service.UserService;

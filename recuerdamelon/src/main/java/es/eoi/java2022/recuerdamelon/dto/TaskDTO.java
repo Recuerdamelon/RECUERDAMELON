@@ -1,8 +1,5 @@
 package es.eoi.java2022.recuerdamelon.dto;
 
-import es.eoi.java2022.recuerdamelon.data.entity.TaskType;
-
-import java.time.ZonedDateTime;
 import java.util.List;
 
 public class TaskDTO {
@@ -17,6 +14,8 @@ public class TaskDTO {
     private TaskTypeDTO taskType;
 
     private List<UserDTO> user;
+
+    private BusinessDTO business;
 
     public Integer getId() {
         return id;
@@ -88,5 +87,13 @@ public class TaskDTO {
 
     public void setUser(List<UserDTO> user) {
         this.user = user;
+    }
+
+    public BusinessDTO getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(BusinessDTO business) {
+        this.business = business;
     }
 }
