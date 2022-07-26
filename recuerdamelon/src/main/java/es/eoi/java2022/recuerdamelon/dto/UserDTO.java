@@ -4,7 +4,6 @@ import java.util.List;
 
 public class UserDTO {
     private Integer id;
-    private String username;
     private String name;
     private String surname;
     private String email;
@@ -15,20 +14,16 @@ public class UserDTO {
 
     private List<TaskDTO> task;
 
+    private List<BusinessDTO> business;
+
+    private BusinessUserDTO businessUser;
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getName() {
@@ -85,5 +80,21 @@ public class UserDTO {
 
     public void setTask(List<TaskDTO> task) {
         this.task = task;
+    }
+
+    public List<BusinessDTO> getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(List<BusinessDTO> business) {
+        this.business = business;
+    }
+
+    public BusinessUserDTO getBusinessUser() {
+        return businessUser;
+    }
+
+    public void setBusinessUser(BusinessUserDTO businessUser) {
+        this.businessUser = businessUser;
     }
 }

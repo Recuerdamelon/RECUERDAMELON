@@ -1,7 +1,7 @@
 package es.eoi.java2022.recuerdamelon.web;
 
-import es.eoi.java2022.recuerdamelon.dto.TaskDTO;
-import es.eoi.java2022.recuerdamelon.service.TaskService;
+import es.eoi.java2022.recuerdamelon.dto.BusinessDTO;
+import es.eoi.java2022.recuerdamelon.service.BusinessService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,59 +21,55 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Optional;
 
 @Controller
-public class TaskController {
+public class BusinessController {
+private final BusinessService businessService;
 
-    private final TaskService taskService;
+    public BusinessController(BusinessService businessService) {this.businessService = businessService;}
 
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;
-    }
-
-//********************************************    CRUD     *******************************************//
+    //********************************************    CRUD     *******************************************//
     //             ---------------------------GET Methods-----------------------------         //
     //# READ...
-    @GetMapping("/tasks")
-//    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[tasks].ownerId == authentication.principal.id")
+    @GetMapping("/business")
+    @PostAuthorize("hasRole('ROLE_ADMIN')")
     public String findAll(@RequestParam("page") Optional<Integer> page,
                           @RequestParam("size") Optional<Integer> size, Model model) {
         // Convierte parámetros page y size a pageable
         Pageable pageable = PageRequest.of(page.orElse(1) - 1, size.orElse(10));
-        model.addAttribute("tasks", taskService.findAll(pageable));
-        return "tasks";
+        model.addAttribute("list",businessService.findAll(pageable));
+        return "business/list";
     }
 
-    @GetMapping("/task/{id}")
-    @PostAuthorize("#model[task].userId == authentication.principal.id")
+    @GetMapping("/business/{id}")
+    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[business].userId == authentication.principal.id")
     public String findById(@PathVariable("id") Integer id, ModelMap model) {
-        model.addAttribute("task", this.taskService.findById(id));
-        return "task/{id}/list";
+        model.addAttribute("business", this.businessService.findById(id));
+        return "business/{id}/list";
     }
 
     //# UPDATE % CREATE...
-    @GetMapping("/task/{id}/edit")//get de update -create&update-//
-    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id")
+    @GetMapping("/business/{id}/edit")//get de update -create&update-//
+    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[business].userId == authentication.principal.id")
     public String update (@PathVariable("id") Integer id, ModelMap model) {
-        model.addAttribute("task", this.taskService.findById(id));
-        return "task/edit";
+        model.addAttribute("business", this.businessService.findById(id));
+        return "business/edit";
     }
-
 
     //             ---------------------------POST Methods-----------------------------         //
 
     @Transactional //post transaccional del get de update//
-    @PostMapping(value = {"/task/{id}/edit"})
-    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id")
-    public String save(TaskDTO dto) {
-        return String.format("redirect:/tasks/%s",
-                this.taskService.save(dto).getId());
+    @PostMapping(value = {"/business/{id}/edit"})
+    @PreAuthorize("hasRole('ROLE_ADMIN') or #model[business].userId == authentication.principal.id")//PRE
+    public String save(BusinessDTO dto) {
+        return String.format("redirect:/business/%s",
+                this.businessService.save(dto).getId());
     }
 
     //# DELETE
-    @PostMapping("/task/{id}/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id") //PRE
+    @PostMapping("/business/{id}/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or #model[business].userId == authentication.principal.id") //PRE
     public Object deleteById(@PathVariable("id") Integer id, SessionStatus status) {
         try {
-            this.taskService.deleteById(id);
+            this.businessService.deleteById(id);
         } catch (DataIntegrityViolationException e) {
             status.setComplete();//Limpieza de atributos de session para no provocar salida de session
 
@@ -82,16 +78,14 @@ public class TaskController {
 
                     //Añadimos los atributos de la sesión
                     .addObject("entityId", id)
-                    .addObject("entityName", "task")
+                    .addObject("entityName", "business")
                     //Añadimos un registro de la excepción como atributo
                     .addObject("errorCause", e.getRootCause().getMessage())
-                    //Y añadimos atributo link para volver a task
-                    .addObject("backLink", "/task");
+                    //Y añadimos atributo link para volver a user
+                    .addObject("backLink", "/business");
         }
         status.setComplete();//Restablecemos atributos de session tras eliminar y...
-        return "redirect:/task";//...redirigimos a "/task"
+        return "redirect:/business";//...redirigimos a "/user"
     }
-
-
 
 }

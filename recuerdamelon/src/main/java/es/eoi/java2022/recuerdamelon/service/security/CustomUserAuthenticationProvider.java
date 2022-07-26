@@ -1,7 +1,7 @@
 package es.eoi.java2022.recuerdamelon.service.security;
 
-import es.eoi.java2022.recuerdamelon.data.entity.UserRole;
 import es.eoi.java2022.recuerdamelon.data.entity.User;
+import es.eoi.java2022.recuerdamelon.data.entity.UserRole;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
