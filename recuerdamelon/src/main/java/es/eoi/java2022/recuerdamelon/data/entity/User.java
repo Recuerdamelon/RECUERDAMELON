@@ -29,6 +29,9 @@ public class User {
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )
     private Set<Task> tasks;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mensaje")
+    private Set<Mensajes> mensajes;
+
     @ManyToMany
     @JoinTable(
             name = "user_has_calendar",

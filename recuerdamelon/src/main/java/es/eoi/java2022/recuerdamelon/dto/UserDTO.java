@@ -1,5 +1,7 @@
 package es.eoi.java2022.recuerdamelon.dto;
 
+import es.eoi.java2022.recuerdamelon.data.entity.Mensajes;
+
 import java.util.List;
 
 public class UserDTO {
@@ -17,6 +19,8 @@ public class UserDTO {
     private List<BusinessDTO> business;
 
     private BusinessUserDTO businessUser;
+
+    private List<Mensajes> mensajes;
 
     public Integer getId() {
         return id;
@@ -96,5 +100,13 @@ public class UserDTO {
 
     public void setBusinessUser(BusinessUserDTO businessUser) {
         this.businessUser = businessUser;
+    }
+
+    public List<Mensajes> getMensajes() {
+        return mensajes;
+    }
+
+    public void setMensajes(List<Mensajes> mensajes) {
+        this.mensajes = mensajes;
     }
 }
