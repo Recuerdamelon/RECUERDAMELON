@@ -9,9 +9,9 @@ const navbarDataFilter = (value) => {
   });
 };
 
-new mdb.Autocomplete(navbarAutocomplete, {
-  filter: navbarDataFilter,
-});
+//new mdb.Autocomplete(navbarAutocomplete, {
+//  filter: navbarDataFilter,
+//});
 
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -64,6 +64,7 @@ function contCharTittle() {
 // -------- CONTADOR CHAR TITTLES CREAR TASK
 // -------- AUX
 
+jQuery(function(){
 var inputs = "input[maxlength], textarea[maxlength]";
   $(document).on('keyup', "[maxlength]", function (e) {
     var este = $(this),
@@ -72,16 +73,16 @@ var inputs = "input[maxlength], textarea[maxlength]";
       textoActual = este.val(),
       currentCharacters = este.val().length;
       remainingCharacters = maxlengthint - currentCharacters,
-      espan = este.prev('label').find('span');      
+      espan = este.prev('label').find('span');
       // Detectamos si es IE9 y si hemos llegado al final, convertir el -1 en 0 - bug ie9 porq. no coge directamente el atributo 'maxlength' de HTML5
       if (document.addEventListener && !window.requestAnimationFrame) {
         if (remainingCharacters <= -1) {
-          remainingCharacters = 0;            
+          remainingCharacters = 0;
         }
       }
       espan.html(remainingCharacters);
       if (!!maxlength) {
-        var texto = este.val(); 
+        var texto = este.val();
         if (texto.length >= maxlength) {
           este.removeClass().addClass("borderojo");
           este.val(text.substring(0, maxlength));
@@ -89,6 +90,15 @@ var inputs = "input[maxlength], textarea[maxlength]";
         }
         else if (texto.length < maxlength) {
           este.removeClass().addClass("bordegris");
-        } 
-      } 
+        }
+      }
     });
+    // DELETE TASK
+    jQuery(".deletetarea").on("click", function(){
+    // jquery va a la clase .deletetarea,y la function se ejecuta cuando haces click (https://api.jquery.com/on/)
+        jQuery("#tasksForm").attr('action', '/task/delete')
+        //envía el formulario(action) a task/delete(controller al que quieres enviarlo)
+        jQuery("#tasksForm").submit()
+        // submit es que envía el formulario(https://api.jquery.com/submit/)
+    })
+})

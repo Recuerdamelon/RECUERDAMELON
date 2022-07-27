@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -69,27 +66,18 @@ public class TaskController {
     }
 
     //# DELETE
-    @PostMapping("/task/{id}/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id") //PRE
-    public Object deleteById(@PathVariable("id") Integer id, SessionStatus status) {
+    @PostMapping("/task/delete")
+    // @PreAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id") //es una `LISTA` de tareas, como asegurar que toda la lista es nuestra?
+    public Object deleteById(@RequestParam Integer[] taskid, SessionStatus status, ModelMap model) {
         try {
-            this.taskService.deleteById(id);
+            for (int i = 0; i < taskid.length; i++) {
+                this.taskService.deleteById(taskid[i]);
+            }
         } catch (DataIntegrityViolationException e) {
-            status.setComplete();//Limpieza de atributos de session para no provocar salida de session
-
-            //Método de Spring que devuelve Model y View de una sola vez al controller
-            return new ModelAndView("error/errorHapus")//url del view...
-
-                    //Añadimos los atributos de la sesión
-                    .addObject("entityId", id)
-                    .addObject("entityName", "task")
-                    //Añadimos un registro de la excepción como atributo
-                    .addObject("errorCause", e.getRootCause().getMessage())
-                    //Y añadimos atributo link para volver a task
-                    .addObject("backLink", "/task");
+            System.out.println("ERROR AL BORRAR TAREAS" + e.getMessage());
         }
         status.setComplete();//Restablecemos atributos de session tras eliminar y...
-        return "redirect:/task";//...redirigimos a "/task"
+        return "redirect:/tasks";//...redirigimos a "/tasks"
     }
 
 

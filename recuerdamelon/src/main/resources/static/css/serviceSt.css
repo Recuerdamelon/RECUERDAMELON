@@ -396,30 +396,17 @@ html, .tasks.body {
 
 
 
-#label-1:checked ~ label[for=label-1],
-#label-2:checked ~ label[for=label-2],
-#label-3:checked ~ label[for=label-3],
-#label-4:checked ~ label[for=label-4],
-#label-5:checked ~ label[for=label-5]{
+.taskInput:checked ~ .taskLabel {
   background: #56749c;
   border-bottom: 3px solid #435975;
   text-decoration:line-through;
 
 }
-#label-1:checked ~ label[for=label-1] h2 span,
-#label-2:checked ~ label[for=label-2] h2 span,
-#label-3:checked ~ label[for=label-3] h2 span,
-#label-4:checked ~ label[for=label-4] h2 span,
-#label-5:checked ~ label[for=label-5] h2 span{
-
+.taskInput:checked ~ .taskLabel h2 span {
     color: var(--blanco);
 }
 
-#label-1:checked ~ label[for=label-1]:before,
-#label-2:checked ~ label[for=label-2]:before,
-#label-3:checked ~ label[for=label-3]:before,
-#label-4:checked ~ label[for=label-4]:before,
-#label-5:checked ~ label[for=label-5]:before{
+.taskInput:checked ~ .taskLabel:before {
   background: url("/asset/img/icons/ok-iconW.svg") no-repeat center center;
 }
 
