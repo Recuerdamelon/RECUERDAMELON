@@ -257,3 +257,289 @@ button:hover {
 .buy:hover .text {
     opacity: 1;
 }
+
+
+
+/* CONTROL-BUTTON-TASK ==== CREAR-POPUP */
+.popup-newTask{
+    position: absolute;
+    display: none;
+
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.25);
+    opacity: 1;
+
+    width: 40% ;
+    height: auto ;
+    padding: 3% 2%;
+    background: var(--verdeGris);
+    border-radius: 5%;    
+    border: solid 0px var(--negro);
+    box-shadow: 2px 2px 5px 5px rgba(41, 112, 45, 0.336);
+    z-index: 100;    
+    transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0ms, transform 20ms ease-in-out 0ms;
+}
+/* BUTTON-TASK -- CLEAR */
+.popup-newTask .clear-btn{
+
+    position: absolute;
+    display: inline;
+    right: 10px;
+    width: 4%;
+    height: 5%;
+    left: 80%;
+    top: 2%;
+    padding: 1%;
+    margin: 1%;
+    background: var(--blanco);
+    color: var(--verdeGris);
+    text-align: center;
+    line-height: 90%;
+    font-size: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.popup-newTask .clear-btn{  
+    background: url('../img/icons/refresh-iconW.svg') no-repeat center center ;   
+}
+.popup-newTask .clear-btn:hover{
+ 
+    background: url('../img/icons/refresh-iconY.svg') no-repeat center center ; 
+}
+/* BUTTON-TASK -- ACCEPT */
+.popup-newTask .accept-btn{
+
+    position: absolute;
+    display: inline;
+    right: 10px;
+    width: 4%;
+    height: 5%;
+    left: 85%;
+    top: 2%;
+    padding: 1%;
+    margin: 1%;
+    background: var(--blanco);
+    color: var(--blanco);
+    text-align: center;
+    line-height: 90%;
+    font-size: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.popup-newTask .accept-btn{  
+    background: url('../img/icons/ok-iconW.svg') no-repeat center center;  
+}
+.popup-newTask .accept-btn:hover{
+    
+    background: url('../img/icons/ok-iconY.svg') no-repeat center center; 
+}
+/* BUTTON-TASK -- CANCEL */
+.popup-newTask .cancel-btn{
+
+    position: absolute;
+    display: inline;
+    right: 10px;
+    width: 4%;
+    height: 5%;
+    left: 90%;
+    top: 2%;
+    padding: 1%;
+    margin: 1%;
+    color: var(--blanco);
+    text-align: center;
+    line-height: 90%;
+    font-size: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.popup-newTask .cancel-btn{
+ 
+    background: url('../img/icons/cancel-iconW.svg') no-repeat center center;   
+}
+.popup-newTask .cancel-btn:hover{
+    
+    background: url('../img/icons/cancel-iconR.svg') no-repeat center center; 
+}
+
+
+.popup-newTask .form-newTask h2{
+
+    text-align: center;
+    color: var(--blanco);
+    margin: 10px 0px 20px;
+    font-size: 150%;
+}
+.popup-newTask .form-newTask a{
+
+    display: block;
+    text-align: right;
+    font-size: 100%;
+    columns: var(--blanco);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+.popup-newTask .form-newTask .form-textTask{
+
+    /* margin: 15px 0px;
+    display: grid;
+    grid-template-columns: 30% auto;
+    grid-template-rows: auto auto; */
+    margin: 1% 0px; display: grid;
+}
+.popup-newTask .form-newTask .form-textTask label{
+
+    font-size: 100%;
+    color: var(--blanco); 
+    margin-top: 3%;
+}
+.popup-newTask .form-newTask .form-textTask textarea{
+
+    box-sizing: border-box;
+    /* font: 12px arial; */
+    height: 150px;
+    margin: 5px 0 15px 0;
+    padding: 5px 2px;
+    width: 100%; 
+    resize: none;
+}
+
+.popup-newTask .form-newTask .form-dateTask{
+
+    margin: 1% 0px; display: inline-block;
+}
+.popup-newTask .form-newTask .form-dateTask label{
+
+    font-size: 100%;
+    color: var(--blanco); 
+    
+
+}
+.popup-newTask .form-newTask .form-dateTask input[type="datetime-local"]{
+
+    width: 30%;
+    margin: 1%;
+}
+
+
+.popup-newTask .form-newTask .form-categoryTask{
+
+    /* margin: 15px 0px;
+    display: grid;
+    grid-template-columns: 30% auto;
+    grid-template-rows: auto auto; */
+    width: 80%;
+    margin: 1% 0px; display: inline-block;
+}
+.popup-newTask .form-newTask .form-categoryTask label{
+
+    font-size: 100%;
+    color: var(--blanco); 
+    
+}
+.popup-newTask .form-newTask .form-categoryTask button{
+
+    font-size: 100%;
+    margin: 3%;
+
+    color: var(--verdeGris);
+    background-color: var(--blanco);
+    border-width: thick;     
+    border-radius: 5%;
+}
+.popup-newTask .form-newTask .form-categoryTask button:hover{
+
+    color: var(--blanco);
+    background-color: var(--amarilloMel);
+}
+
+.popup-newTask .form-newTask .form-shareTask{
+
+    width: 100%;
+    margin: 1% 0px; display: inline-block;
+}
+.popup-newTask .form-newTask .form-shareTask label{
+
+    font-size: 100%;
+    color: var(--blanco); 
+    
+}
+.popup-newTask .form-newTask .form-shareTask input{
+
+    width: 20%;  
+}
+/* Button 'compartir' */
+.popup-newTask .form-newTask .form-shareTask button{
+
+    font-size: 100%;
+    margin-left: 2%;
+
+    color: var(--verdeGris);
+    background-color: var(--blanco);
+    border-width: thick;     
+    border-radius: 5%;
+}
+.popup-newTask .form-newTask .form-shareTask button:hover{
+
+
+    color: var(--blanco);
+    background-color: var(--amarilloMel);
+}
+/* Consultar usr compartidos */
+.popup-newTask .form-newTask .form-shareTask .dropshare-btn{
+ 
+    padding-right: 5%;
+    margin-bottom: 6%;
+    border-width: thick;     
+    border-radius: 1%;
+    border: solid var(--blanco);
+    background: url('../img/icons/contact_iconW.svg') no-repeat left center; 
+    background-color: var(--verdeGris);  
+}
+.popup-newTask .form-newTask .form-shareTask .dropshare-btn:hover{
+ 
+    background-color: var(--verdeGris);
+    border: solid var(--amarilloMel);
+    background: url('../img/icons/contact_iconY.svg') no-repeat left center;   
+}
+.popup-newTask .form-newTask .form-shareTask .dropshare-btn span{
+ 
+    padding-left: 90%;
+    color: var(--blanco);  
+}
+
+/* Botones 'x' para cada contact */
+.dropdown-shareTask {
+    display: none;
+    position: absolute;
+    left: 95%;
+    top: 65%;
+    background-color: var(--blanco);
+    min-width: 15%;
+    width: 10%;
+    height: 20%;
+    overflow: auto;
+    border: 1px solid var(--verdeGris);
+    z-index: 1;
+}
+.dropdown-shareTask li {
+color: var(--verdeGris);
+padding: 4% 5%;
+text-decoration: none;
+display: block;
+
+}
+.dropdown-shareTask li:hover {color: var(--amarilloMel);} 
+.show {display: block;}
+
+.popup-newTask .form-newTask .form-shareTask .dropdown-shareTask button{
+ 
+    padding-right: 5%;
+    margin-bottom: 6%;
+    border-width: thick;     
+    border-radius: 1%;
+    border: solid var(--blanco);
+    background: url('../img/icons/cancel-iconR.svg') no-repeat center center;   
+}

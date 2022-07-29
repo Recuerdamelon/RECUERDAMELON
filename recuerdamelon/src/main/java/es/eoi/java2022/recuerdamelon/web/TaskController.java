@@ -55,6 +55,15 @@ public class TaskController {
     }
 
 
+      //#CREATE...
+    @GetMapping("/task/create")//get de update -create&update-//
+    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id")
+    public String create (@PathVariable("id") Integer id, ModelMap model) {
+        model.addAttribute("task", new Task());  /* se importa la entity??*/
+        return "task/create";
+    }
+    
+    
     //             ---------------------------POST Methods-----------------------------         //
 
     @Transactional //post transaccional del get de update//
