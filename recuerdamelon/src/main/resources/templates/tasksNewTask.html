@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sd="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layoutHome}">
+
+<head>
+    <title>Home</title>
+</head>
+
+<body>
+<main>
+    <!-- fragment navbar -->
+    <div layout:fragment="navbar"></div>
+
+    <!-- fragment contenido html -->
+    <div layout:fragment="content">
+
+        <!-- USER BUTTON -->
+        <div class="container-controls">
+
+            <!-- ESTADO DE REGISTROS -->
+            <div class="container-state" >
+                <li id = "stateli">TAREAS REGISTRADAS / AÚN NO HAY TAREAS</li>
+            </div>
+
+            <!-- SEARCH TASK -->
+            <div class="dropdown-filt">
+                <button onclick="myFunction()" class="dropbtn">FILTER</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                    <a href="#Work">Work</a>
+                    <a href="#Sport">Sport</a>
+                    <a href="#Fun">Fun</a>
+                    <a href="#Personal">Personal</a>
+                    <a href="#ToLearn">ToLearn</a>
+                    <a href="#Pep">Pep</a>
+                    <a href="#JGarcia">JGarcia</a>
+                    <a href="#Bflores">Bflores</a>
+                    <a href="#JCarras">JCarras</a>
+                    <a href="#NuevoMeloner con el que compartie una tarea">NuevoMeloner con el que compartie una tarea</a>
+                </div>
+            </div>
+
+            <!-- BUTTON TASK -->
+            <div class="follow">
+                <div class="icon first"><img th:src="@{/img/icons/plus-iconsW.svg}" alt="Crear Tarea"></div>
+                <div class="icon deletetarea"><img th:src="@{/img/icons/trash-iconW.svg}" alt="Eliminar tarea"></div>
+                <div class="icon"><img th:src="@{/img/icons/mark-iconsW.svg}" alt="Seleccionar todo"></div>
+                <div class="icon last"><img th:src="@{/img/icons/share_iconW.svg}" alt="Compartir Tarea"></div>
+                <div class="label">
+                    tasks
+                    <!-- <img src="./asset/img/menu-lateral/help_icon.svg" alt="Usuario"> -->
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-------------------------------------------------- POPUP CREAR TAREAS -->
+        <div class="popup-newTask" id="formNewTask">
+
+            <form class="form-newTask" th:actiion="@{/task/create}" th:object=${task} method="POST">
+                <button type="button" class="clear-btn" onclick=clearNewTask()></button>
+                <button type="submit" class="accept-btn" onclick=acceptNewTask()></button>
+                <button type="button" class="cancel-btn" onclick=cancelNewTask()></button>
+
+                <h2 th:text="#{NewTask.Tittle}"></h2>
+                <div class="form-textTask">
+<!--                    <label>Titulo (<span id="cont-span">0</span>/60)</label>-->
+                    <label th:text="#{NewTask.ContChar}">(<span id="cont-span">0</span>/60)</label>  <!-- ???????????????????????????????-->
+                    <input th:id="tittle-task" placeholder="" type="text" maxlength="60" required onclick="contchar()" th:field="*title">
+
+                    <label for="description-task" th:text="#{NewTask.Description}"></label>
+                    <textarea id="description-task" maxlength="150" th:field="*description"></textarea>
+
+                </div>
+                <div class="form-dateTask">
+                    <label th:text="#{NewTask.IniDate}"></label> <input class="" type="datetime-local" name="date-time" id="dateTask-ini" th:field="*startDate">
+                    <label th:text="#{NewTask.EndDate}"></label> <input class="" type="datetime-local" name="date-time" id="dateTask-fin" th:field="*endDate">
+                </div>
+
+                <div class="form-categoryTask" action="#">
+                    <label for="catTask" th:text="#{NewTask.SelectCat}"> </label>
+                    <input type="text" id="catTask" name="catTask" list="categoryTask" th:field="*taskType">
+
+                    <datalist id="categoryTask">
+                        <option value="Default"></option>
+                        <option value="Work"></option>
+                        <option value="Personal"></option>
+                        <option value="EOIjava"></option>
+                        <option value="Sport"></option>
+                    </datalist>
+                    <button type="button" class="selectCat-btn" onclick=AceptCat() th:text="#{NewTask.Button.Accept}"> </button>
+                </div>
+
+                <div class="form-shareTask">
+                    <label for="shareTask" th:text="#{NewTask.AddShare}"></label>
+                    <input type="text" id="shareTask" name="shareTask" list="contactToTask" th:field="*user">  <!--COMO INCLUIR EN UN ARRAY-->
+
+                    <datalist id="contactToTask">
+                        <option value="JGarcia"></option>
+                        <option value="Bflores"></option>
+                        <option value="JCarras"></option>
+                        <option value="EOIjava"></option>
+                        <option value="Pep"></option>
+                    </datalist>
+                    <button type="button" class="selectCat-btn" onclick=AceptCat() th:text="#{NewTask.Button.Share}"> </button>
+
+                    <!-- SHOW SHARED -->
+                    <!-- <div class="form-showShared"> -->
+                    <button  type="button" class="dropshare-btn" id="show-contshared" onclick="myShared()"><span th:text="#{NewTask.ContShare}"></span></button>
+                    <div id="myContacts" class="dropdown-shareTask">
+                        <!-- Podríamos evitar borrar compartir desde aqui....????????????????????? -->
+                        <li name="list" value="JGarcia">JGarcia <button></button></li>
+                        <li name="list" value="Bflores">Bflores <button></button></li>
+                        <li name="list" value="JCarras">JCarras <button onclick="deletShareTask()"></button></li>
+                        <li name="list" value="JGarcia">JGarcia <button></button></li>
+                        <li name="list" value="Bflores">Bflores <button></button></li>
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </form>
+        </div>
+        <!----------------------------------------------------------------- POPUP NEWTASK -->
+
+
+        <!--------  Ejemplo interfaz web de manejo de tareas  ------->
+        <div class="container-tasks">
+
+            <!-- TASK REG -->
+            <div class="tasks">
+
+
+                <!-- task 2 -->
+<!--                <input id='label-2' type='checkbox' checked/>-->
+<!--                <label for='label-2'>-->
+<!--                    <tr th:each="task,iter : ${tasks}">-->
+<!--                    <h2>-->
+<!--                        <div class="task-title">-->
+<!--                            <img th:src="@{/img/icons/working.png}" alt="Imagen">-->
+<!--                            <label th:text="${task.title}"></label>-->
+<!--                        </div>-->
+<!--                        <div class="task-controls">-->
+<!--                            <button type="button" class="btn-edit" id="btEdit1">-->
+<!--                                <span>.</span>-->
+<!--                            </button>-->
+<!--                            <button type="button" class="btn-select" id="btSelect1">-->
+<!--                                <span>Select</span>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <label th:text="${task.description}"></label>-->
+<!--                    </h2>-->
+<!--                </label>-->
+
+
+
+
+                    <form method="post" id="tasksForm">
+                            <div th:each="task,iter : ${tasks}">
+
+                                    <input class="taskInput" th:id="'label-'+${iter.index + 1}" type='checkbox' name="taskid" th:value="${task.id}"/>
+                                    <label class="taskLabel" th:for="'label-'+${iter.index + 1}">
+
+                                        <div class="typetask"> </div>
+
+                                        <h2>
+                                            <div class="task-tittle">
+                                                <img th:src="@{/img/icons/working.png}" alt="Imagen">
+                                                <span th:text="${task.title}"/>
+                                            </div>
+                                            <div class="task-controls">
+                                                <!--    <img src="./asset/img/icons/edit-iconW.svg" alt="Imagen"> -->
+                                                <button type="button" class="btn-edit" th:id="'botonedit-'+${iter.index}">
+                                                    <span>.</span>
+                                                </button>
+                                                <button type="button" class="btn-select" th:id="'botonselect-'+${iter.index}">
+                                                    <span>Select</span>
+                                                </button>
+
+                                                <!--  SELECT BUTTON -->
+                                                <!--
+                                                    <input class="btn-check" type="radio" value="" id="select-1">
+                                                    <label class="btn btn-primary" for="select-1">select</label>
+                                                -->
+                                            </div>
+                                            <span th:text="${task.description}"/>
+                                        </h2>
+                                    </label>
+
+
+                            </div>
+                    </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</main>
+</body>
+
+</html>
