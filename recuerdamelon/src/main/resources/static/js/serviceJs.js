@@ -52,27 +52,17 @@ function acceptNewTask(){
 
 
 // -------- CONTADOR CHAR TITTLES CREAR TASK
-// https://codepen.io/AngelKrak/pen/vLQvMe
-//Creamos la Funcion
-function contCharTittle() {
-  $("#numCharTt").val($("#tittle-task1").val().length + " /100"); //Detectamos los Caracteres del Input
-  $("#numCharTt").addClass('mui--is-not-empty'); //Agregamos la Clase de Mui para decir que el input no esta vacio y que suba el Texto del Label(Como cuando haces Focus)
-} //Aqui termina la Funcion
-
-
-
-// -------- CONTADOR CHAR TITTLES CREAR TASK
 // -------- AUX
 
-jQuery(function(){
-var inputs = "input[maxlength], textarea[maxlength]";
+jQuery(function contchar(){
+  var inputsCont = "input[maxlength], textarea[maxlength]";
   $(document).on('keyup', "[maxlength]", function (e) {
     var este = $(this),
       maxlength = este.attr('maxlength'),
       maxlengthint = parseInt(maxlength),
       textoActual = este.val(),
       currentCharacters = este.val().length;
-      remainingCharacters = maxlengthint - currentCharacters,
+      remainingCharacters = currentCharacters,
       espan = este.prev('label').find('span');
       // Detectamos si es IE9 y si hemos llegado al final, convertir el -1 en 0 - bug ie9 porq. no coge directamente el atributo 'maxlength' de HTML5
       if (document.addEventListener && !window.requestAnimationFrame) {
@@ -84,7 +74,7 @@ var inputs = "input[maxlength], textarea[maxlength]";
       if (!!maxlength) {
         var texto = este.val();
         if (texto.length >= maxlength) {
-          este.removeClass().addClass("borderojo");
+          // este.removeClass().addClass("borderojo");
           este.val(text.substring(0, maxlength));
           e.preventDefault();
         }
@@ -92,7 +82,10 @@ var inputs = "input[maxlength], textarea[maxlength]";
           este.removeClass().addClass("bordegris");
         }
       }
-    });
+});
+} /*falta () ??*/
+
+       
     // DELETE TASK
     jQuery(".deletetarea").on("click", function(){
     // jquery va a la clase .deletetarea,y la function se ejecuta cuando haces click (https://api.jquery.com/on/)
