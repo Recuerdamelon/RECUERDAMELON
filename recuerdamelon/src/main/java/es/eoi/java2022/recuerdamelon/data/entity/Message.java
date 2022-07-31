@@ -1,32 +1,24 @@
 package es.eoi.java2022.recuerdamelon.data.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-public class Mensajes implements Serializable {
+public class Message implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
-    private String mensaje;
+    private String message;
+
     @ManyToOne
     private User user;
 
-//    public Mensajes() {
-//
-//    }
-//    public Mensajes(Integer id, String texto, User user) {
-//        this.id = id;
-//        this.mensaje = texto;
-//        this.user = user;
-//    }
+    public Message() {
+    }
 
     public Integer getId() {
         return id;
@@ -36,12 +28,12 @@ public class Mensajes implements Serializable {
         this.id = id;
     }
 
-    public String getMensaje() {
-        return mensaje;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public User getUser() {
@@ -51,4 +43,6 @@ public class Mensajes implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
+
 }

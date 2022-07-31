@@ -29,8 +29,8 @@ public class User {
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )
     private Set<Task> tasks;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mensaje")
-    private Set<Mensajes> mensajes;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "message")
+    private Set<Message> messages;
 
     @ManyToMany
     @JoinTable(
@@ -177,5 +177,13 @@ public class User {
 
     public void setBusinessUser(BusinessUser businessUser) {
         this.businessUser = businessUser;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
     }
 }

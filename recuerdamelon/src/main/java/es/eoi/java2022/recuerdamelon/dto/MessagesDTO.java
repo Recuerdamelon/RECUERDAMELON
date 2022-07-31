@@ -2,16 +2,16 @@ package es.eoi.java2022.recuerdamelon.dto;
 
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 
-public class MensajesDTO {
+public class MessagesDTO {
     private Integer id;
 
-    private String mensaje;
+    private String message;
 
     private User user;
 
     private Integer userId;
 
-    private Integer userId_reciver;
+    //private Integer userId_reciver;
 
 
     public Integer getId() {
@@ -22,12 +22,12 @@ public class MensajesDTO {
         this.id = id;
     }
 
-    public String getMensaje() {
-        return mensaje;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Integer getUserId() {

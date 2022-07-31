@@ -1,6 +1,6 @@
 package es.eoi.java2022.recuerdamelon.service;
 
-import es.eoi.java2022.recuerdamelon.dto.MensajesDTO;
+import es.eoi.java2022.recuerdamelon.dto.MessagesDTO;
 import es.eoi.java2022.recuerdamelon.event.MessageEvent;
 import es.eoi.java2022.recuerdamelon.event.MessageEventSaludo;
 import org.slf4j.Logger;
@@ -25,9 +25,9 @@ public class PublicarMensaje {
         logger.info("Evento generado");
 
     }
-    public void  EnviarMensajeSaludo(MensajesDTO mensajesDTO){
+    public void  EnviarMensajeSaludo(MessagesDTO messagesDTO){
         logger.info("Inicio el envío de mensaje saludo por eventos");
-        MessageEventSaludo messageEventSaludo = new MessageEventSaludo(this,mensajesDTO);
+        MessageEventSaludo messageEventSaludo = new MessageEventSaludo(this, messagesDTO);
         publisher.publishEvent(messageEventSaludo);
         logger.info("Evento generado de saludo");
 

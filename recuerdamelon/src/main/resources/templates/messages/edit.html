@@ -9,18 +9,18 @@
 <div layout:fragment="content">
     <div class="row">
         <div class="col-md-12">
-            <form role="form" th:object="${mensaje}" method="post">
+            <form role="form" th:object="${message}" method="post">
                 <div class="box box-primary">
                     <div class="box-body">
                         <div class="tab-content">
-                            <input th:type="hidden" th:field="${mensaje.id}"/>
+                            <input th:type="hidden" th:field="${message.id}"/>
                             <div class="tab-pane active" id="1a">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="name" th:text="#{Mensaje.mensaje}"></label>
+                                        <label for="name" th:text="#{Message.message}"></label>
                                         <input type="text" class="form-control"
                                                id="name"
-                                               th:field="${mensaje.mensaje}"
+                                               th:field="${message.message}"
                                                maxlength="255">
                                     </div>
 
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="box-footer with-border">
-                    <a th:href="@{/mensajes}" class="btn btn-default" role="button"
+                    <a th:href="@{/messages}" class="btn btn-default" role="button"
                        title="Back list" th:text="#{General.Cancel}">
                         <span aria-hidden="true"></span>
                     </a>

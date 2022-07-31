@@ -1,6 +1,6 @@
 package es.eoi.java2022.recuerdamelon.service;
 
-import es.eoi.java2022.recuerdamelon.dto.MensajesDTO;
+import es.eoi.java2022.recuerdamelon.dto.MessagesDTO;
 import es.eoi.java2022.recuerdamelon.service.mapper.IEntityMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,5 +49,5 @@ public abstract class AbstractService<E, ID, DTO, REPO extends JpaRepository<E, 
         return serviceMapper;
     }
 
-    public abstract MensajesDTO save(MensajesDTO dto, Integer usrid);
+    public abstract MessagesDTO save(MessagesDTO dto, Integer usrid);
 }

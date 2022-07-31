@@ -1,10 +1,10 @@
 package es.eoi.java2022.recuerdamelon.data.repository;
 
-import es.eoi.java2022.recuerdamelon.data.entity.Mensajes;
+import es.eoi.java2022.recuerdamelon.data.entity.Message;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MensajesRepository extends JpaRepository<Mensajes, Integer> {
-    Page<Mensajes> findByUserId(Integer userId, Pageable pageable);
+public interface MessagesRepository extends JpaRepository<Message, Integer> {
+    Page<Message> findByUserId(Integer userId, Pageable pageable);
 }
