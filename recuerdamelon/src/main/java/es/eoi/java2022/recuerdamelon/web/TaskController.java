@@ -1,5 +1,6 @@
 package es.eoi.java2022.recuerdamelon.web;
 
+import es.eoi.java2022.recuerdamelon.data.entity.Task;
 import es.eoi.java2022.recuerdamelon.dto.TaskDTO;
 import es.eoi.java2022.recuerdamelon.service.TaskService;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -56,12 +57,12 @@ public class TaskController {
 
 
       //#CREATE...
-//    @GetMapping("/task/create")//get de update -create&update-//
-//    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id")
-//    public String create (@PathVariable("id") Integer id, ModelMap model) {
-//        model.addAttribute("task", new Task());  /* se importa la entity??*/
-//        return "task/create";
-//    }
+    @GetMapping("/task/create")//get de update -create&update-//
+    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id")
+    public String create (@PathVariable("id") Integer id, ModelMap model) {
+        model.addAttribute("task", new Task());  /* se importa la entity??*/
+        return "task/create";
+    }
     
     
     //             ---------------------------POST Methods-----------------------------         //

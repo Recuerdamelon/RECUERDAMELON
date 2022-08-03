@@ -58,6 +58,9 @@ public class User {
     @JoinColumn(unique = true)
     private BusinessUser businessUser;
 
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )
+    private Set<Community> communities;
+
     public Integer getId() {
         return id;
     }
@@ -185,5 +188,13 @@ public class User {
 
     public void setMessages(Set<Message> messages) {
         this.messages = messages;
+    }
+
+    public Set<Community> getCommunities() {
+        return communities;
+    }
+
+    public void setCommunities(Set<Community> communities) {
+        this.communities = communities;
     }
 }
