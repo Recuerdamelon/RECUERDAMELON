@@ -82,8 +82,8 @@ jQuery(function contchar(){
           este.removeClass().addClass("bordegris");
         }
       }
-});
-} /*falta () ??*/
+})
+}); /*falta () ??*/
 
        
     // DELETE TASK

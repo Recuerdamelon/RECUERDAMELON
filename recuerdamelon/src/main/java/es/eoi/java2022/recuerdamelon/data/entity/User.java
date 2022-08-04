@@ -29,6 +29,9 @@ public class User {
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )
     private Set<Task> tasks;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "message")
+    private Set<Message> messages;
+
     @ManyToMany
     @JoinTable(
             name = "user_has_calendar",
@@ -54,6 +57,9 @@ public class User {
     @OneToOne
     @JoinColumn(unique = true)
     private BusinessUser businessUser;
+
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )
+    private Set<Community> communities;
 
     public Integer getId() {
         return id;
@@ -174,5 +180,21 @@ public class User {
 
     public void setBusinessUser(BusinessUser businessUser) {
         this.businessUser = businessUser;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
+
+    public Set<Community> getCommunities() {
+        return communities;
+    }
+
+    public void setCommunities(Set<Community> communities) {
+        this.communities = communities;
     }
 }

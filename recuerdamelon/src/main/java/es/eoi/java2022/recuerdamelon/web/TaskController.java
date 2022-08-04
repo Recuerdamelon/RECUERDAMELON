@@ -1,5 +1,6 @@
 package es.eoi.java2022.recuerdamelon.web;
 
+import es.eoi.java2022.recuerdamelon.data.entity.Task;
 import es.eoi.java2022.recuerdamelon.dto.TaskDTO;
 import es.eoi.java2022.recuerdamelon.service.TaskService;
 import org.springframework.dao.DataIntegrityViolationException;

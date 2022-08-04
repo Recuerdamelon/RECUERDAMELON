@@ -98,7 +98,7 @@ video {
 a,
 .input label,
 .password-olvidada,
-.reguistro-usuario {
+.registro-usuario {
     color: var(--blanco);
 }
 
@@ -117,12 +117,16 @@ a,
     text-align: left;
 }
 
-.password-olvidada a {
+.password-olvidada a:hover {
+text-decoration:none;
+    color:var(--verde)
     display: inline-block;
     margin-top: 20px;
 }
 
-.reguistro-usuario a {
+.registro-usuario a:hover{
+text-decoration:none;
+    color:var(--verde)
     display: inline-block;
     margin-top: 20px;
 }
