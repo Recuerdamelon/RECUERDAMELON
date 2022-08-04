@@ -18,7 +18,7 @@ var colors = [
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
-
+    console.log("El usuario es: " + username);
     if(username) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
@@ -35,6 +35,7 @@ function connect(event) {
 function onConnected() {
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public', onMessageReceived);
+    console.log("Antes de addUser: " + username); //Trazas de Javascript
 
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",

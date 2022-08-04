@@ -18,7 +18,7 @@ public class ChatController {
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        //logger.info(ChatMessage.getSender());
+        logger.info("ChatMessage.MessageType.");
         return chatMessage;
     }
 
@@ -27,6 +27,9 @@ public class ChatController {
     public ChatMessage addUser(@Payload ChatMessage chatMessage,
                                SimpMessageHeaderAccessor headerAccessor) {
         // Add username in web socket session
+        chatMessage.setSender("Juan");
+        logger.info("Este es el usuario");
+        logger.info(chatMessage.getSender());
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;
     }

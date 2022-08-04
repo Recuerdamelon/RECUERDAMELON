@@ -15,6 +15,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     //STOMP: Simple Text Oriented MESSAGING Protocol: Format and rules message exchanging
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+        //Address messages to a route
         registry.addEndpoint("/ws").withSockJS();//websocket endpoint where our client can connect
                                             //SockJS enable use in every browser
     }

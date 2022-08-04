@@ -61,7 +61,7 @@
         <!-------------------------------------------------- POPUP CREAR TAREAS -->
         <div class="popup-newTask" id="formNewTask">
 
-            <form class="form-newTask" th:actiion="@{/task/create}" th:object=${task} method="POST">
+            <form class="form-newTask" th:action="@{/task/create}" th:object=${task} method="POST">
                 <button type="button" class="clear-btn" onclick=clearNewTask()></button>
                 <button type="submit" class="accept-btn" onclick=acceptNewTask()></button>
                 <button type="button" class="cancel-btn" onclick=cancelNewTask()></button>
@@ -70,20 +70,20 @@
                 <div class="form-textTask">
 <!--                    <label>Titulo (<span id="cont-span">0</span>/60)</label>-->
                     <label th:text="#{NewTask.ContChar}">(<span id="cont-span">0</span>/60)</label>  <!-- ???????????????????????????????-->
-                    <input th:id="tittle-task" placeholder="" type="text" maxlength="60" required onclick="contchar()" th:field="*title">
+                    <input th:id="tittle-task" placeholder="" type="text" maxlength="60" required onclick="contchar()" >
 
                     <label for="description-task" th:text="#{NewTask.Description}"></label>
-                    <textarea id="description-task" maxlength="150" th:field="*description"></textarea>
+                    <textarea id="description-task" maxlength="150" ></textarea>
 
                 </div>
                 <div class="form-dateTask">
-                    <label th:text="#{NewTask.IniDate}"></label> <input class="" type="datetime-local" name="date-time" id="dateTask-ini" th:field="*startDate">
-                    <label th:text="#{NewTask.EndDate}"></label> <input class="" type="datetime-local" name="date-time" id="dateTask-fin" th:field="*endDate">
+                    <label th:text="#{NewTask.IniDate}"></label> <input class="" type="datetime-local" name="date-time" id="dateTask-ini" >
+                    <label th:text="#{NewTask.EndDate}"></label> <input class="" type="datetime-local" name="date-time" id="dateTask-fin" >
                 </div>
 
                 <div class="form-categoryTask" action="#">
                     <label for="catTask" th:text="#{NewTask.SelectCat}"> </label>
-                    <input type="text" id="catTask" name="catTask" list="categoryTask" th:field="*taskType">
+                    <input type="text" id="catTask" name="catTask" list="categoryTask" >
 
                     <datalist id="categoryTask">
                         <option value="Default"></option>
@@ -97,7 +97,7 @@
 
                 <div class="form-shareTask">
                     <label for="shareTask" th:text="#{NewTask.AddShare}"></label>
-                    <input type="text" id="shareTask" name="shareTask" list="contactToTask" th:field="*user">  <!--COMO INCLUIR EN UN ARRAY-->
+                    <input type="text" id="shareTask" name="shareTask" list="contactToTask" >  <!--COMO INCLUIR EN UN ARRAY-->
 
                     <datalist id="contactToTask">
                         <option value="JGarcia"></option>
