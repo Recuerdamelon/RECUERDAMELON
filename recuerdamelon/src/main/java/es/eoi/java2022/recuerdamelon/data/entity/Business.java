@@ -18,7 +18,7 @@ public class Business {
     private String nif;
     private byte[] avatar;
 
-    @OneToMany(mappedBy = "empresa")
+    @OneToMany(mappedBy = "business")
     private Set<User> users;
 
     @OneToMany(mappedBy = "business")

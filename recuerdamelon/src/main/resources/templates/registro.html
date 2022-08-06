@@ -1,66 +1,77 @@
 <!DOCTYPE html>
 <html
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sd="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{layoutLog}">
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sd="http://www.w3.org/1999/xhtml"
+        layout:decorate="~{layoutLog}">
+
 
 <!--
     TODO: Como importar layoutLog y el de TL?? hace falta el de TL??
 -->
-    <head>
-        <title>Registro</title>
-    </head>
+<head>
+    <title>Registro</title>
+</head>
 
-    <body>
+<body>
 
-        <main>
-          
-            <div layout:fragment="content">
-                <article class="login">
-                    <section>
-                        <img th:src="@{/img/logoletranegra.png}" alt="Imagen">
-                    </section>
-                    <section>
+<main>
 
-                        <form action="#" th:action="@{/registro}" method="post">
+    <div layout:fragment="content">
+        <article class="login">
+            <section>
+                <img th:src="@{/img/logoletranegra.png}" alt="Imagen">
+            </section>
+            <section>
 
-                            <p th:if="${errors}" th:text="#{Registro.Error}"></p>
+                <form action="/" th:action="@{/registro}" th:object="${user}" method="post">
 
-                            <div class="texto-formulario">
-                                <h2 th:text="#{Registro.Title}"></h2> <!-- <h2>Crear una nueva cuenta Meloner</h2> -->
-                            </div>
+                    <p th:if="${errors}" th:text="#{Registro.Error}"></p>
 
-                            <div class="input">
-                                <label for="username" th:text="#{Registro.Username}" ></label>   <!-- <label for="Meloner">Elija tu nombre Meloner</label>>  -->
-                                <input placeholder="" type="text" id="username" name="username">
-                            </div>
-                            <div class="input">
-                                <label for="email" th:text="#{Registro.Email}"></label> <!--   for="email" th:text="#{Registro.Email}">Email</label>-->
-                                <input placeholder="" type="email" id="email">
-                            </div>
-                            <div class="input">
-                                <label for="password" th:text="#{Registro.Password}"></label> <!--<label for="contraseña">Elija tu contraseña</label>-->
-                                <input placeholder="" type="password" id="password" name="password">
-                            </div>
-                            <div class="input">
-                                <label for="repassword" th:text="#{Registro.RePassword}"></label> <!--<label for="contraseña">Repita la contraseña</label>-->
-                                <input placeholder="" type="password" id="repassword" name="repassword">
-                            </div>
+                    <div class="texto-formulario">
+                        <h2 th:text="#{Registro.Title}"></h2> <!-- <h2>Crear una nueva cuenta Meloner</h2> -->
+                    </div>
 
-                            <div class="input">
-                               <button type="submit" th:text="#{Registro.Button.Submit}"></button>  <!-- >Crear cuenta</button> -->
-                            </div>
-                        </form>
+                    <input th:type="hidden" th:field="${user.id}" >
+
+                    <div class="input">
+                        <label for="username" th:text="#{Registro.Username}" ></label>   <!-- <label for="Meloner">Elija tu nombre Meloner</label>>  -->
+                        <input placeholder="" type="text" id="username" name="username"  required th:field="${user.username}" >
+                    </div>
+                    <div class="input">
+                        <label for="name" th:text="#{Registro.name}" ></label>   <!-- <label for="Meloner">Elija tu nombre Meloner</label>>  -->
+                        <input placeholder="" type="text" id="name" name="name"  required th:field="${user.name}">
+                    </div>
+                    <div class="input">
+                        <label for="surname" th:text="#{Registro.surname}" ></label>   <!-- <label for="Meloner">Elija tu nombre Meloner</label>>  -->
+                        <input placeholder="" type="text" id="surname" name="surname"  required th:field="${user.surname}">
+                    </div>
+                    <div class="input">
+                        <label for="email" th:text="#{Registro.Email}"></label> <!--   for="email" th:text="#{Registro.Email}">Email</label>-->
+                        <input placeholder="" type="email" id="email" name="email"  required th:field="${user.email}">
+                    </div>
+                    <div class="input">
+                        <label for="password" th:text="#{Registro.Password}"></label> <!--<label for="contraseña">Elija tu contraseña</label>-->
+                        <input placeholder="" type="password" id="password" name="password"  required th:field="${user.password}">
+                    </div>
+                    <div class="input" >
+                        <label for="repassword" th:text="#{Registro.RePassword}" ></label> <!--<label for="contraseña">Repita la contraseña</label>-->
+                        <input placeholder="" type="password" id="repassword" name="repassword"  required >
+                    </div>
+
+                    <div class="input">
+                        <button type="submit" th:text="#{Registro.Button.Submit}"></button>  <!-- >Crear cuenta</button> -->
+                    </div>
+
+                </form>
 
 
 
-                    </section>
-                </article>
+            </section>
+        </article>
 
 
-            </div>
-        </main>
-
+         </div>
+     </main>
     </body>
 </html>

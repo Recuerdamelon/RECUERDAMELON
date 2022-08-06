@@ -3,7 +3,7 @@ package es.eoi.java2022.recuerdamelon.data.entity;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
+@Entity(name ="user_role" )
 public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

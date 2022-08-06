@@ -4,13 +4,16 @@ import es.eoi.java2022.recuerdamelon.data.entity.ConfirmationToken;
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.data.repository.ConfirmationTokenRepository;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
+import es.eoi.java2022.recuerdamelon.dto.UserDTO;
 import es.eoi.java2022.recuerdamelon.service.EmailService;
 import es.eoi.java2022.recuerdamelon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -113,8 +116,36 @@ public class LoginController {
     }
 
     @GetMapping("/registro")
-    public String getRegistro() {
+    public String getRegistro(WebRequest request, Model model) {
+        UserDTO userDTO = new UserDTO();
+        model.addAttribute("user", userDTO);
         return "registro";
+    }
+
+    @Transactional
+    @PostMapping("/registro")
+    public String saveRegistro(UserDTO userDTO) {
+        this.userService.save(userDTO);
+        return "login";
+        //Comprobamos si el usuario esta registrado
+//        try {
+//            //llamamos al metodo del servicio para saber si el usuario existe
+//            User user = this.userService.findByUsername(userDTO.getName());
+//            //si el usuario no existe lo grabamos
+//            this.userService.save(userDTO);
+//            //una vez grabado vamos al login
+//            return "login";
+//        }catch (Exception e){
+//            //si el usuario no existe podemos guardar uno nuevo
+//
+//            return "login";
+//        }
+
+
+
+//            userRepository.findByName(userDTO.getName()).isPresent();
+
+
 
     }
 }
