@@ -11,11 +11,12 @@ public class Task {
     private Integer id;
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false,name = "start_date")
     private ZonedDateTime startDate;
-    @Column(nullable = false)
+    @Column(nullable = false,name ="end_date" )
     private ZonedDateTime endDate;
     private String description;
+    @Column(name ="location_url" )
     private String locationUrl;
     @Column(nullable = false)
     private Boolean delete;

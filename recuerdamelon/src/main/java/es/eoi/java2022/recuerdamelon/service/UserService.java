@@ -40,11 +40,11 @@ public class UserService {
         }
         return repository.save(user);
     }
-    public UserDTO save(UserDTO userDTO) {
+    public User save(UserDTO userDTO) {
         if (userDTO.getId() != null){
-            throw new RuntimeException("El Identificador no puede ser nulo");
+            throw new RuntimeException("Conflicto de tipo id");
         }
-        return mapper.toDto(repository.save(mapper.toEntity(userDTO)));
+        return repository.save(mapper.toEntity(userDTO));
     }
 
 }

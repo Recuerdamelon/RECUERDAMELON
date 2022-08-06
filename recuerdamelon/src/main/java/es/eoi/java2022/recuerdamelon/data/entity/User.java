@@ -52,7 +52,7 @@ public class User {
     private Set<Notification> notifications;
 
     @ManyToOne
-    private Business empresa;
+    private Business business;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -68,6 +68,7 @@ public class User {
     public void setId(Integer id) {
         this.id = id;
     }
+
 
     public String getName() {
         return name;
@@ -166,12 +167,13 @@ public class User {
         this.username = username;
     }
 
-    public Business getEmpresa() {
-        return empresa;
+
+    public Business getBusiness() {
+        return business;
     }
 
-    public void setEmpresa(Business empresa) {
-        this.empresa = empresa;
+    public void setBusiness(Business business) {
+        this.business = business;
     }
 
     public BusinessUser getBusinessUser() {

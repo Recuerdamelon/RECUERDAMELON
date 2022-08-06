@@ -11,7 +11,7 @@ public class Calendar {
     private Integer id;
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "task_date")
     private ZonedDateTime taskDate;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "calendar")

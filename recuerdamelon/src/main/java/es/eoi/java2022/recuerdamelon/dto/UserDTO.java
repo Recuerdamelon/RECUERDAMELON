@@ -6,9 +6,12 @@ import java.util.List;
 
 public class UserDTO {
     private Integer id;
+
+    private String username;
     private String name;
     private String surname;
     private String email;
+    private String password;
     private boolean active;
     private byte[] avatar;
 
@@ -16,7 +19,7 @@ public class UserDTO {
 
     private List<TaskDTO> task;
 
-    private List<BusinessDTO> business;
+    private BusinessDTO business;
 
     private BusinessUserDTO businessUser;
 
@@ -86,11 +89,11 @@ public class UserDTO {
         this.task = task;
     }
 
-    public List<BusinessDTO> getBusiness() {
+    public BusinessDTO getBusiness() {
         return business;
     }
 
-    public void setBusiness(List<BusinessDTO> business) {
+    public void setBusiness(BusinessDTO business) {
         this.business = business;
     }
 
@@ -102,4 +105,19 @@ public class UserDTO {
         this.businessUser = businessUser;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
