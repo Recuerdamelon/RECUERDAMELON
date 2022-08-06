@@ -125,6 +125,7 @@ public class LoginController {
     @Transactional
     @PostMapping("/registro")
     public String saveRegistro(UserDTO userDTO) {
+        userDTO.setPassword(encoder.encode(userDTO.getPassword()));
         this.userService.save(userDTO);
         return "login";
         //Comprobamos si el usuario esta registrado
