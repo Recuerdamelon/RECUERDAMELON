@@ -17,48 +17,40 @@
     <!-- fragment contenido html -->
     <div layout:fragment="content">
 
-        <div class="container-usuario">
-            <TABLE class="tabla-usuario" BORDER="0" CELLPADDING="10px" CELLSPACING="0">
-                <TR>
-                    <TD>
-                        <div class="image-cropper">
-                            <img class="my-picture" th:src="@{/img/unk.jpg}" alt="Avatar">
-                        </div>
-                    </TD>
-                </TR>
-                <TR>
-                    <TD><label>Usuario:</label></TD>
-                    <TD><input type="text" name="nombre_x" id="nombre_x"></TD>
-                </TR>
-                <TR>
-                    <TD><label>Correo:</label></TD>
-                    <TD><input type="text" name="correo_x" id="correo_x"></TD>
-                </TR>
-                <TR>
-                    <td> <label>nueva contraseña:</label> </td>
-                    <TD><input type="password" name="pass_x" id="pass_x"></TD>
-                </TR>
-                <TR>
-                    <td> foto:</td>
-                    <TD><input type="file" id="foto_x" name="foto_x"></TD>
-                </TR>
-                <TR>
-                    <td></td>
-                    <TD><button type="button" id="guardardatos"> Grabar</button></TD>
-                </TR>
+        <form method="POST" action="/user/save" enctype="multipart/form-data">
+            <div class="container-usuario">
+                <TABLE class="tabla-usuario" BORDER="0" CELLPADDING="10px" CELLSPACING="0">
+                    <TR>
+                        <TD>
+                            <div class="image-cropper">
+                                <img class="my-picture" th:src="${userData.getAvatarUrl() == null ? '/img/usermelon.png' : userData.getAvatarUrl() }" alt="Avatar">
+                            </div>
+                        </TD>
+                    </TR>
+                    <TR>
+                        <TD><label>Usuario:</label></TD>
+                        <TD><input type="text" name="nombre_x"></TD>
+                    </TR>
+                    <TR>
+                        <TD><label>Correo:</label></TD>
+                        <TD><input type="text" name="correo_x"></TD>
+                    </TR>
+                    <TR>
+                        <td> <label>nueva contraseña:</label> </td>
+                        <TD><input type="password" name="pass_x"></TD>
+                    </TR>
+                    <TR>
+                        <td> foto:</td>
+                        <TD><input type="file" name="image"></TD>
+                    </TR>
+                    <TR>
+                        <td></td>
+                        <TD><button type="submit">Guardar</button></TD>
+                    </TR>
 
-            </TABLE>
-            <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#guardardatos').click(function() {
-                            nombre_x = $('#nombre_x').val();
-                            correo_x = $('#correo_x').val();
-                            pass_x = $('#pass_x').val();
-                            RegistrarNuevo(nombre_x, correo_x, pass_x, pais_x, foto_x);
-                        });
-                    });
-                </script>
-        </div>
+                </TABLE>
+            </div>
+        </form>
 
     </div>
 

@@ -1,5 +1,7 @@
 package es.eoi.java2022.recuerdamelon.data.entity;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -21,7 +23,7 @@ public class User {
     private String password;
     @Column(nullable = false)
     private boolean active;
-    private byte[] avatar;
+    private String avatar;
 
     @OneToMany(mappedBy = "owner")
     private Set<Task> ownedTasks;
@@ -110,11 +112,16 @@ public class User {
         this.active = active;
     }
 
-    public byte[] getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(byte[] avatar) {
+    public String getAvatarUrl() {
+        if (avatar == null || StringUtils.isEmpty(avatar)) return null;
+        return "/user-photos/" + id + "/" + avatar;
+    }
+
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 

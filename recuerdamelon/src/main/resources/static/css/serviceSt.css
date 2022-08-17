@@ -6,6 +6,7 @@
     --blanco: #FFFFFF;
     --negro: #000000;
     --fuente: 'Quicksand', sans-serif;
+
 }
 
 /*------- NAV INFERIOR DESPLEGABLE: Contacto, info, ... ----------*/
@@ -410,7 +411,7 @@ html, .tasks.body {
 }
 
 .container-usuario {
-    background: #c0e242;
+    background: #b9af5b;
     width: auto;
     border-radius: 15px;
     color: #fff;

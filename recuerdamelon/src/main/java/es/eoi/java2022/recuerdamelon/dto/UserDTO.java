@@ -13,7 +13,7 @@ public class UserDTO {
     private String email;
     private String password;
     private boolean active;
-    private byte[] avatar;
+    private String avatar;
 
     private List<UserRoleDTO> roles;
 
@@ -65,11 +65,11 @@ public class UserDTO {
         this.active = active;
     }
 
-    public byte[] getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(byte[] avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 

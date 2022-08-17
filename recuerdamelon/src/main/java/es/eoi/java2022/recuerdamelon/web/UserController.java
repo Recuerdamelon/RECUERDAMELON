@@ -1,23 +1,32 @@
 package es.eoi.java2022.recuerdamelon.web;
 
+import es.eoi.java2022.recuerdamelon.data.entity.User;
+import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
 import es.eoi.java2022.recuerdamelon.dto.UserDTO;
 import es.eoi.java2022.recuerdamelon.service.UserService;
+import es.eoi.java2022.recuerdamelon.utils.FileUploadUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
 import java.util.Optional;
 @Controller
 public class UserController {
@@ -91,5 +100,24 @@ public class UserController {
         return "redirect:/user";//...redirigimos a "/user"
     }
 
+        //SAVE USER PROFILE IMAGE
+        @Autowired
+        private UserRepository repo;
+        @PostMapping("/user/save")
+        public RedirectView saveUser(@AuthenticationPrincipal User user, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            user.setAvatar(fileName);
+
+            repo.save(user);
+
+             String uploadDir = "user-photos/" + user.getId();
+
+              FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+            return new RedirectView("/perfil", true);
+        }
 
 }
+
+
