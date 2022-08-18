@@ -12,6 +12,8 @@ public class UserDTO {
     private String surname;
     private String email;
     private String password;
+
+    private String repassword;
     private boolean active;
     private String avatar;
 
@@ -120,4 +122,13 @@ public class UserDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getRepassword() {
+        return repassword;
+    }
+
+    public void setRepassword(String repassword) {
+        this.repassword = repassword;
+    }
 }
+
