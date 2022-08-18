@@ -26,6 +26,7 @@ public class UserService {
     public User findById(Integer id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException(String.format("El Id %d no existe", id)));
     }
+    public User findByUsername(String username){return repository.findByUsername(username);}
 
     public User findByEmail(String email) {
         return repository.findByEmailIgnoreCase(email);

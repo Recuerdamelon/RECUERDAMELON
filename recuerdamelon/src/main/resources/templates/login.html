@@ -1,80 +1,65 @@
 <!DOCTYPE html>
-<html
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
-      xmlns:sd="http://www.w3.org/1999/xhtml"
+<head>
+    <title>Recuperar Contraseña</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuerda melon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="#" th:href="@{/css/normalize.css}"/>
+    <link rel="stylesheet" href="#" th:href="@{/css/loginStyle.css}"/>
+    <link rel="icon" href="#" th:href="@{/img/favicon.ico}" type="image/x-icon"/>
+</head>
 
-      layout:decorate="~{layoutLog}">
-
-<!--
-    TODO: Como importar layoutLog y el de TL?? hace falta el de TL??
--->
-    <head>
-        <title>Login</title>
-
-    </head>
-
-    <body>
-
-        <main>
-
-
-            <!-- VIDEOS Y LETRAS BACKGROUND ESTATICO APROVECHANDO EL layoutLog.html -->
-
-            <!--<div class="background-video">
-                <video id="background-video" autoplay loop muted >
-                    <source src="./asset/video/pexels-polina-kovaleva-7258391.webm" type="video/mp4">
-                </video>
+<body>
+<main>
+    <div class="background-video">
+        <video id="background-video" autoplay loop muted >
+            <source th:src="@{/img/videoBgLog.webm}" type="video/mp4">
+        </video>
+    </div>
+    <article class="imagenes">
+        <img th:src="@{/img/9-removebg-preview.png}" alt="letras1">
+        <img th:src="@{/img/10-removebg-preview.png}" alt="letras2">
+        <img th:src="@{/img/11-removebg-preview.png}" alt="letras3">
+    </article>
+    <article class="login">
+        <section>
+            <div>
+                <img class="logo" th:src="@{/img/logoletranegra.png}" alt="Imagen">
             </div>
-            <article class="imagenes">
-                <img th:src="@{/img/9-removebg-preview.png}" alt="letras1">
-                <img th:src="@{/img/10-removebg-preview.png}" alt="letras2">
-                <img th:src="@{/img/11-removebg-preview.png}" alt="letras3">
-            </article>-->
+            <form action="#" th:action="@{/login}" method="post">
+                <p th:if="${errors}" th:text="#{Login.Error}"></p>
 
-            <div layout:fragment="content">
-                <article class="login">
-                    <section>
-                        <img th:src="@{/img/logoletranegra.png}" alt="Imagen">
-                    </section>
-                    <section>
+                <div class="texto-formulario">
+                    <h2 th:text="#{Login.Title}"></h2> <!--<h2> <b th:text="#{Login.Title}"></b> </h2>-->
+                </div>
+                <div class="input">
+                    <label for="username" th:text="#{Login.Username}" ></label>   <!-- Meloner</label>  -->
+                    <input placeholder="Introduce tu usuario" type="text" id="username" name="username">
+                </div>
+                <div class="input">
+                    <label for="password" th:text="#{Login.Password}"></label>      <!-- Contraseña</label> -->
+                    <input placeholder="Introduce tu contraseña" type="password" id="password" name="password">
+                </div>
+                <div class="password-olvidada"> <!--.... FALTA RECUPERAR html-->
+                    <a th:href = "@{/recoverPassword}" th:text="#{Login.Recuperar.Password}"></a> <!--"¡Olvidaste tu contraseña melón!"-->
+                </div>
+                <div class="input">
+                    <!-- <input type="submit" value="Login"> -->
+                    <button type="submit" th:text="#{Login.Button.Submit}"></button>  <!-- >Login</button>  -->
+                </div>
+                <div class="registro-usuario">
+                    <a th:href = "@{/registro}" th:text="#{Login.Registrarse}"></a>   <!--"¿Aún no eres Meloner?"-->
+                </div>
+            </form>
+        </section>
+    </article>
+</main>
+</body>
 
-                        <form action="#" th:action="@{/login}" method="post">
-
-                            <p th:if="${errors}" th:text="#{Login.Error}"></p>
-
-                            <div class="texto-formulario">
-                                <h2 th:text="#{Login.Title}"></h2> <!--<h2> <b th:text="#{Login.Title}"></b> </h2>-->
-                            </div>
-
-                            <div class="input">
-                                <label for="username" th:text="#{Login.Username}" ></label>   <!-- Meloner</label>  -->
-                                <input placeholder="Introduce tu usuario" type="text" id="username" name="username">
-                            </div>
-                            <div class="input">
-                                <label for="password" th:text="#{Login.Password}"></label>      <!-- Contraseña</label> -->
-                                <input placeholder="Introduce tu contraseña" type="password" id="password" name="password">
-                            </div>
-                            <div class="password-olvidada"> <!--.... FALTA RECUPERAR html-->
-                                <a th:href = "@{/recoverPassword}" th:text="#{Login.Recuperar.Password}"></a> <!--"¡Olvidaste tu contraseña melón!"-->
-
-                            </div>
-                            <div class="input">
-                                <!-- <input type="submit" value="Login"> -->
-                               <button type="submit" th:text="#{Login.Button.Submit}"></button>  <!-- >Login</button>  -->
-                            </div>
-                            <div class="registro-usuario">
-                                <a th:href = "@{/registro}" th:text="#{Login.Registrarse}"></a>   <!--"¿Aún no eres Meloner?"-->
-                            </div>
-                        </form>
-
-                    </section>
-                </article>
-
-
-            </div>
-        </main>
-
-    </body>
 </html>

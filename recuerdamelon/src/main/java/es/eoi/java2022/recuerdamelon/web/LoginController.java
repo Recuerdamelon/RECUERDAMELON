@@ -8,15 +8,19 @@ import es.eoi.java2022.recuerdamelon.dto.UserDTO;
 import es.eoi.java2022.recuerdamelon.service.EmailService;
 import es.eoi.java2022.recuerdamelon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
 public class LoginController {
@@ -115,6 +119,8 @@ public class LoginController {
         return modelAndView;
     }
 
+
+
     @GetMapping("/registro")
     public String getRegistro(WebRequest request, Model model) {
         UserDTO userDTO = new UserDTO();
@@ -124,10 +130,22 @@ public class LoginController {
 
     @Transactional
     @PostMapping("/registro")
-    public String saveRegistro(UserDTO userDTO) {
-        userDTO.setPassword(encoder.encode(userDTO.getPassword()));
-        this.userService.save(userDTO);
-        return "login";
+    public String saveRegistro(UserDTO userDTO, Model model, Errors errors, RedirectAttributes redirectAttributes) {
+        List<User> allUsers = userService.findAll(Pageable.unpaged());
+        if (allUsers.contains(userService.findByUsername(userDTO.getUsername()))) {
+            redirectAttributes.addFlashAttribute("errorusername", true);
+            return "redirect:/registro";
+        } else if (allUsers.contains(userService.findByEmail(userDTO.getEmail()))) {
+            redirectAttributes.addFlashAttribute("erroremail", true);
+            return "redirect:/registro";
+        } else {
+            userDTO.setPassword(encoder.encode(userDTO.getPassword()));
+            userDTO.setActive(true);
+            this.userRepository.save(userService.save(userDTO));
+            return "login";
+        }
+
+    }
         //Comprobamos si el usuario esta registrado
 //        try {
 //            //llamamos al metodo del servicio para saber si el usuario existe
@@ -149,4 +167,4 @@ public class LoginController {
 
 
     }
-}
+

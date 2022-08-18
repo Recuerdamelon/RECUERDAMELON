@@ -1,77 +1,86 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:sd="http://www.w3.org/1999/xhtml"
-        layout:decorate="~{layoutLog}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-
-<!--
-    TODO: Como importar layoutLog y el de TL?? hace falta el de TL??
--->
 <head>
     <title>Registro</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuerda melon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="#" th:href="@{/css/normalize.css}"/>
+    <link rel="stylesheet" href="#" th:href="@{/css/loginStyle.css}"/>
+    <link rel="icon" href="#" th:href="@{/img/favicon.ico}" type="image/x-icon"/>
 </head>
 
 <body>
-
 <main>
+    <div class="background-video">
+        <video id="background-video" autoplay loop muted >
+            <source th:src="@{/img/videoBgLog.webm}" type="video/mp4">
+        </video>
+    </div>
+    <article class="imagenes">
+        <img th:src="@{/img/9-removebg-preview.png}" alt="letras1">
+        <img th:src="@{/img/10-removebg-preview.png}" alt="letras2">
+        <img th:src="@{/img/11-removebg-preview.png}" alt="letras3">
+    </article>
 
-    <div layout:fragment="content">
-        <article class="login">
-            <section>
-                <img th:src="@{/img/logoletranegra.png}" alt="Imagen">
-            </section>
-            <section>
+    <article class="login">
+        <section>
+            <div>
+                <img style="width:25%" th:src="@{/img/logoletranegra.png}" alt="Imagen">
+            </div>
+            <form action="/" th:action="@{/registro}" th:object="${user}" method="post">
 
-                <form action="/" th:action="@{/registro}" th:object="${user}" method="post">
+                <p class="p-error" th:if="${errorusername}" th:text="#{Registro.ErrorUsername}"></p>
+                <p class="p-error" th:if="${erroremail}" th:text="#{Registro.ErrorEmail}"></p>
 
-                    <p th:if="${errors}" th:text="#{Registro.Error}"></p>
+                <div class="texto-formulario">
+                    <h2 th:text="#{Registro.Title}"></h2> <!-- <h2>Crear una nueva cuenta Meloner</h2> -->
+                </div>
 
-                    <div class="texto-formulario">
-                        <h2 th:text="#{Registro.Title}"></h2> <!-- <h2>Crear una nueva cuenta Meloner</h2> -->
-                    </div>
+                <input th:type="hidden" th:field="${user.id}" >
 
-                    <input th:type="hidden" th:field="${user.id}" >
+                <div class="input">
+                    <label for="username" th:text="#{Registro.Username}" ></label>   <!-- <label for="Meloner">Elija tu nombre Meloner</label>>  -->
+                    <input placeholder="" type="text" id="username" name="username"  required th:field="${user.username}" >
+                </div>
+                <div class="input">
+                    <label for="name" th:text="#{Registro.name}" ></label>   <!-- <label for="Meloner">Elija tu nombre Meloner</label>>  -->
+                    <input placeholder="" type="text" id="name" name="name"  required th:field="${user.name}">
+                </div>
+                <div class="input">
+                    <label for="surname" th:text="#{Registro.surname}" ></label>   <!-- <label for="Meloner">Elija tu nombre Meloner</label>>  -->
+                    <input placeholder="" type="text" id="surname" name="surname"  required th:field="${user.surname}">
+                </div>
+                <div class="input">
+                    <label for="email" th:text="#{Registro.Email}"></label> <!--   for="email" th:text="#{Registro.Email}">Email</label>-->
+                    <input placeholder="" type="email" id="email" name="email"  required th:field="${user.email}">
+                </div>
+                <div class="input">
+                    <label for="password" th:text="#{Registro.Password}"></label> <!--<label for="contraseña">Elija tu contraseña</label>-->
+                    <input placeholder="" type="password" id="password" name="password"  required th:field="${user.password}" onkeyup='check();'>
+                </div>
+                <div class="input">
+                    <label for="repassword" th:text="#{Registro.RePassword}"></label>
+                    <input placeholder="" type="password" id="repassword" name="repassword"  required th:field="${user.repassword}" onkeyup='check();' />
+                    <span id='message'></span>
+                </div>
 
-                    <div class="input">
-                        <label for="username" th:text="#{Registro.Username}" ></label>   <!-- <label for="Meloner">Elija tu nombre Meloner</label>>  -->
-                        <input placeholder="" type="text" id="username" name="username"  required th:field="${user.username}" >
-                    </div>
-                    <div class="input">
-                        <label for="name" th:text="#{Registro.name}" ></label>   <!-- <label for="Meloner">Elija tu nombre Meloner</label>>  -->
-                        <input placeholder="" type="text" id="name" name="name"  required th:field="${user.name}">
-                    </div>
-                    <div class="input">
-                        <label for="surname" th:text="#{Registro.surname}" ></label>   <!-- <label for="Meloner">Elija tu nombre Meloner</label>>  -->
-                        <input placeholder="" type="text" id="surname" name="surname"  required th:field="${user.surname}">
-                    </div>
-                    <div class="input">
-                        <label for="email" th:text="#{Registro.Email}"></label> <!--   for="email" th:text="#{Registro.Email}">Email</label>-->
-                        <input placeholder="" type="email" id="email" name="email"  required th:field="${user.email}">
-                    </div>
-                    <div class="input">
-                        <label for="password" th:text="#{Registro.Password}"></label> <!--<label for="contraseña">Elija tu contraseña</label>-->
-                        <input placeholder="" type="password" id="password" name="password"  required th:field="${user.password}">
-                    </div>
-                    <div class="input" >
-                        <label for="repassword" th:text="#{Registro.RePassword}" ></label> <!--<label for="contraseña">Repita la contraseña</label>-->
-                        <input placeholder="" type="password" id="repassword" name="repassword"  required >
-                    </div>
+                <div class="input">
+                    <button type="submit" th:text="#{Registro.Button.Submit}" id="buttonOk" hidden="hidden" onkeyup='check();'></button>  <!-- >Crear cuenta</button> -->
+                </div>
 
-                    <div class="input">
-                        <button type="submit" th:text="#{Registro.Button.Submit}"></button>  <!-- >Crear cuenta</button> -->
-                    </div>
+            </form>
 
-                </form>
+            <script src="/js/repassword.js"></script>
 
+        </section>
+    </article>
+</main>
+</body>
 
-
-            </section>
-        </article>
-
-
-         </div>
-     </main>
-    </body>
 </html>
