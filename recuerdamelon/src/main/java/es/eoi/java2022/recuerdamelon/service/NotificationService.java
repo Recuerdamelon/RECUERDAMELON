@@ -37,11 +37,11 @@ public class NotificationService {
         }
         return repository.save(notification);
     }
-    public NotificationDTO save(NotificationDTO notificationDTO) {
+    public Notification save(NotificationDTO notificationDTO) {
         if (notificationDTO.getId() != null){
             throw new RuntimeException("El Identificador no puede ser nulo");
         }
-        return mapper.toDto(repository.save(mapper.toEntity(notificationDTO)));
+        return repository.save(mapper.toEntity(notificationDTO));
     }
 
 }

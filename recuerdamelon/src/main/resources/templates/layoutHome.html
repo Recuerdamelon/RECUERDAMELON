@@ -40,7 +40,7 @@
 <body>
 <main>
   <!------------------------- FRAGMENT: NAVBAR ----------------------------->
-  <section class="content" layout:fragment="navbar"></section>
+  <section layout:fragment="navbar"></section>
   <div class="container-bg">
     <!-- MENU -->
     <div class="navbar">
@@ -54,8 +54,14 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" th:href="@{contactos.html}">Contactos</a>
+          <a class="nav-link" th:href="@{/community}">Amigos</a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/mensajes/list}">Mensajes</a>
+        </li>
+
+        <!--Perfil-->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  data-bs-toggle="dropdown" href="#">Meloner</a>
           <ul class="dropdown-menu">
@@ -64,6 +70,11 @@
             <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
           </ul>
         </li>
+        <!--Sala chat-->
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/salachat}">Sala de chat</a>
+        </li>
+        </li>
             
       </ul>
     </div>
@@ -71,16 +82,13 @@
     <div class="logo">
       <img th:src="@{/img/logoletranegra.png}" alt="Imagen">
     </div>
+  </div>
     <!-------------------------   **************  ----------------------------->
 
 
     <!------------------- FRAGMENT: CONTENIDO A RELLENAR ---------------------->
-  </div>
   <div layout:fragment="content">
   </div>
-  <!-------------------------   **************  ----------------------------->
-
-
 </main>
 </body>
 </html>

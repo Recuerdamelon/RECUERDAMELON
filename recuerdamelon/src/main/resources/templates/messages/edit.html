@@ -9,18 +9,18 @@
 <div layout:fragment="content">
     <div class="row">
         <div class="col-md-12">
-            <form role="form" th:object="${message}" method="post">
+            <form role="form" th:object="${chatMessage}" method="post">
                 <div class="box box-primary">
                     <div class="box-body">
                         <div class="tab-content">
-                            <input th:type="hidden" th:field="${message.id}"/>
+                            <input th:type="hidden" th:field="${chatMessage.id}"/>
                             <div class="tab-pane active" id="1a">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="name" th:text="#{Message.message}"></label>
+                                        <label for="name" th:text="#{Message.chatMessage}"></label>
                                         <input type="text" class="form-control"
                                                id="name"
-                                               th:field="${message.message}"
+                                               th:field="${chatMessage.chatMessage}"
                                                maxlength="255">
                                     </div>
 

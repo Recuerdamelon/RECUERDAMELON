@@ -82,10 +82,10 @@
 			<artifactId>mapstruct</artifactId>
 			<version>${mapstruct.version}</version>
 		</dependency>
-	<!--	<dependency>
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-		</dependency>-->
+		</dependency>
 		<!--Socket-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

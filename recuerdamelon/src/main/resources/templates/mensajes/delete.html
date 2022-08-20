@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layoutHome}">
+
+
+
+<body>
+<div layout:fragment="navbar"></div>
+
+<div layout:fragment="content">
+    <link rel="stylesheet" th:href="@{/css/mensajes.css}"/>
+    <script type="text/javascript" th:src="@{/js/sidebarNav.js}"></script>
+
+                <div class="box-body">
+                    <form action="#" class="form" th:action="@{'/'}" method="get">
+                        <div class="mailbox">
+                            <div id="mySidenav" class="sidenav">
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                <a th:href="@{/mensajes/create}">Nuevo mensaje</a>
+                                <a th:href="@{/mensajes/list}">Recibidos</a>
+                                <a th:href="@{/mensajes/saved}">Borradores</a>
+                                <a th:href="@{/mensajes/sent}">Enviados</a>
+                                <a th:href="@{/mensajes/delete}" class="active" >Eliminados</a>
+                            </div>
+                            <div>
+                                <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9993; Buzón</span>
+                            </div>
+                            <div class="messages">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Meloner</th>
+                                            <th>Asunto</th>
+                                            <th>Fecha</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="item,iter : ${mensajes}">
+                                            <div class="message">
+                                                <td class="sender" th:text="${item.sender}"></td>
+                                                <td class="title" th:text="${item.title}"></td>
+                                                <td class="date" th:text="${item.date}"></td>
+                                            </div>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+</div>
+</div>
+
+</body>
+</html>

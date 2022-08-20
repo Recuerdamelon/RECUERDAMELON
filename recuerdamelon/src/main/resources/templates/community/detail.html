@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sd="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layoutHome}">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <!-- ESTILOS PROPIOS -->
+    <link rel="stylesheet" th:href="@{/css/amigos.css}">
+
+</head>
+
+<body>
+
+<div layout:fragment="navbar"></div>
+
+<!-- fragment contenido html -->
+<div layout:fragment="content">
+
+                  <div>
+                    <table class="table table-bordered table-hover" id="users">
+                      <tbody>
+                      <tr th:each="user,iter : ${users}">
+                        <td th:text="${user.username}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+</div>
+</body>
+</html>

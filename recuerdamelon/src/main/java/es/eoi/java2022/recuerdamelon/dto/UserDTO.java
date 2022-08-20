@@ -1,6 +1,5 @@
 package es.eoi.java2022.recuerdamelon.dto;
 
-import es.eoi.java2022.recuerdamelon.data.entity.Message;
 
 import java.util.List;
 
@@ -12,7 +11,6 @@ public class UserDTO {
     private String surname;
     private String email;
     private String password;
-
     private String repassword;
     private boolean active;
     private String avatar;
@@ -25,7 +23,6 @@ public class UserDTO {
 
     private BusinessUserDTO businessUser;
 
-    private List<Message> messages;
 
     public Integer getId() {
         return id;
@@ -131,4 +128,3 @@ public class UserDTO {
         this.repassword = repassword;
     }
 }
-

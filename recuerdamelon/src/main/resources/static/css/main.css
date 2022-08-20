@@ -27,7 +27,6 @@ body:before {
     position: absolute;
     top: 0;
     left: 0;
-    background: #128ff2;
     content: "";
     z-index: 0;
 }
@@ -93,13 +92,13 @@ button.default {
 }
 
 button.primary {
-    background-color: #128ff2;
+    background-color: #e8b14a;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
 
 button.accent {
-    background-color: #ff4743;
+    background-color: #e8b14a;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
@@ -108,30 +107,31 @@ button.accent {
     text-align: center;
 }
 
-.username-page-container {
+.username-page {
     background: #fff;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     border-radius: 2px;
     width: 100%;
     max-width: 500px;
     display: inline-block;
-    margin-top: 42px;
+    margin-top: 200px;
     vertical-align: middle;
-    position: relative;
     padding: 35px 55px 35px;
     min-height: 250px;
-    position: absolute;
     top: 50%;
     left: 0;
     right: 0;
-    margin: 0 auto;
-    margin-top: -160px;
+
+}
+
+.container-userpage{
+    width: 100%;
+    margin-top: 13%;
 }
 
 .username-page-container .username-submit {
     margin-top: 10px;
 }
-
 
 #chat-page {
     position: relative;
@@ -295,4 +295,4 @@ button.accent {
     .chat-header h2 {
         font-size: 1.1em;
     }
-}
+

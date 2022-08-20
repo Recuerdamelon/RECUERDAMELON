@@ -1,5 +1,7 @@
 package es.eoi.java2022.recuerdamelon.utils;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +15,12 @@ public class DateUtil {
 
     public static ZonedDateTime stringToDate(String stringDate) {
         return ZonedDateTime.parse(stringDate, DATE_FORMATER.withZone(ZoneId.of("UTC")));
+    }
+
+    public static ZonedDateTime timeStamp (Timestamp timestamp){
+        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
+        return zonedDateTime;
     }
 }
 
