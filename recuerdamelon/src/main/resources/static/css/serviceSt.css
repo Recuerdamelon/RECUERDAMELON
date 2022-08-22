@@ -445,6 +445,34 @@ html, .tasks.body {
     border-radius: 50%;
   }
 
-  .table{
-  color:white;
-  }
+
+.tabla1{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    background: #88ad58;
+    border-radius: 10px 10px 10px 10px;
+    width: 60%;
+    color: white;
+}
+
+.tabla2{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    background: #e8b14a;
+    border-radius: 10px 10px 10px 10px;
+    width: 30%;
+    color: white;
+    text-align:center;
+}
+
+.tabla1.input{
+text-align: center;
+}
+
+.h3{
+ color: #88ad58;
+ text-align: center;
+}
+

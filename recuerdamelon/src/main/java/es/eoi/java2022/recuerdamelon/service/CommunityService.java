@@ -42,6 +42,10 @@ public class CommunityService {
         return repository.findById(id).orElseThrow(() -> new RuntimeException(String.format("El Id %d no existe", id)));
     }
 
+    public Community findByName(String name) {
+        return repository.findByName(name);
+    }
+
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }

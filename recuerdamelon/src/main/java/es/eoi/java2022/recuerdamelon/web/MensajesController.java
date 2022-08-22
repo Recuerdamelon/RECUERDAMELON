@@ -57,111 +57,63 @@ public class MensajesController {
 
     //RECIEVED//
     @GetMapping("/mensajes/list")
-    public String getAllRecieved(@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size,
-                         Model model) {
+    public String getAllRecieved(Model model) {
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+            final List<Mensajes> all = this.service.findByRecieved(user.getId(), true);
+            model.addAttribute("mensajes", all);
 
-        if (user.getRoles().contains("ROLE_ADMIN")){
-            final List<Mensajes> all = this.service.findAll( PageRequest.of(page.orElse(1) - 1, size.orElse(10)));
-            model
-                    .addAttribute("username", user.getUsername())
-                    .addAttribute("mensajes", all)
-                    .addAttribute("admin","");
-        }
-        else {
-            final Page<MensajesDTO> all = this.service.findByRecieverAndRecieved(user.getId(), true,
-                    PageRequest.of(page.orElse(1) - 1, size.orElse(10)));
-            model
-                    .addAttribute("username", user.getUsername())
-                    .addAttribute("mensajes", all)
-                    .addAttribute("admin","hidden");
-        }
         return "mensajes/list";
     }
 
     //SENT//
     @GetMapping("/mensajes/sent")
-    public String getAllSent(@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size,
-                         Model model) {
+    public String getAllSent(Model model) {
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+            final List<Mensajes> all = this.service.findBySent(user.getId(), true);
+            model.addAttribute("mensajes", all);
 
-        if (user.getRoles().contains("ROLE_ADMIN")){
-            final List<Mensajes> all = this.service.findAll( PageRequest.of(page.orElse(1) - 1, size.orElse(10)));
-            model
-                    .addAttribute("username", user.getUsername())
-                    .addAttribute("mensajes", all)
-                    .addAttribute("admin","");
-        }
-        else {
-            final Page<MensajesDTO> all = this.service.findByRecieverAndSent(user.getId(), true,
-                    PageRequest.of(page.orElse(1) - 1, size.orElse(10)));
-            model
-                    .addAttribute("username", user.getUsername())
-                    .addAttribute("mensajes", all)
-                    .addAttribute("admin","hidden");
-        }
         return "mensajes/sent";
     }
 
     //DELETE//
     @GetMapping("/mensajes/delete")
-    public String getAllDelete(@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size,
-                             Model model) {
+    public String getAllDelete(Model model) {
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+            final List<Mensajes> all = this.service.findByDeleted(user.getId(), true);
+            model.addAttribute("mensajes", all);
 
-        if (user.getRoles().contains("ROLE_ADMIN")){
-            final List<Mensajes> all = this.service.findAll( PageRequest.of(page.orElse(1) - 1, size.orElse(10)));
-            model
-                    .addAttribute("username", user.getUsername())
-                    .addAttribute("mensajes", all)
-                    .addAttribute("admin","");
-        }
-        else {
-            final Page<MensajesDTO> all = this.service.findByRecieverAndDeleted(user.getId(), true,
-                    PageRequest.of(page.orElse(1) - 1, size.orElse(10)));
-            model
-                    .addAttribute("username", user.getUsername())
-                    .addAttribute("mensajes", all)
-                    .addAttribute("admin","hidden");
-        }
         return "mensajes/delete";
     }
 
     //SENT//
     @GetMapping("/mensajes/saved")
-    public String getAllSaved(@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size,
-                             Model model) {
+    public String getAllSaved(Model model) {
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+            final List<Mensajes> all = this.service.findBySaved(user.getId(), true);
+            model.addAttribute("mensajes", all);
 
-        if (user.getRoles().contains("ROLE_ADMIN")){
-            final List<Mensajes> all = this.service.findAll( PageRequest.of(page.orElse(1) - 1, size.orElse(10)));
-            model
-                    .addAttribute("username", user.getUsername())
-                    .addAttribute("mensajes", all)
-                    .addAttribute("admin","");
-        }
-        else {
-            final Page<MensajesDTO> all = this.service.findByRecieverAndSaved(user.getId(), true,
-                    PageRequest.of(page.orElse(1) - 1, size.orElse(10)));
-            model
-                    .addAttribute("username", user.getUsername())
-                    .addAttribute("mensajes", all)
-                    .addAttribute("admin","hidden");
-        }
         return "mensajes/saved";
+    }
+
+    //INVITATION//
+    @GetMapping("/mensajes/invited")
+    public String getAllInvitations(Model model) {
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+            final List<Mensajes> all = this.service.findByInvitation(user.getId(), true);
+            model.addAttribute("mensajes", all);
+        return "mensajes/invited";
     }
 
     @GetMapping("/mensajes/create")
     public String create(ModelMap model) {
         final MensajesDTO dto = new MensajesDTO();
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        List<String> mailed = new ArrayList<>();
+        List<User> mailed = new ArrayList<>();
         for (Community communities: userService.findCommunitiesByUserId(user.getId())) {
-            for (User getMail: communityService.findFriends(communities.getId())) {
-                mailed.add(getMail.getUsername());
-            }
+            mailed.addAll(communityService.findFriends(communities.getId()));
         }
-//        dto.setRecievers(mailed);
+        //dto.setUsers(mailed); //MANDAR LISTA CON COMMUNITIES??
+        model.addAttribute("users", mailed);
         model.addAttribute("mensaje", dto);
         return "mensajes/edit";
     }

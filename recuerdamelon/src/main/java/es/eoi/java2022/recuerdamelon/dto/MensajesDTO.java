@@ -1,5 +1,6 @@
 package es.eoi.java2022.recuerdamelon.dto;
 
+import es.eoi.java2022.recuerdamelon.data.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +16,7 @@ public class MensajesDTO {
     private String mensaje;
 
     private Integer userId;
-
-    private Integer reciever;
-    private List<String> recievers;
+    private List<User> users;
 
     private String date;
     private String title;
@@ -27,6 +26,9 @@ public class MensajesDTO {
     private boolean saved;
     private boolean sent;
     private boolean recieved;
+    private boolean invitation;
+
+    private String community;
 
     public Integer getId() {
         return id;
@@ -52,13 +54,6 @@ public class MensajesDTO {
         this.userId = userId;
     }
 
-    public Integer getReciever() {
-        return reciever;
-    }
-
-    public void setReciever(Integer reciever) {
-        this.reciever = reciever;
-    }
 
     public String getDate() {
         return date;
@@ -84,12 +79,12 @@ public class MensajesDTO {
         this.sender = sender;
     }
 
-    public List<String> getRecievers() {
-        return recievers;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setRecievers(List<String> recievers) {
-        this.recievers = recievers;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public boolean isDeleted() {
@@ -124,4 +119,19 @@ public class MensajesDTO {
         this.recieved = recieved;
     }
 
+    public boolean isInvitation() {
+        return invitation;
+    }
+
+    public void setInvitation(boolean invitation) {
+        this.invitation = invitation;
+    }
+
+    public String getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(String community) {
+        this.community = community;
+    }
 }

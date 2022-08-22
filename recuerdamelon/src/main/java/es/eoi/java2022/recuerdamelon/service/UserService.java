@@ -1,6 +1,7 @@
 package es.eoi.java2022.recuerdamelon.service;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Community;
+import es.eoi.java2022.recuerdamelon.data.entity.Mensajes;
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
 import es.eoi.java2022.recuerdamelon.dto.UserDTO;
@@ -41,6 +42,12 @@ public class UserService {
         return repository.findById(userId)
                 .orElseThrow(() -> new RuntimeException(String.format("El Id %d no existe", userId)))
                 .getCommunities().stream().collect(Collectors.toList());
+    }
+
+    public List<Mensajes> findMensajesByUserId(Integer userId){
+        return repository.findById(userId)
+                .orElseThrow(() -> new RuntimeException(String.format("El Id %d no existe", userId)))
+                .getMensajes().stream().collect(Collectors.toList());
     }
     public void deleteById(Integer id) {
         repository.deleteById(id);

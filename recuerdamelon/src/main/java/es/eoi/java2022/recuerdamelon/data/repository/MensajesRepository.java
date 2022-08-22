@@ -14,9 +14,10 @@ public interface MensajesRepository extends JpaRepository<Mensajes, Integer> {
     Page<Mensajes> findAll(Pageable pageable);
     Page<Mensajes> findByUsersId(Integer userId, Pageable pageable);
 
-    Page<Mensajes> findByRecieverAndRecieved (Integer reciever, boolean recieved, Pageable pageable);
-    Page<Mensajes> findByRecieverAndDeleted (Integer reciever, boolean deleted, Pageable pageable);
-    Page<Mensajes> findByRecieverAndSaved (Integer reciever, boolean saved, Pageable pageable);
-    Page<Mensajes> findByRecieverAndSent (Integer reciever, boolean sent, Pageable pageable);
+//    List<Mensajes> findByUsersAndRecieved (List<User> users, boolean recieved);
+//    Page<Mensajes> findByUserIdAndDeleted (Integer id, boolean deleted, Pageable pageable);
+//    Page<Mensajes> findByUserIdAndSaved (Integer id, boolean saved, Pageable pageable);
+//    Page<Mensajes> findByUserIdAndSent (Integer id, boolean sent, Pageable pageable);
+//    Page<Mensajes> findByUserIdAndInvitation (Integer id, boolean invitation, Pageable pageable);
 
 }

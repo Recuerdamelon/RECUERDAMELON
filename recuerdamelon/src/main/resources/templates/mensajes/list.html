@@ -22,6 +22,7 @@
                                 <a th:href="@{/mensajes/saved}">Borradores</a>
                                 <a th:href="@{/mensajes/sent}" >Enviados</a>
                                 <a th:href="@{/mensajes/delete}">Eliminados</a>
+                                <a th:href="@{/mensajes/invited}">Invitaciones</a>
                             </div>
                             <div>
                                 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9993; Buzón</span>
@@ -37,13 +38,14 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <div class="message">
                                         <tr th:each="item,iter : ${mensajes}">
-                                            <div class="message">
                                                 <td class="sender" th:text="${item.sender}"></td>
                                                 <td class="title" th:text="${item.title}"></td>
                                                 <td class="date" th:text="${item.date}"></td>
-                                            </div>
+
                                         </tr>
+                                        </div>
                                         </tbody>
                                     </table>
                                 </div>

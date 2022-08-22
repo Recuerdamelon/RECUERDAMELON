@@ -5,14 +5,15 @@ import es.eoi.java2022.recuerdamelon.data.entity.Community;
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 
 import java.io.Serializable;
+import java.util.Set;
 
 public class CommunityDTO implements Serializable {
 
     private Integer id;
     private String name;
-    private boolean admin;
+    private Integer admin;
 
-    private User user;
+    private Set<User> users;
 
 
     public Integer getId() {
@@ -31,27 +32,19 @@ public class CommunityDTO implements Serializable {
         this.name = name;
     }
 
-    public boolean isAdmin() {
+    public Integer getAdmin() {
         return admin;
     }
 
-    public void setAdmin(boolean admin) {
+    public void setAdmin(Integer admin) {
         this.admin = admin;
     }
 
-/*    public String getUsername() {
-        return username;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }*/
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

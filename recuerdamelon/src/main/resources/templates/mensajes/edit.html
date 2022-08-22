@@ -43,10 +43,10 @@
                                 <p>Enviar a: </p>
                                 <div class="column"></div>
                                 <select id="multiple-users" multiple="multiple"
-                                th:field="*{mensaje.recievers}">
-                                    <option th:each="reciever : ${mensaje.recievers}"
-                                            th:value="${reciever}"
-                                            th:text="${reciever}">
+                                th:field="*{mensaje.users}">
+                                    <option th:each="user : ${users}"
+                                            th:value="${user}"
+                                            th:text="${user.username}">
                                     </option>
                                 </select>
                             </div>

@@ -24,7 +24,7 @@ public class Community {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> users;
-    private boolean admin;
+    private Integer admin;
 
 
 //To find communities associated to a User
@@ -69,12 +69,11 @@ public void addUser(User user) {
         this.users = users;
     }
 
-    public boolean isAdmin() {
+    public Integer getAdmin() {
         return admin;
     }
 
-    public void setAdmin(boolean admin) {
+    public void setAdmin(Integer admin) {
         this.admin = admin;
     }
-
 }

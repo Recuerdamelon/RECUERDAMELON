@@ -19,7 +19,7 @@
 <!-- fragment contenido html -->
 <div layout:fragment="content">
 
-                  <div>
+                  <div class="tabla2">
                     <table class="table table-bordered table-hover" id="users">
                       <tbody>
                       <tr th:each="user,iter : ${users}">
@@ -28,6 +28,10 @@
                       </tbody>
                     </table>
                   </div>
+
+    <div class="input" style="text-align:center" >
+        <a class="box-title btn btn-success" th:href="@{'/community/' + ${community.name} + '/users'}">Añadir usuario</a>
+    </div>
 </div>
 </body>
 </html>

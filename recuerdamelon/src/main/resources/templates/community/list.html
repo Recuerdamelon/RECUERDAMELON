@@ -2,11 +2,11 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:sd="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+        xmlns="http://www.w3.org/1999/html"
         layout:decorate="~{layoutHome}">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <!-- ESTILOS PROPIOS -->
     <link rel="stylesheet" th:href="@{/css/amigos.css}">
 
@@ -19,53 +19,26 @@
 <!-- fragment contenido html -->
 <div layout:fragment="content">
 
-<div id="tabla1" style="margin:5%; ">
+    <div class="tabla1">
         <table class="table table-hover table-striped">
-          <thead>
-          <tr>
-            <th style="text-align:center;">Mis comunidades</th>
-            <th><a class="box-title btn btn-success" th:href="@{/community/create}">Nueva comunidad</a></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="community,iter : ${communities}">
-            <td style="text-align:center;" th:text="${community.name}"></td>
-            <td><a class="box-title btn btn-success" th:href="@{'/community/' + ${community.id}}">Meloners</a></td>
+            <thead>
+            <tr>
+                <th style="text-align:center; color:white;">Mis comunidades</th>
+                <th style="text-align:center;"><a class="box-title btn btn-success" th:href="@{/community/create}">Nueva comunidad</a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="community,iter : ${communities}">
+                <td style="text-align:center;" th:text="${community.name}"></td>
+                <td style="text-align:center;" ><a class="box-title btn btn-warning" th:href="@{'/community/' + ${community.id}}">Meloners</a></td>
 
-<!--ModalButton - <td><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Meloners</button></td></td>--><!-- Button trigger modal -->
+                <!--ModalButton - <td><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Meloners</button></td></td>-->
+                <!-- Button trigger modal -->
 
-          </tr>
-          </tbody>
+            </tr>
+            </tbody>
         </table>
-
-            <!-- Modal -->
-<!--            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--              <div class="modal-dialog">-->
-<!--                <div class="modal-content">-->
-<!--                  <div class="modal-header">-->
-<!--&lt;!&ndash;                    <div class=" icon"><img th:src="@{/img/barrow.png}" alt="Imagen"></div>&ndash;&gt;-->
-<!--                    <h5 class="modal-title" id="exampleModalLabel">Meloners en el carro</h5>-->
-<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                  </div>-->
-<!--                  <div class="modal-body">-->
-<!--                    <table class="table table-bordered table-hover" id="users">-->
-<!--                      <tbody>-->
-<!--                      <tr th:each="user,iter : ${users}">-->
-<!--                        <td th:text="${user.username}"></td>-->
-<!--                      </tr>-->
-<!--                      </tbody>-->
-<!--                    </table>-->
-<!--                  </div>-->
-<!--                  <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </tbody>-->
-
-</div>
+    </div>
 </div>
 </div>
 </body>

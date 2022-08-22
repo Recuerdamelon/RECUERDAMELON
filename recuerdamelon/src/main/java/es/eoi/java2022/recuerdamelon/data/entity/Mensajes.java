@@ -27,8 +27,6 @@ public class Mensajes implements Serializable {
     )
     private Set<User> users;
 
-    private Integer reciever;
-
     private String date;
     private String title;
     private String sender;
@@ -37,6 +35,8 @@ public class Mensajes implements Serializable {
     private boolean saved;
     private boolean sent;
     private boolean recieved;
+    private boolean invitation;
+    private String community;
 
     public Integer getId() {
         return id;
@@ -61,16 +61,6 @@ public class Mensajes implements Serializable {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-
-    public Integer getReciever() {
-        return reciever;
-    }
-
-    public void setReciever(Integer reciever) {
-        this.reciever = reciever;
-    }
-
-
 
     public String getTitle() {
         return title;
@@ -126,5 +116,21 @@ public class Mensajes implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public boolean isInvitation() {
+        return invitation;
+    }
+
+    public void setInvitation(boolean invitation) {
+        this.invitation = invitation;
+    }
+
+    public String getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(String community) {
+        this.community = community;
     }
 }
