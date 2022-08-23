@@ -1,9 +1,9 @@
-package es.eoi.java2022.recuerdamelon.web;
+/*package es.eoi.java2022.recuerdamelon.web;
 
 
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.dto.MessagesDTO;
-import es.eoi.java2022.recuerdamelon.listeners.MessageListenerGlobalAsinc;
+//import es.eoi.java2022.recuerdamelon.listeners.MessageListenerGlobalAsinc;
 import es.eoi.java2022.recuerdamelon.service.MessagesService;
 import es.eoi.java2022.recuerdamelon.service.PublicarMensaje;
 import org.slf4j.Logger;
@@ -72,3 +72,5 @@ public class MessagesController {
         return "redirect:/messages";
     }
 }
+
+ */

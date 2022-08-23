@@ -192,6 +192,12 @@ a,
 
 
 }
+.input button:disabled,
+       button[disabled] {
+    pointer-events: none;
+      opacity: .65;
+}
+
 
 
 /* Animacion */

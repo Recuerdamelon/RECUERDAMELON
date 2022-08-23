@@ -22,11 +22,11 @@ USE `recuerdamelon` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `recuerdamelon`.`business` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(225) NOT NULL,
+  `avatar` TINYBLOB NULL DEFAULT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `nif` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `nif` VARCHAR(45) NOT NULL,
-  `avatar` BLOB NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
@@ -37,12 +37,12 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `recuerdamelon`.`business_user` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `tipo_trabajador` VARCHAR(45) NOT NULL,
-  `business_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `business_id`),
-  INDEX `fk_business_user_business1_idx` (`business_id` ASC) VISIBLE,
-  CONSTRAINT `fk_business_user_business1`
+  `name` VARCHAR(255) NOT NULL,
+  `tipo_trabajador` VARCHAR(255) NOT NULL,
+  `business_id` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `UK_gj1g9dpsahrnb3bhsgilp0oy0` (`business_id` ASC) VISIBLE,
+  CONSTRAINT `FKas2f9lyhs15dxvdscebtqt1fh`
     FOREIGN KEY (`business_id`)
     REFERENCES `recuerdamelon`.`business` (`id`))
 ENGINE = InnoDB
@@ -53,7 +53,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `recuerdamelon`.`calendar`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `recuerdamelon`.`calendar` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `task_date` DATETIME(6) NOT NULL,
   PRIMARY KEY (`id`))
@@ -65,7 +65,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `recuerdamelon`.`user`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `recuerdamelon`.`user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `username` VARCHAR(45) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `surname` VARCHAR(255) NOT NULL,
@@ -73,19 +73,24 @@ CREATE TABLE IF NOT EXISTS `recuerdamelon`.`user` (
   `password` VARCHAR(255) NOT NULL,
   `active` TINYINT(1) NOT NULL DEFAULT '1',
   `avatar` BLOB NULL DEFAULT NULL,
-  `business_id` INT NULL DEFAULT NULL,
   `business_user_id` INT NULL DEFAULT NULL,
+  `empresa_id` INT NULL DEFAULT NULL,
+  `business_id` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-  INDEX `fk_user_business1_idx` (`business_id` ASC) VISIBLE,
-  INDEX `fk_user_business_user1_idx` (`business_user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_user_business1`
+  UNIQUE INDEX `UK_1f2f71or7sv0e8w979ay7a4sn` (`business_user_id` ASC) VISIBLE,
+  INDEX `FKt5a8qi2i3vkgi0v4qwau0s8ov` (`empresa_id` ASC) VISIBLE,
+  INDEX `FK4xigqfhyelwj2n5psmxapdr0o` (`business_id` ASC) VISIBLE,
+  CONSTRAINT `FK4xigqfhyelwj2n5psmxapdr0o`
     FOREIGN KEY (`business_id`)
     REFERENCES `recuerdamelon`.`business` (`id`),
-  CONSTRAINT `fk_user_business_user1`
+  CONSTRAINT `FKcg32bm0th1r6ia5fjt77t1gnt`
     FOREIGN KEY (`business_user_id`)
-    REFERENCES `recuerdamelon`.`business_user` (`id`))
+    REFERENCES `recuerdamelon`.`business_user` (`id`),
+  CONSTRAINT `FKt5a8qi2i3vkgi0v4qwau0s8ov`
+    FOREIGN KEY (`empresa_id`)
+    REFERENCES `recuerdamelon`.`business` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -110,13 +115,30 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
+-- Table `recuerdamelon`.`chat_message`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `recuerdamelon`.`chat_message` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `content` VARCHAR(255) NULL DEFAULT NULL,
+  `sender` VARCHAR(255) NULL DEFAULT NULL,
+  `type` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 13
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
 -- Table `recuerdamelon`.`community`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `recuerdamelon`.`community` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`))
+  `admin` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -152,8 +174,7 @@ CREATE TABLE IF NOT EXISTS `recuerdamelon`.`confirmation_token` (
     FOREIGN KEY (`user_id`)
     REFERENCES `recuerdamelon`.`user` (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
@@ -162,8 +183,47 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `recuerdamelon`.`hibernate_sequence` (
   `next_val` BIGINT NULL DEFAULT NULL)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `recuerdamelon`.`mensajes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `recuerdamelon`.`mensajes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `texto` VARCHAR(255) NOT NULL,
+  `date` VARCHAR(255) NULL DEFAULT NULL,
+  `sender` VARCHAR(255) NULL DEFAULT NULL,
+  `title` VARCHAR(255) NULL DEFAULT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT '0',
+  `saved` TINYINT(1) NULL DEFAULT '0',
+  `sent` TINYINT(1) NULL DEFAULT '0',
+  `recieved` TINYINT(1) NULL DEFAULT '0',
+  `invitation` TINYINT(1) NULL DEFAULT '0',
+  `community` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `recuerdamelon`.`mensajes_has_user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `recuerdamelon`.`mensajes_has_user` (
+  `mensajes_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`mensajes_id`, `user_id`),
+  INDEX `fk_mensajes_has_user_user1_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_mensajes_has_user_mensajes1_idx` (`mensajes_id` ASC) VISIBLE,
+  CONSTRAINT `fk_mensajes_has_user_mensajes1`
+    FOREIGN KEY (`mensajes_id`)
+    REFERENCES `recuerdamelon`.`mensajes` (`id`),
+  CONSTRAINT `fk_mensajes_has_user_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `recuerdamelon`.`user` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
@@ -179,6 +239,7 @@ CREATE TABLE IF NOT EXISTS `recuerdamelon`.`message` (
     FOREIGN KEY (`user_id`)
     REFERENCES `recuerdamelon`.`user` (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -200,21 +261,23 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `recuerdamelon`.`task`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `recuerdamelon`.`task` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `title` VARCHAR(255) NOT NULL,
   `description` VARCHAR(255) NULL DEFAULT NULL,
   `location_url` VARCHAR(255) NULL DEFAULT NULL,
-  `delete` TINYINT(1) NOT NULL DEFAULT '0',
   `owner_id` INT NOT NULL,
   `task_type_id` INT NOT NULL,
   `calendar_id` INT NOT NULL,
   `end_date` DATETIME(6) NOT NULL,
   `start_date` DATETIME(6) NOT NULL,
+  `delete` TINYINT(1) NOT NULL,
+  `owner_id_id` INT NULL DEFAULT NULL,
   `business_id` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`, `owner_id`, `task_type_id`, `calendar_id`),
   INDEX `fk_task_user1_idx` (`owner_id` ASC) VISIBLE,
   INDEX `fk_task_task_type1_idx` (`task_type_id` ASC) VISIBLE,
   INDEX `fk_task_calendar1_idx` (`calendar_id` ASC) VISIBLE,
+  INDEX `FKa2ymfien19uwjmpr8ur2jw75o` (`owner_id_id` ASC) VISIBLE,
   INDEX `FK31351ddav78eao7ca7v3l4j3d` (`business_id` ASC) VISIBLE,
   CONSTRAINT `FK31351ddav78eao7ca7v3l4j3d`
     FOREIGN KEY (`business_id`)
@@ -227,6 +290,9 @@ CREATE TABLE IF NOT EXISTS `recuerdamelon`.`task` (
     REFERENCES `recuerdamelon`.`task_type` (`id`),
   CONSTRAINT `fk_task_user1`
     FOREIGN KEY (`owner_id`)
+    REFERENCES `recuerdamelon`.`user` (`id`),
+  CONSTRAINT `FKa2ymfien19uwjmpr8ur2jw75o`
+    FOREIGN KEY (`owner_id_id`)
     REFERENCES `recuerdamelon`.`user` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
@@ -236,7 +302,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `recuerdamelon`.`notification`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `recuerdamelon`.`notification` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `notification_time` INT NOT NULL,
   `notified` TINYINT(1) NOT NULL DEFAULT '0',
   `user_id` INT NOT NULL,
@@ -291,8 +357,7 @@ CREATE TABLE IF NOT EXISTS `recuerdamelon`.`tasks_has_user` (
     FOREIGN KEY (`task_id`)
     REFERENCES `recuerdamelon`.`task` (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
@@ -310,15 +375,14 @@ CREATE TABLE IF NOT EXISTS `recuerdamelon`.`user_has_calendar` (
     FOREIGN KEY (`calendar_id`)
     REFERENCES `recuerdamelon`.`calendar` (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
 -- Table `recuerdamelon`.`user_role`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `recuerdamelon`.`user_role` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
@@ -341,8 +405,7 @@ CREATE TABLE IF NOT EXISTS `recuerdamelon`.`user_has_role` (
     FOREIGN KEY (`user_id`)
     REFERENCES `recuerdamelon`.`user` (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
@@ -367,49 +430,3 @@ DEFAULT CHARACTER SET = utf8mb3;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
---INSERT INTO Calendar (ID,NAME, TASK_DATE)
---VALUES
---(1,'calendario1', '2022-07-07 09:48:00.0'),
---(2,'calendario2', '2022-07-07 09:48:00.0'),
---(3,'calendario3', '2022-07-07 09:48:00.0'),
---(4,'calendario4', '2022-07-07 09:48:00.0');
---
---INSERT INTO Notification (ID,notification_Time,notified) VALUES(1,2,false);
---INSERT INTO Notification (ID,notification_Time,notified) VALUES(3,4,false);
---INSERT INTO Notification (ID,notification_Time,notified) VALUES(5,6,true);
---INSERT INTO Notification (ID,notification_Time,notified) VALUES(7,8,false);
---
---INSERT INTO Task_Type (ID,NAME) VALUES(1,'taskType1');
---INSERT INTO Task_Type (ID,NAME) VALUES(2,'taskType2');
---INSERT INTO Task_Type (ID,NAME) VALUES(3,'taskType3');
---INSERT INTO Task_Type (ID,NAME) VALUES(4,'taskType4');
---
---INSERT INTO Task (ID, TITLE, START_DATE, END_DATE, DESCRIPTION, LOCATION_URL, DELETE)
---VALUES
---(1,'task1','2007-12-03','2007-12-11','description1','url1',false),
---(2,'task2','2007-12-03','2007-12-11','description2','url2',false),
---(3,'task3','2007-12-03','2007-12-09','description3','url3',false),
---(4,'task4','2007-12-03','2007-12-09','description4','url4',false);
-
---
---INSERT INTO USER (ID,USER_NAME,NAME, SURNAME, EMAIL, PASSWORD, ACTIVE)
---VALUES(1,'user1','name1','surname1','email1','$2a$04$5sT3dri6bOOG2b9P1LETEujUeYMR46G/OVybuBjxBAohlEtDsxmi2',true);
---INSERT INTO USER (ID,USER_NAME,NAME, SURNAME, EMAIL, PASSWORD, ACTIVE)
---VALUES(2,'user2','name2','surname2','email2','$2a$04$5sT3dri6bOOG2b9P1LETEujUeYMR46G/OVybuBjxBAohlEtDsxmi2',true);
---INSERT INTO USER (ID,USER_NAME,NAME, SURNAME, EMAIL, PASSWORD, ACTIVE)
---VALUES(3,'user3','name3','surname3','email3','$2a$04$5sT3dri6bOOG2b9P1LETEujUeYMR46G/OVybuBjxBAohlEtDsxmi2',true);
---INSERT INTO USER (ID,USER_NAME,NAME, SURNAME, EMAIL, PASSWORD, ACTIVE)
---VALUES(4,'admin','name4','surname4','email4','$2a$04$5sT3dri6bOOG2b9P1LETEujUeYMR46G/OVybuBjxBAohlEtDsxmi2',true);
---
---INSERT INTO User_Role (ID, NAME) VALUES(1,'PLAIN_USER');
---INSERT INTO User_Role (ID, NAME) VALUES(2,'ADMIN');
---
---INSERT INTO `USER_HAS_ROLE` (`USER_ID`, `ROLE_ID`)
---VALUES
---    (1,1),
---    (2,1),
---    (3,1),
---    (4,1),
---    (4,2);

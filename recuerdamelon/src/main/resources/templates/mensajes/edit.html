@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layoutHome}">
+
+
+
+<body>
+<div layout:fragment="navbar"></div>
+
+<div layout:fragment="content">
+    <link rel="stylesheet" th:href="@{/css/mensajes.css}"/>
+    <script type="text/javascript" th:src="@{/js/sidebarNav.js}"></script>
+
+    <div class="box-body">
+        <form action="#" class="form" method="post">
+            <div class="mailbox">
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a th:href="@{/mensajes/create}" class="active" >Nuevo mensaje</a>
+                    <a th:href="@{/mensajes/list}">Recibidos</a>
+                    <a th:href="@{/mensajes/saved}">Borradores</a>
+                    <a th:href="@{/mensajes/sent}" >Enviados</a>
+                    <a th:href="@{/mensajes/delete}">Eliminados</a>
+                </div>
+                <div>
+                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9993; Buzón</span>
+                </div>
+                <div class="messages">
+                    <div class="table-responsive">
+                        <label for="name" th:text="#{Mensaje.mensaje}"></label>
+                        <input type="text" class="form-control"
+                               id="title" placeholder="Asunto"
+                               th:field="${mensaje.title}"
+                               maxlength="255">
+                        <input type="text" class="textarea"
+                               id="name" placeholder="Escribe aquí tu mensaje..."
+                               th:field="${mensaje.mensaje}"
+                               maxlength="255">
+                        <div class="container">
+                            <div class="row">
+                                <div class="column"></div>
+                                <p>Enviar a: </p>
+                                <div class="column"></div>
+                                <select id="multiple-users" multiple="multiple"
+                                th:field="*{mensaje.users}">
+                                    <option th:each="user : ${users}"
+                                            th:value="${user}"
+                                            th:text="${user.username}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="sendButton">
+                                    <button class="button button1" type="submit" name="btnSaveEdit" value="Save"
+                                    >Enviar</button>
+                                </div>
+<!--                                <div class="saveButton">-->
+<!--                                    <button class="button button1" type="submit"-->
+<!--                                            >Guardar</button>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>
+
+

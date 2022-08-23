@@ -1,0 +1,124 @@
+.mailbox {
+  margin: 30px;
+  position: relative;
+  background: #88ad58;
+  border-radius: 10px 10px 10px 10px;
+  width: 90%;
+  color:white;
+}
+
+.messages {
+  padding: 10px 10px 10px 10px;
+  width: 100%;
+}
+
+.message {
+  clear: both;
+  margin-bottom: 5px;
+  position: relative;
+  padding: 5px;
+  background: #e8b14a;
+  border-radius: 5px;
+}
+
+.message input {
+  position: absolute;
+  top: 8px; left: 10px;
+  width: 30px;
+}
+
+.message .sender {
+  display: block;
+  position: absolute;
+  left: 40px;
+  color: white;
+  font-weight: bold;
+  width: 90px;
+}
+
+.message .title {
+  display: inline-block;
+  padding-left: 150px;
+  width: 100%;
+  color:white;
+}
+
+.message .date {
+  position: absolute;
+  right: 10px;
+  color:white;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  opacity:0.7
+  top: 0;
+  left: 0;
+  background-color: #6BF178;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  margin-top: 9%
+  border-radius: 10px 10px 10px 10px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #ffc107;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.sidenav .a .active{
+color: #ffc107;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.table{
+color:white;
+}
+
+.textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.select {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
+
+.mailbox .table-responsive .message .sendButton {
+  margin: 5 px;
+}

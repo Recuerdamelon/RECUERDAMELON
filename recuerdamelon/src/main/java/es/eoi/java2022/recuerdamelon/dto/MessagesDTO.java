@@ -1,15 +1,13 @@
 package es.eoi.java2022.recuerdamelon.dto;
 
-import es.eoi.java2022.recuerdamelon.data.entity.User;
+import es.eoi.java2022.recuerdamelon.data.entity.ChatMessage;
 
 public class MessagesDTO {
     private Integer id;
 
-    private String message;
-
-    private User user;
-
-    private Integer userId;
+    private ChatMessage.MessageType type;
+    private String content;
+    private String sender;
 
     //private Integer userId_reciver;
 
@@ -22,27 +20,27 @@ public class MessagesDTO {
         this.id = id;
     }
 
-    public String getMessage() {
-        return message;
+    public ChatMessage.MessageType getType() {
+        return type;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setType(ChatMessage.MessageType type) {
+        this.type = type;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getContent() {
+        return content;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public User getUser() {
-        return user;
+    public String getSender() {
+        return sender;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 }

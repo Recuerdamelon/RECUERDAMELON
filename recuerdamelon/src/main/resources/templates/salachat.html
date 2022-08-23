@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sd="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layoutHome}">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<noscript>
+    <h2>Sorry! Your browser doesn't support Javascript</h2>
+</noscript>
+<body>
+<main>
+    <!-- fragment navbar -->
+    <div layout:fragment="navbar"></div>
+
+    <!-- fragment contenido html -->
+    <div layout:fragment="content">
+
+
+    <div class="container-userpage">
+<!--        <nav th:replace="fragmentos/navbar.html :: nav"></nav>-->
+        <div class="row justify-content-center">
+            <div class="col-4" id="username-page">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Introduzca su nombre</h5>
+                        <p class="card-text">El texto introducido será utilizado como su nombre de participante en la sala de conversación.</p>
+                        <form id="usernameForm" name="usernameForm">
+                            <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" />
+                            <button type="submit" class="accent username-submit mt-2">Entrar en la sala</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5 hidden" id="chat-page">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h2>Sala de chat</h2>
+                    </div>
+                    <div class="connecting">
+                        Conectando...
+                    </div>
+                    <ul id="messageArea">
+
+                    </ul>
+                    <form id="messageForm" name="messageForm">
+                        <div class="form-group">
+                            <div class="input-group clearfix">
+                                <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
+                                <button type="submit" class="primary">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    <script th:replace="fragmentos/bs5-head.html :: bs5-js"></script>-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+    <script src="/js/main.js"></script>
+
+
+    </div>
+</main>
+</body>
+</html>

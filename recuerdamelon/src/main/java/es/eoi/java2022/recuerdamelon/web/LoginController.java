@@ -75,7 +75,7 @@ public class LoginController {
         ConfirmationToken confirmationToken = new ConfirmationToken(user);
         // Save it
         confirmationTokenRepository.save(confirmationToken);
-        emailService.sendSimpleMessage(email, "Recuperar Contraseña", "Haz click en el siguiente enlace para cambiar tu contraseña. " + "http://localhost:8080/enterNewPassword?token="+confirmationToken.getConfirmationToken()); // FUNCIONA ENVÍA EL EMAIL SI ESTÁ REGISTRADO DEFINITIVO
+        emailService.sendSimpleMessage(email, "Recuperar Contraseña", "Haz click en el siguiente enlace para cambiar tu contraseña. " + "http://localhost:8080/enterNewPassword?token=" + confirmationToken.getConfirmationToken()); // FUNCIONA ENVÍA EL EMAIL SI ESTÁ REGISTRADO DEFINITIVO
         return "emailSentNewPassword";
     }
 
@@ -119,8 +119,6 @@ public class LoginController {
         return modelAndView;
     }
 
-
-
     @GetMapping("/registro")
     public String getRegistro(WebRequest request, Model model) {
         UserDTO userDTO = new UserDTO();
@@ -146,25 +144,7 @@ public class LoginController {
         }
 
     }
-        //Comprobamos si el usuario esta registrado
-//        try {
-//            //llamamos al metodo del servicio para saber si el usuario existe
-//            User user = this.userService.findByUsername(userDTO.getName());
-//            //si el usuario no existe lo grabamos
-//            this.userService.save(userDTO);
-//            //una vez grabado vamos al login
-//            return "login";
-//        }catch (Exception e){
-//            //si el usuario no existe podemos guardar uno nuevo
-//
-//            return "login";
-//        }
+}
 
 
-
-//            userRepository.findByName(userDTO.getName()).isPresent();
-
-
-
-    }
 

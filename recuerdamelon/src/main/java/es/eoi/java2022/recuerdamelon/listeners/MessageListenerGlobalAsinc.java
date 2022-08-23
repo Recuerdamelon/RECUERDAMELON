@@ -1,4 +1,4 @@
-package es.eoi.java2022.recuerdamelon.listeners;
+/*package es.eoi.java2022.recuerdamelon.listeners;
 
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.event.MessageEvent;
@@ -39,4 +39,4 @@ public class MessageListenerGlobalAsinc {
                 " y ha llegado a la hora:" + eventmensaje.getTimestamp());
 
     }
-}
+}*/

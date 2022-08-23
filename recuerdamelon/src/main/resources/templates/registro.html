@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+
 <head>
     <title>Registro</title>
     <meta charset="UTF-8">
@@ -16,6 +17,7 @@
 </head>
 
 <body>
+
 <main>
     <div class="background-video">
         <video id="background-video" autoplay loop muted >
@@ -71,7 +73,7 @@
                 </div>
 
                 <div class="input">
-                    <button type="submit" th:text="#{Registro.Button.Submit}" id="buttonOk" hidden="hidden" onkeyup='check();'></button>  <!-- >Crear cuenta</button> -->
+                    <button class="" type="submit" th:text="#{Registro.Button.Submit}" id="buttonOk" disabled="true" onkeyup='check();'></button>  <!-- >Crear cuenta</button> -->
                 </div>
 
             </form>

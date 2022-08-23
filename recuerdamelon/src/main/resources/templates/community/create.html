@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sd="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layoutHome}">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <!-- ESTILOS PROPIOS -->
+    <link rel="stylesheet" th:href="@{/css/amigos.css}">
+
+</head>
+
+<body>
+
+<div layout:fragment="navbar"></div>
+
+<!-- fragment contenido html -->
+<div layout:fragment="content">
+    <div class="tabla1">
+        <section>
+
+            <form action="/" th:action="@{/community/create}" th:object="${newCommunity}" method="post">
+
+                <p class="p-error" th:if="${errorCreatingCommunity}" th:text="#{NewComm.ErrorName}"></p>
+                <p class="p-error" th:if="${errorNamingCommunity}" th:text="#{NewComm.ErrorNaming}"></p>
+
+                <div class="texto-formulario">
+                    <h2 th:text="#{NewComm.Title}"></h2> <!-- <h2>Crear una nueva comunidad Meloner</h2> -->
+                </div>
+
+
+                <div class="input">
+                    <label for="name" th:text="#{NewComm.Name}" ></label>   <!-- <label for="Meloner">Elije tu nombre de comunidad</label>>  -->
+                    <input placeholder="" type="text" id="name" name="name"  required th:field="${newCommunity.name}" >
+                </div>
+                <div class="input">
+                    <button type="submit" th:text="#{Registro.Button.Submit}"></button>  <!-- >Crear cuenta</button> -->
+                </div>
+
+    </form>
+
+
+
+        </section>
+    </div>
+</div>
+</body>
+</html>

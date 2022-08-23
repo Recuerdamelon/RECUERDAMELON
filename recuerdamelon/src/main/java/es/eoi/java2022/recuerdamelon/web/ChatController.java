@@ -1,21 +1,32 @@
 
 package es.eoi.java2022.recuerdamelon.web;
 
-import es.eoi.java2022.recuerdamelon.model.ChatMessage;
+import es.eoi.java2022.recuerdamelon.data.entity.ChatMessage;
+import es.eoi.java2022.recuerdamelon.dto.MessagesDTO;
+import es.eoi.java2022.recuerdamelon.service.MessagesService;
+import es.eoi.java2022.recuerdamelon.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.context.request.WebRequest;
 
+@Controller
 public class ChatController {
 
     private static final Logger logger = LoggerFactory.getLogger(ChatMessage.class);
 
 
 
-    @MessageMapping("/chat.sendMessage")
+    /*@MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
         logger.info("ChatMessage.MessageType.");
@@ -32,7 +43,7 @@ public class ChatController {
         logger.info(chatMessage.getSender());
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;
-    }
+    }*/
 
 
 /*If you recall from the websocket configuration, all the messages sent from clients with a destination
@@ -41,5 +52,56 @@ public class ChatController {
     For example, a message with destination /app/chat.sendMessage will be routed to the sendMessage() method,
     and a message with destination /app/chat.addUser will be routed to the addUser() method.*/
 
+    //----------carlos upload-------------//
+
+    private final MessagesService messagesService;
+    private final UserService userService;
+
+    public ChatController(MessagesService messagesService, UserService userService) {
+        this.messagesService = messagesService;
+        this.userService = userService;
+    }
+
+    @MessageMapping("/chat.sendMessage")
+    @SendTo("/topic/public/{roomId}")//Añadir variable a la ruta del chat->
+    public ChatMessage sendMessage(@Payload ChatMessage chatMessage, MessagesDTO messagesDTO) {
+        messagesDTO.setContent(chatMessage.getContent());
+        messagesDTO.setSender(chatMessage.getSender());
+        messagesDTO.setType(chatMessage.getType());
+        messagesService.save(messagesDTO);// Añadir room
+        return chatMessage;
+    }
+    @MessageMapping("/chat.addUser")
+    @SendTo("/topic/public")
+    public ChatMessage addUser(@Payload ChatMessage chatMessage,
+                               SimpMessageHeaderAccessor headerAccessor) {
+        // Add username in web socket session
+        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        return chatMessage;
+    }
+
+    @GetMapping("/salachat")
+    public String get(WebRequest request, Model model) {
+        return "salachat";
+    }
+//
+//    @Transactional
+//    @PostMapping("/salachat")
+//    public String save(MessagesDTO messagesDTO) {
+//        this.messagesService.save(messagesDTO);
+//        return "salachat";
+//    }
+
+
+    ////        MessagesDTO messagesDTO = new MessagesDTO();
+////        User user = new User();
+////        String mChat = chatMessage.getContent();
+////        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+////        String username = authentication.getName();
+////        User sender = userService.findByUsername(username);
+////        messagesDTO.setMessage(mChat);
+////        messagesDTO.setUser(sender);
+////        messagesDTO.setUserId(sender.getId());
+////        messagesService.save(messagesDTO);
 }
 

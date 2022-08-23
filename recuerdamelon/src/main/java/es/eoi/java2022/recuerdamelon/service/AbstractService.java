@@ -1,3 +1,4 @@
+/*
 package es.eoi.java2022.recuerdamelon.service;
 
 import es.eoi.java2022.recuerdamelon.dto.MessagesDTO;
@@ -51,3 +52,4 @@ public abstract class AbstractService<E, ID, DTO, REPO extends JpaRepository<E, 
 
     public abstract MessagesDTO save(MessagesDTO dto, Integer usrid);
 }
+*/

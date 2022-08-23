@@ -24,10 +24,10 @@ spring:
     init:
       mode: always
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: recuerdamelon.app@gmail.com
-    password: kymulstigcxvcyfb
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:recuerdamelon.app@gmail.com}
+    password: ${MAIL_PASSWORD:kymulstigcxvcyfb}
     properties:
       mail:
         smtp:

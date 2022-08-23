@@ -1,3 +1,4 @@
+/*
 package es.eoi.java2022.recuerdamelon.web.rest;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Notification;
@@ -46,4 +47,4 @@ public class NotificationRestController {
     public Notification update (Notification notification){
         return notificationService.update(notification);
     }
-}
+}*/

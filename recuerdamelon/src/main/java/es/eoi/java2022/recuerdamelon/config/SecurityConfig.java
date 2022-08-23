@@ -54,6 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/tasks", true)
                 .permitAll();
 
+
+
         // Logout
         http.logout()
                 .logoutUrl("/logout")
