@@ -37,16 +37,21 @@
                                             <th>Fecha</th>
                                         </tr>
                                         </thead>
+
                                         <tbody>
                                         <div class="message">
                                         <tr th:each="item,iter : ${mensajes}">
                                                 <td class="sender" th:text="${item.sender}"></td>
                                                 <td class="title" th:text="${item.title}"></td>
                                                 <td class="date" th:text="${item.date}"></td>
+                                                <td><a th:href="@{'/mensajes/' + ${item.id} + '/detail'}">&#128232;</a></td>
+                                                <td><a th:href="@{'/mensajes/' + ${item.id} + '/delete'}"
+                                                       onclick="return confirm('¿Estás seguro de que quieres eliminar?')">&#128465;</a></td>
 
                                         </tr>
                                         </div>
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>

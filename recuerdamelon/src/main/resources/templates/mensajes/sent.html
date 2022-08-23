@@ -43,6 +43,7 @@
                                                 <td class="sender" th:text="${item.sender}"></td>
                                                 <td class="title" th:text="${item.title}"></td>
                                                 <td class="date" th:text="${item.date}"></td>
+                                            <td><a th:href="@{'/mensajes/' + ${item.id} + '/detail'}">&#128232;</a></td>
                                             </div>
                                         </tr>
                                         </tbody>

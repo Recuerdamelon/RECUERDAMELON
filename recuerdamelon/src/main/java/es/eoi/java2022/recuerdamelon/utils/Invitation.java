@@ -25,7 +25,6 @@ public class Invitation {
             invitation.setUserId(user.getId());
             invitation.setUsers(recieveInvitation);
             invitation.setDate(DateUtil.dateToString(zonedDateTime));
-            invitation.setRecieved(true);
             invitation.setInvitation(true);
             invitation.setMensaje("El usuario " + admin.getUsername() + "  te ha enviado una invitacion a la comunidad" +
                     " de meloners " + communityName);

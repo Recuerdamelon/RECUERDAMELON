@@ -56,9 +56,6 @@ public class CommunityService {
         return repository.save(community);
     }
     public Community save(CommunityDTO communityDTO) {
-        if (communityDTO.getId() != null){
-            throw new RuntimeException("El Identificador no puede ser nulo");
-        }
         return repository.save(mapper.toEntity(communityDTO));
     }
 

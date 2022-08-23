@@ -5,13 +5,12 @@ import es.eoi.java2022.recuerdamelon.data.repository.MensajesRepository;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
 import es.eoi.java2022.recuerdamelon.dto.MensajesDTO;
 import es.eoi.java2022.recuerdamelon.service.mapper.MensajesServiceMapper;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class MensajesService {
@@ -34,18 +33,19 @@ public class MensajesService {
 
     }
 
+    public Mensajes findById (Integer id){
+        return repository.findById(id).orElseThrow(() -> new RuntimeException(String.format("El Id %d no existe", id)));
+    }
+
     public Mensajes save(MensajesDTO dto) {
 
             return this.repository.save(serviceMapper.toEntity(dto)); //Guarde los ids de quienes reciben el mensaje
 
     }
 
-    //Metodo para el listado principal
-//    public List<Mensajes> findByUsersId(Integer userId) {
-//        return userRepository.findById(userId)
-//                .orElseThrow(() -> new RuntimeException(String.format("El Id %d no existe", userId)))
-//                .getMensajes().stream().collect(Collectors.toList());
-//    }
+    public void delete (Mensajes mensajes){
+        this.repository.delete(mensajes);
+    }
 
     public List<Mensajes> findByRecieved(Integer id, boolean recieved) {
         List<Mensajes> all = userService.findMensajesByUserId(id);

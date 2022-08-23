@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layoutHome}">
+
+
+<body>
+<div layout:fragment="navbar"></div>
+
+<div layout:fragment="content">
+    <link rel="stylesheet" th:href="@{/css/mensajes.css}"/>
+    <script type="text/javascript" th:src="@{/js/sidebarNav.js}"></script>
+
+    <div class="box-body">
+        <div class="mailbox">
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a th:href="@{/mensajes/create}" class="active">Nuevo mensaje</a>
+                <a th:href="@{/mensajes/list}">Recibidos</a>
+                <a th:href="@{/mensajes/saved}">Borradores</a>
+                <a th:href="@{/mensajes/sent}">Enviados</a>
+                <a th:href="@{/mensajes/delete}">Eliminados</a>
+            </div>
+            <div>
+                <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9993; Buzón</span>
+            </div>
+            <div class="messages">
+                <table>
+                    <thead>
+                    <tr>
+                        <div class="tabla3">
+                            <label for="title"> Asunto: </label>
+                            <p id="title" style="font-weight: 900" th:text="${mensaje.title}"/>
+                        </div>
+                        <div class="tabla3">
+                            <label for="sender"> Remitente: </label>
+                            <p id="sender" style="font-weight: 900" th:text="${mensaje.sender}"/>
+                        </div>
+                        <div class="tabla3">
+                            <label for="date"> Fecha: </label>
+                            <p id="date" style="font-weight: 900" th:text="${mensaje.date}"/>
+                        </div>
+                    </tr>
+                    </thead>
+                    <tbody style="margin-top: 9%">
+                    <label type="text" class="form-control"
+                           th:text="${mensaje.mensaje}"></label>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>
