@@ -38,6 +38,8 @@ public class Mensajes implements Serializable {
     private boolean invitation;
     private String community;
 
+    private boolean acepted;
+
     public Integer getId() {
         return id;
     }
@@ -132,5 +134,13 @@ public class Mensajes implements Serializable {
 
     public void setCommunity(String community) {
         this.community = community;
+    }
+
+    public boolean isAcepted() {
+        return acepted;
+    }
+
+    public void setAcepted(boolean acepted) {
+        this.acepted = acepted;
     }
 }

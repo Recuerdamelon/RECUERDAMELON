@@ -27,9 +27,7 @@
             <form action="/" th:action="@{'/community/' + ${community.name} + '/usersAdded'}" th:object="${addUsers}" method="post"
                   onsubmit="alert('Se ha enviado la invitación');">
 
-                <p th:if="${errors}" th:text="#{Registro.Error}"></p>
-
-                <button type="button" onclick='addInput()'>+ Añadir otro Meloner</button>
+                <p class="p-error" th:if="${erroraddusername}" th:text="#{Adduser.ErrorUsername}"></p>
 
                 <div class="input" style="text-align:center; margin: 3px;">
                     <input placeholder="" type="text" id="name1" name="name"   th:field="${addUsers.user1}" >
@@ -52,13 +50,11 @@
                     <input placeholder="" type="text" id="name5" name="name" hidden  th:field="${addUsers.user5}" >
                 </div>
 
-                <div class="input" hidden>
-                    <input placeholder="" type="text" id="community" name="name" hidden  th:field="${addUsers.communityName}" >
-                </div>
 
+                <button type="button" onclick='addInput()'>+ Añadir otro Meloner</button>
 
                 <div class="input">
-                    <button type="submit" th:text="#{Registro.Button.Submit}"></button>  <!-- >Añadir meloners</button> -->
+                    <button type="submit" style="margin:10%" th:text="#{Add.Button.Submit}"></button>  <!-- >Añadir meloners</button> -->
                 </div>
 
             </form>

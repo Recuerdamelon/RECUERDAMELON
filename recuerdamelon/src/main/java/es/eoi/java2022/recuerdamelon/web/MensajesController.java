@@ -13,6 +13,7 @@ import es.eoi.java2022.recuerdamelon.service.PublicarMensaje;
 import es.eoi.java2022.recuerdamelon.service.UserService;
 import es.eoi.java2022.recuerdamelon.service.mapper.CommunityServiceMapper;
 import es.eoi.java2022.recuerdamelon.service.mapper.MensajesServiceMapper;
+import es.eoi.java2022.recuerdamelon.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -122,10 +123,38 @@ public class MensajesController {
         LocalDateTime localDateTime = timestamp.toLocalDateTime();
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-//            dto.setUserId(user.getId() );
-//            dto.setSent(true);
-//            dto.setSender(user.getUsername());
-//            dto.setDate(DateUtil.dateToString(zonedDateTime));
+        //PARA EL QUE ENVIA EL MENSAJE
+            dto.setUserId(user.getId() );
+            dto.setSent(true);
+            dto.setSender(user.getUsername());
+            dto.setDate(DateUtil.dateToString(zonedDateTime));
+        this.repository.save(service.save(dto));
+
+        //PARA LOS QUE RECIBEN EL MENSAJE
+        for (User mailed: dto.getUsers()) {
+            dto.setUserId(user.getId() );
+            dto.setRecieved(true);
+            dto.setSender(user.getUsername());
+            dto.setDate(DateUtil.dateToString(zonedDateTime));
+            this.repository.save(service.save(dto));
+        }
+        //Generar evento
+        publicarMensaje.EnviarMensajeSaludo1(dto);
+        return "redirect:/mensajes/list";
+    }
+
+    @Transactional
+    @PostMapping({"/mensajes/save"})
+    public String toDraw(MensajesDTO dto) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+            dto.setMensaje(dto.getMensaje());
+            dto.setTitle(dto.getTitle());
+            dto.setSender(user.getUsername());
+            dto.setDate(DateUtil.dateToString(zonedDateTime));
+            dto.setSaved(true);
         this.repository.save(service.save(dto));
         //Generar evento
         publicarMensaje.EnviarMensajeSaludo1(dto);
@@ -160,6 +189,9 @@ public class MensajesController {
     @GetMapping("/mensajes/{id}/{community}/acept")
     public String acept(@PathVariable("community") String name, @PathVariable("id") Integer id, ModelMap model) {
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
         Community community = communityService.findByName(name);
         Set<User> toAdd = new HashSet<>();
         toAdd.add(user);
@@ -171,6 +203,8 @@ public class MensajesController {
         mensajes1.setMensaje("El usuario " + user.getUsername() + " se ha unido a la comunidad " + name);
         mensajes1.setInvitation(true);
         mensajes1.setCommunity(name);
+        mensajes1.setAcepted(true);
+        mensajes1.setDate(DateUtil.dateToString(zonedDateTime));
         Set<User> friends = new HashSet<>();
         for (User friend : communityService.findFriends(community.getId())) {
             friends.add(friend);

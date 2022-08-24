@@ -105,7 +105,6 @@ public class CommunityController {
     @GetMapping("/community/{name}/users")
     public String inputUsers(@PathVariable("name") String name, ModelMap model) {
         Community toAdd = communityService.findByName(name);
-        Set<User> Friends = new HashSet<>();
         CommunityUserCreationDTO creationDTO = new CommunityUserCreationDTO();
         model.addAttribute("addUsers", creationDTO);
         model.addAttribute("community", toAdd);
@@ -121,10 +120,11 @@ public class CommunityController {
         User userAdmin = userService.findById(user.getId());
         List<User> all = userService.findAll(Pageable.unpaged());
         List<String> allUsernames = new ArrayList<>();
-        List<String> toAdd = new ArrayList<>();
-        for (User user1 : all) {
-            allUsernames.add(user1.getUsername());
+        for (User userExists : all) {
+            allUsernames.add(userExists.getUsername());
         }
+
+        List<String> toAdd = new ArrayList<>();
         if (dto.getUser1() != null && allUsernames.contains(dto.getUser1())) {
             toAdd.add(dto.getUser1());
         }
@@ -140,14 +140,21 @@ public class CommunityController {
         if (dto.getUser5() != null && allUsernames.contains(dto.getUser5())) {
             toAdd.add(dto.getUser5());
         }
-        if (new HashSet<>(allUsernames).containsAll(toAdd)) {
+        System.out.println("toAdd.size() = " + toAdd.size());
+        System.out.println(allUsernames.size());
+        if (toAdd.size()!=0) {
             List<User> recieveInvitation = new ArrayList<>();
             for (String invited : toAdd) {
                 recieveInvitation.add(userService.findByUsername(invited));
                 mensajesService.save(Invitation.makeInvitation(toAdd, name, userAdmin, recieveInvitation));
-            }
-        }
-        return "redirect:/community/list";
 
+            }
+        }else{
+            redirectAttributes.addFlashAttribute("erroraddusername", true);
+            return "redirect:/community/{name}/users";
+        }
+//        return "Ha ocurrido un error";
+
+        return "redirect:/community/list";
     }
 }

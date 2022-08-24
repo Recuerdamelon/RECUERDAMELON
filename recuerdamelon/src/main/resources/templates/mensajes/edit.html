@@ -38,29 +38,24 @@
                                th:field="${mensaje.mensaje}"
                                maxlength="255">
                         <div class="container">
-                            <div class="row">
-                                <div class="column"></div>
                                 <p>Enviar a: </p>
-                                <div class="column"></div>
-                                <select id="multiple-users" multiple="multiple"
+                                <select style="width:100%; text-align:center" id="multiple-users" multiple="multiple"
                                 th:field="*{mensaje.users}">
                                     <option th:each="user : ${users}"
                                             th:value="${user}"
-                                            th:text="${user.username}">
+                                            th:text="'&#127816;' + '  ' + ${user.username}">
                                     </option>
                                 </select>
                             </div>
                         </div>
                         <div class="container">
-                            <div class="row">
+                            <div class="row" style="margin-top:5%">
                                 <div class="sendButton">
                                     <button class="button button1" type="submit" name="btnSaveEdit" value="Save"
                                     >Enviar</button>
+                                    <a th:href="@{'/mensajes/save'}" style="float:right" class="button button1"
+                                       onclick="return confirm('Mensaje guarado en borradores')">&#128194;</a>
                                 </div>
-<!--                                <div class="saveButton">-->
-<!--                                    <button class="button button1" type="submit"-->
-<!--                                            >Guardar</button>-->
-<!--                                </div>-->
                             </div>
                         </div>
                 </div>
