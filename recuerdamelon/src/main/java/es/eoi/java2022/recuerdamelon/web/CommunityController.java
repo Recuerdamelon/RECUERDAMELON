@@ -121,10 +121,11 @@ public class CommunityController {
         User userAdmin = userService.findById(user.getId());
         List<User> all = userService.findAll(Pageable.unpaged());
         List<String> allUsernames = new ArrayList<>();
-        List<String> toAdd = new ArrayList<>();
-        for (User user1 : all) {
-            allUsernames.add(user1.getUsername());
+        for (User userExists:all) {
+            allUsernames.add(userExists.getUsername());
         }
+
+        List<String> toAdd = new ArrayList<>();
         if (dto.getUser1() != null && allUsernames.contains(dto.getUser1())) {
             toAdd.add(dto.getUser1());
         }
@@ -140,7 +141,9 @@ public class CommunityController {
         if (dto.getUser5() != null && allUsernames.contains(dto.getUser5())) {
             toAdd.add(dto.getUser5());
         }
-        if (new HashSet<>(allUsernames).containsAll(toAdd)) {
+        System.out.println("toAdd.size() = " + toAdd.size());
+        System.out.println(allUsernames.size());
+        if (allUsernames.contains(toAdd) && !toAdd.isEmpty()) {
             List<User> recieveInvitation = new ArrayList<>();
             for (String invited : toAdd) {
                 recieveInvitation.add(userService.findByUsername(invited));

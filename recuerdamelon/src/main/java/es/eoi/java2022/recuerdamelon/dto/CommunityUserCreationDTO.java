@@ -5,7 +5,7 @@ import es.eoi.java2022.recuerdamelon.data.entity.User;
 import java.util.List;
 
 public class CommunityUserCreationDTO {
-        private String user1;
+    private String user1;
     private String user2;
     private String user3;
     private String user4;
