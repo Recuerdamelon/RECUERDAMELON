@@ -146,7 +146,11 @@ public class CommunityController {
                 recieveInvitation.add(userService.findByUsername(invited));
                 mensajesService.save(Invitation.makeInvitation(toAdd, name, userAdmin, recieveInvitation));
             }
+        }else{
+            redirectAttributes.addFlashAttribute("erroraddusername", true);
+            return "/community/users";
         }
+
         return "redirect:/community/list";
 
     }
