@@ -27,6 +27,7 @@ public class MensajesDTO {
     private boolean sent;
     private boolean recieved;
     private boolean invitation;
+    private boolean acepted;
 
     private String community;
 
@@ -133,5 +134,13 @@ public class MensajesDTO {
 
     public void setCommunity(String community) {
         this.community = community;
+    }
+
+    public boolean isAcepted() {
+        return acepted;
+    }
+
+    public void setAcepted(boolean acepted) {
+        this.acepted = acepted;
     }
 }

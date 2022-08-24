@@ -44,8 +44,8 @@
                                                 <td class="sender" th:text="${item.sender}"></td>
                                                 <td class="title" th:text="${item.mensaje}"></td>
                                                 <td class="date" th:text="${item.date}"></td>
-                                            <td><a th:href="@{'/mensajes/' + ${item.id} + '/' + ${item.community} + '/acept'}">&#9989;</a></td>
-                                            <td><a th:href="@{'/mensajes/' + ${item.id} + '/' + ${item.community} + '/decline'}">&#10060;</a></td>
+                                            <td><a th:if="${item.acepted == false}" th:href="@{'/mensajes/' + ${item.id} + '/' + ${item.community} + '/acept'}">&#9989;</a></td>
+                                            <td><a th:if="${item.acepted == false}" th:href="@{'/mensajes/' + ${item.id} + '/' + ${item.community} + '/decline'}">&#10060;</a></td>
                                             </div>
                                         </tr>
                                         </tbody>

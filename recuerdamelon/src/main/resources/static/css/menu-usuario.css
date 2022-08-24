@@ -16,15 +16,13 @@
     white-space: nowrap;
 }
 
-@media screen and (max-width: 36rem) {
-    .container {
-        transform: translateY(-50%) rotate(90deg) translateX(-50%);
-    }
-}
-
 .buy,
 .try {
     vertical-align: middle;
+}
+
+.select{
+width:90%;
 }
 
 
