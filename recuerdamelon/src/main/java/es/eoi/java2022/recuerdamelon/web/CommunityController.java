@@ -113,7 +113,7 @@ public class CommunityController {
     }
 
     @Transactional
-    @PostMapping(value = {"/community/{name}/usersAdded"})
+    @PostMapping(value = {"/community/{name}/users"})
     public String addUsers(CommunityUserCreationDTO dto, @PathVariable("name") String name,
                            Errors errors, RedirectAttributes redirectAttributes) {
 

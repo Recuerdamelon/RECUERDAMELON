@@ -135,6 +135,7 @@ public class MensajesDTO {
     public void setCommunity(String community) {
         this.community = community;
     }
+<<<<<<< HEAD
 
     public boolean isAcepted() {
         return acepted;
@@ -143,4 +144,6 @@ public class MensajesDTO {
     public void setAcepted(boolean acepted) {
         this.acepted = acepted;
     }
+=======
+>>>>>>> origin/main
 }
