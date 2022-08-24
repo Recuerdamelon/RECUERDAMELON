@@ -11,8 +11,6 @@ public class CommunityUserCreationDTO {
     private String user4;
     private String user5;
 
-    private String communityName;
-
     public String getUser1() {
         return user1;
     }
@@ -53,12 +51,5 @@ public class CommunityUserCreationDTO {
         this.user5 = user5;
     }
 
-    public String getCommunityName() {
-        return communityName;
-    }
-
-    public void setCommunityName(String communityName) {
-        this.communityName = communityName;
-    }
 }
 

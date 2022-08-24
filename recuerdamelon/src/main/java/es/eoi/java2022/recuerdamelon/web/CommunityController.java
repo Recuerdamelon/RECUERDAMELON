@@ -105,7 +105,6 @@ public class CommunityController {
     @GetMapping("/community/{name}/users")
     public String inputUsers(@PathVariable("name") String name, ModelMap model) {
         Community toAdd = communityService.findByName(name);
-        Set<User> Friends = new HashSet<>();
         CommunityUserCreationDTO creationDTO = new CommunityUserCreationDTO();
         model.addAttribute("addUsers", creationDTO);
         model.addAttribute("community", toAdd);
@@ -113,7 +112,7 @@ public class CommunityController {
     }
 
     @Transactional
-    @PostMapping(value = {"/community/{name}/users"})
+    @PostMapping(value = {"/community/{name}/usersAdded"})
     public String addUsers(CommunityUserCreationDTO dto, @PathVariable("name") String name,
                            Errors errors, RedirectAttributes redirectAttributes) {
 
@@ -121,7 +120,7 @@ public class CommunityController {
         User userAdmin = userService.findById(user.getId());
         List<User> all = userService.findAll(Pageable.unpaged());
         List<String> allUsernames = new ArrayList<>();
-        for (User userExists:all) {
+        for (User userExists : all) {
             allUsernames.add(userExists.getUsername());
         }
 
@@ -143,18 +142,19 @@ public class CommunityController {
         }
         System.out.println("toAdd.size() = " + toAdd.size());
         System.out.println(allUsernames.size());
-        if (allUsernames.contains(toAdd) && !toAdd.isEmpty()) {
+        if (toAdd.size()!=0) {
             List<User> recieveInvitation = new ArrayList<>();
             for (String invited : toAdd) {
                 recieveInvitation.add(userService.findByUsername(invited));
                 mensajesService.save(Invitation.makeInvitation(toAdd, name, userAdmin, recieveInvitation));
+
             }
         }else{
             redirectAttributes.addFlashAttribute("erroraddusername", true);
-            return "/community/users";
+            return "redirect:/community/{name}/users";
         }
+//        return "Ha ocurrido un error";
 
         return "redirect:/community/list";
-
     }
 }
