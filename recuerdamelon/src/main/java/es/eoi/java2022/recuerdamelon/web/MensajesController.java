@@ -123,10 +123,38 @@ public class MensajesController {
         LocalDateTime localDateTime = timestamp.toLocalDateTime();
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-//            dto.setUserId(user.getId() );
-//            dto.setSent(true);
-//            dto.setSender(user.getUsername());
-//            dto.setDate(DateUtil.dateToString(zonedDateTime));
+        //PARA EL QUE ENVIA EL MENSAJE
+            dto.setUserId(user.getId() );
+            dto.setSent(true);
+            dto.setSender(user.getUsername());
+            dto.setDate(DateUtil.dateToString(zonedDateTime));
+        this.repository.save(service.save(dto));
+
+        //PARA LOS QUE RECIBEN EL MENSAJE
+        for (User mailed: dto.getUsers()) {
+            dto.setUserId(user.getId() );
+            dto.setRecieved(true);
+            dto.setSender(user.getUsername());
+            dto.setDate(DateUtil.dateToString(zonedDateTime));
+            this.repository.save(service.save(dto));
+        }
+        //Generar evento
+        publicarMensaje.EnviarMensajeSaludo1(dto);
+        return "redirect:/mensajes/list";
+    }
+
+    @Transactional
+    @PostMapping({"/mensajes/save"})
+    public String toDraw(MensajesDTO dto) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+            dto.setMensaje(dto.getMensaje());
+            dto.setTitle(dto.getTitle());
+            dto.setSender(user.getUsername());
+            dto.setDate(DateUtil.dateToString(zonedDateTime));
+            dto.setSaved(true);
         this.repository.save(service.save(dto));
         //Generar evento
         publicarMensaje.EnviarMensajeSaludo1(dto);
