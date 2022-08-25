@@ -9,8 +9,7 @@ public class MessagesDTO {
     private String content;
     private String sender;
 
-    //private Integer userId_reciver;
-
+    private String roomId;
 
     public Integer getId() {
         return id;
@@ -42,5 +41,13 @@ public class MessagesDTO {
 
     public void setSender(String sender) {
         this.sender = sender;
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 }
