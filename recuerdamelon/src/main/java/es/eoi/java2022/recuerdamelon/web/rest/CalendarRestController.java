@@ -3,7 +3,7 @@ package es.eoi.java2022.recuerdamelon.web.rest;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Calendar;
 import es.eoi.java2022.recuerdamelon.dto.CalendarDTO;
-import es.eoi.java2022.recuerdamelon.service.CalendarService;
+import es.eoi.java2022.recuerdamelon.dto.service.CalendarService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;

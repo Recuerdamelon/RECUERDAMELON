@@ -1,4 +1,4 @@
-package es.eoi.java2022.recuerdamelon.service.mapper;
+package es.eoi.java2022.recuerdamelon.dto.service.mapper;
 
 public interface IEntityMapper<E, DTO> {
     DTO toDto(E e);

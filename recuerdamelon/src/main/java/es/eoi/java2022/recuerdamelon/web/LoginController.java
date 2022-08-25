@@ -5,8 +5,8 @@ import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.data.repository.ConfirmationTokenRepository;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
 import es.eoi.java2022.recuerdamelon.dto.UserDTO;
-import es.eoi.java2022.recuerdamelon.service.EmailService;
-import es.eoi.java2022.recuerdamelon.service.UserService;
+import es.eoi.java2022.recuerdamelon.dto.service.EmailService;
+import es.eoi.java2022.recuerdamelon.dto.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,6 +29,7 @@ public class LoginController {
 
     @Autowired
     private UserRepository userRepository;
+
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     @Resource
@@ -36,6 +37,7 @@ public class LoginController {
 
     @Resource
     UserService userService;
+
 
 //    @PostConstruct
 //    public void init(){
@@ -139,6 +141,35 @@ public class LoginController {
         } else {
             userDTO.setPassword(encoder.encode(userDTO.getPassword()));
             userDTO.setActive(true);
+            this.userRepository.save(userService.save(userDTO));
+            return "login";
+        }
+
+    }
+
+    @GetMapping("/registrobusiness")
+    public String getRegistrobusiness(WebRequest request, Model model) {
+       UserDTO userDTO = new UserDTO();
+        model.addAttribute("business", userDTO);
+        return "BusinessRegistro";
+    }
+
+    @Transactional
+    @PostMapping("/registrobusiness")
+    public String saveRegistrobusiness(UserDTO userDTO, Model model, Errors errors, RedirectAttributes redirectAttributes) {
+        List<User> allbusiness = userService.findAll(Pageable.unpaged());
+        if (allbusiness.contains(userService.findByUsername(userDTO.getName()))) {
+            redirectAttributes.addFlashAttribute("errorusername", true);
+            return "redirect:/BusinessRegistro";
+        } else if (allbusiness.contains(userService.findByEmail(userDTO.getEmail()))) {
+            redirectAttributes.addFlashAttribute("erroremail", true);
+            return "redirect:/BusinessRegistro";
+        } else {
+            userDTO.setPassword(encoder.encode(userDTO.getPassword()));
+            userDTO.setActive(true);
+            userDTO.setBusiness(true);
+            userDTO.setName("business");
+            userDTO.setSurname("business");
             this.userRepository.save(userService.save(userDTO));
             return "login";
         }

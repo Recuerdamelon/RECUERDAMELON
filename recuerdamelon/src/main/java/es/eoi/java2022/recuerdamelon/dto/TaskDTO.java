@@ -15,7 +15,7 @@ public class TaskDTO {
 
     private List<UserDTO> user;
 
-    private BusinessDTO business;
+
 
     public Integer getId() {
         return id;
@@ -89,11 +89,5 @@ public class TaskDTO {
         this.user = user;
     }
 
-    public BusinessDTO getBusiness() {
-        return business;
-    }
 
-    public void setBusiness(BusinessDTO business) {
-        this.business = business;
-    }
 }

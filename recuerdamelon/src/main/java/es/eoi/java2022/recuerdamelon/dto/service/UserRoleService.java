@@ -1,10 +1,9 @@
-package es.eoi.java2022.recuerdamelon.service;
+package es.eoi.java2022.recuerdamelon.dto.service;
 
 import es.eoi.java2022.recuerdamelon.data.entity.UserRole;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRoleRepository;
 import es.eoi.java2022.recuerdamelon.dto.UserRoleDTO;
-import es.eoi.java2022.recuerdamelon.service.mapper.UserRoleServiceMapper;
-import org.springframework.data.domain.PageRequest;
+import es.eoi.java2022.recuerdamelon.dto.service.mapper.UserRoleServiceMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 

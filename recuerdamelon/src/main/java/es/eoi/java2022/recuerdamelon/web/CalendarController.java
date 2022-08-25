@@ -1,8 +1,7 @@
 package es.eoi.java2022.recuerdamelon.web;
 
-import es.eoi.java2022.recuerdamelon.data.entity.Calendar;
 import es.eoi.java2022.recuerdamelon.dto.CalendarDTO;
-import es.eoi.java2022.recuerdamelon.service.CalendarService;
+import es.eoi.java2022.recuerdamelon.dto.service.CalendarService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller

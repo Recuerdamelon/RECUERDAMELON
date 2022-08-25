@@ -1,6 +1,7 @@
 package es.eoi.java2022.recuerdamelon.dto;
 
 
+import javax.persistence.Column;
 import java.util.List;
 
 public class UserDTO {
@@ -15,13 +16,21 @@ public class UserDTO {
     private boolean active;
     private String avatar;
 
+    private boolean business;
+
+    private String nif;
+
+    private String team;
+
+    private byte[] bavatar;
+
+
     private List<UserRoleDTO> roles;
 
     private List<TaskDTO> task;
 
-    private BusinessDTO business;
 
-    private BusinessUserDTO businessUser;
+
 
 
     public Integer getId() {
@@ -88,21 +97,38 @@ public class UserDTO {
         this.task = task;
     }
 
-    public BusinessDTO getBusiness() {
+    public boolean isBusiness() {
         return business;
     }
 
-    public void setBusiness(BusinessDTO business) {
+    public void setBusiness(boolean business) {
         this.business = business;
     }
 
-    public BusinessUserDTO getBusinessUser() {
-        return businessUser;
+    public String getNif() {
+        return nif;
     }
 
-    public void setBusinessUser(BusinessUserDTO businessUser) {
-        this.businessUser = businessUser;
+    public void setNif(String nif) {
+        this.nif = nif;
     }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
+
+    public byte[] getBavatar() {
+        return bavatar;
+    }
+
+    public void setBavatar(byte[] bavatar) {
+        this.bavatar = bavatar;
+    }
+
 
     public String getUsername() {
         return username;

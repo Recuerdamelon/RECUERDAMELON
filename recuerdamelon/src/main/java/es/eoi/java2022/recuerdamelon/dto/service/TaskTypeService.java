@@ -1,10 +1,9 @@
-package es.eoi.java2022.recuerdamelon.service;
+package es.eoi.java2022.recuerdamelon.dto.service;
 
 import es.eoi.java2022.recuerdamelon.data.entity.TaskType;
 import es.eoi.java2022.recuerdamelon.data.repository.TaskTypeRepository;
 import es.eoi.java2022.recuerdamelon.dto.TaskTypeDTO;
-import es.eoi.java2022.recuerdamelon.service.mapper.TaskTypeServiceMapper;
-import org.springframework.data.domain.PageRequest;
+import es.eoi.java2022.recuerdamelon.dto.service.mapper.TaskTypeServiceMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
