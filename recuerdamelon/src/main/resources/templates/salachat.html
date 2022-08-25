@@ -28,9 +28,10 @@
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Introduzca su nombre</h5>
-                        <p class="card-text">El texto introducido será utilizado como su nombre de participante en la sala de conversación.</p>
+                        <p class="card-text">Le recordamos que está accediendo a una sala de chat grupal con todos los usuarios
+                        de la aplicación, incluyendo administradores</p>
                         <form id="usernameForm" name="usernameForm">
-                            <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" />
+                            <input type="text" id="name" th:type="hidden" th:value="${user.username}"/>
                             <button type="submit" class="accent username-submit mt-2">Entrar en la sala</button>
                         </form>
                     </div>

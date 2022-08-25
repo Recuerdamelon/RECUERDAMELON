@@ -2,6 +2,7 @@
 package es.eoi.java2022.recuerdamelon.web;
 
 import es.eoi.java2022.recuerdamelon.data.entity.ChatMessage;
+import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.dto.MessagesDTO;
 import es.eoi.java2022.recuerdamelon.service.MessagesService;
 import es.eoi.java2022.recuerdamelon.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -62,13 +64,23 @@ public class ChatController {
         this.userService = userService;
     }
 
+    @GetMapping("/salachat")
+    public String get(Model model) {
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        System.out.println("user.getUsername() = " + user.getUsername());
+//        ChatMessage chatMessage = new ChatMessage();
+//        model.addAttribute("chat", chatMessage);
+        model.addAttribute("user", user);
+        return "salachat";
+    }
+
     @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public/{roomId}")//Añadir variable a la ruta del chat->
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage, MessagesDTO messagesDTO) {
-        messagesDTO.setContent(chatMessage.getContent());
-        messagesDTO.setSender(chatMessage.getSender());
-        messagesDTO.setType(chatMessage.getType());
-        messagesService.save(messagesDTO);// Añadir room
+    @SendTo("/topic/public")//Añadir variable a la ruta del chat->@SendTo("/topic/public/{roomId}")
+    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+//        messagesDTO.setContent(chatMessage.getContent());
+//        messagesDTO.setSender(chatMessage.getSender());
+//        messagesDTO.setType(chatMessage.getType());
+        // Añadir room messagesService.save(messagesDTO);
         return chatMessage;
     }
     @MessageMapping("/chat.addUser")
@@ -80,10 +92,7 @@ public class ChatController {
         return chatMessage;
     }
 
-    @GetMapping("/salachat")
-    public String get(WebRequest request, Model model) {
-        return "salachat";
-    }
+
 //
 //    @Transactional
 //    @PostMapping("/salachat")
