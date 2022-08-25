@@ -5,11 +5,9 @@ import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.data.repository.CommunityRepository;
 import es.eoi.java2022.recuerdamelon.dto.CommunityDTO;
 import es.eoi.java2022.recuerdamelon.dto.CommunityUserCreationDTO;
-import es.eoi.java2022.recuerdamelon.dto.MensajesDTO;
-import es.eoi.java2022.recuerdamelon.service.CommunityService;
-import es.eoi.java2022.recuerdamelon.service.MensajesService;
-import es.eoi.java2022.recuerdamelon.service.UserService;
-import es.eoi.java2022.recuerdamelon.utils.DateUtil;
+import es.eoi.java2022.recuerdamelon.dto.service.CommunityService;
+import es.eoi.java2022.recuerdamelon.dto.service.MensajesService;
+import es.eoi.java2022.recuerdamelon.dto.service.UserService;
 import es.eoi.java2022.recuerdamelon.utils.Invitation;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,10 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.*;
 
 @Controller

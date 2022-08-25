@@ -25,8 +25,20 @@ public class User {
     private boolean active;
     private String avatar;
 
+
+    private boolean business;
+
+    @Column
+    private String nif;
+
+    @Column
+    private String team;
+
+    @Column(name = "business_avatar")
+    private byte[] bavatar;
+
     @OneToMany(mappedBy = "owner")
-    private Set<Task> ownedTasks;
+    private Set<Task> ownedTasks;//esto que hace aqui pepe?
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )
     private Set<Task> tasks;
@@ -51,13 +63,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<Notification> notifications;
-
-    @ManyToOne
-    private Business business;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private BusinessUser businessUser;
+    
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )
     private Set<Community> communities;
@@ -177,23 +183,37 @@ public class User {
         this.username = username;
     }
 
-
-    public Business getBusiness() {
+    public boolean isBusiness() {
         return business;
     }
 
-    public void setBusiness(Business business) {
+    public void setBusiness(boolean business) {
         this.business = business;
     }
 
-    public BusinessUser getBusinessUser() {
-        return businessUser;
+    public String getNif() {
+        return nif;
     }
 
-    public void setBusinessUser(BusinessUser businessUser) {
-        this.businessUser = businessUser;
+    public void setNif(String nif) {
+        this.nif = nif;
     }
 
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
+
+    public byte[] getBavatar() {
+        return bavatar;
+    }
+
+    public void setBavatar(byte[] bavatar) {
+        this.bavatar = bavatar;
+    }
 
     public Set<Community> getCommunities() {
         return communities;

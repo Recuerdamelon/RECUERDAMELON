@@ -2,15 +2,12 @@ package es.eoi.java2022.recuerdamelon.utils;
 
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.dto.MensajesDTO;
-import es.eoi.java2022.recuerdamelon.service.CommunityService;
-import es.eoi.java2022.recuerdamelon.service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Invitation {
