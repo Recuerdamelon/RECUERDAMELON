@@ -1,4 +1,4 @@
-package es.eoi.java2022.recuerdamelon.service;
+package es.eoi.java2022.recuerdamelon.dto.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;

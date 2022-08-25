@@ -2,7 +2,7 @@ package es.eoi.java2022.recuerdamelon.web.rest;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Task;
 import es.eoi.java2022.recuerdamelon.dto.TaskDTO;
-import es.eoi.java2022.recuerdamelon.service.TaskService;
+import es.eoi.java2022.recuerdamelon.dto.service.TaskService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 

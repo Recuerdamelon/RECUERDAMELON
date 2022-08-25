@@ -26,8 +26,7 @@ public class Task {
     private Calendar calendar;
     @ManyToOne
     private User owner;
-    @ManyToOne
-    private Business business;
+
     @ManyToMany
     @JoinTable(
             name = "tasks_has_user",
@@ -135,12 +134,6 @@ public class Task {
         this.notifications = notifications;
     }
 
-    public Business getBusiness() {
-        return business;
-    }
 
-    public void setBusiness(Business business) {
-        this.business = business;
-    }
 }
 

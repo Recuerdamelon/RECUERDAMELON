@@ -1,20 +1,18 @@
 package es.eoi.java2022.recuerdamelon.web;
 
-import es.eoi.java2022.recuerdamelon.data.entity.Task;
 import es.eoi.java2022.recuerdamelon.dto.TaskDTO;
-import es.eoi.java2022.recuerdamelon.service.TaskService;
+import es.eoi.java2022.recuerdamelon.dto.service.TaskService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.Optional;
 
@@ -56,15 +54,32 @@ public class TaskController {
     }
 
 
-      //#CREATE...
-    @GetMapping("/task/create")//get de update -create&update-//
-    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id")
-    public String create (@PathVariable("id") Integer id, ModelMap model) {
-        model.addAttribute("task", new Task());  /* se importa la entity??*/
-        return "task/create";
-    }
-    
-    
+
+      //#CREATE USER TASK
+      @GetMapping("/task/create")
+      public String getTask(WebRequest request, Model model) {
+          TaskDTO taskDTO = new TaskDTO();
+          model.addAttribute("task", taskDTO);
+          return "task";
+      }
+
+   /* @Transactional
+    @PostMapping("/task/create")*/
+//    public String saveTask(TaskDTO taskDTO, Model model, Errors errors, RedirectAttributes redirectAttributes) {
+//        List<Task> allTask = taskService.findAll(Pageable.unpaged());
+//        if (allTask.contains(taskService.findByTitle(taskDTO.getTitle()))) {
+//            redirectAttributes.addFlashAttribute("errortitle", true);
+//            return "redirect:/task"; /*return "redirect:/task/create";*/
+//        }
+//        else {
+
+//            this.taskRepository.save(taskService.save(taskDTO));
+//            return "task"; /*return "redirect:/task/create";*/
+//        }
+//    }
+
+
+
     //             ---------------------------POST Methods-----------------------------         //
 
     @Transactional //post transaccional del get de update//

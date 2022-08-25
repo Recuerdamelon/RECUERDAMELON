@@ -1,7 +1,7 @@
 package es.eoi.java2022.recuerdamelon.web;
 
 import es.eoi.java2022.recuerdamelon.dto.TaskTypeDTO;
-import es.eoi.java2022.recuerdamelon.service.TaskTypeService;
+import es.eoi.java2022.recuerdamelon.dto.service.TaskTypeService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

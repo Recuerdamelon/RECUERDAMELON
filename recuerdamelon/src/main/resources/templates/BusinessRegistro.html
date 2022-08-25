@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+  <title>Bussiness</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuerda melon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="#" th:href="@{/css/normalize.css}"/>
+  <link rel="stylesheet" href="#" th:href="@{/css/loginStyle.css}"/>
+  <link rel="icon" href="#" th:href="@{/img/favicon.ico}" type="image/x-icon"/>
+</head>
+
+<body>
+
+<main>
+  <div class="background-video">
+    <video id="background-video" autoplay loop muted >
+      <source th:src="@{/img/videoBgLog.webm}" type="video/mp4">
+    </video>
+  </div>
+  <article class="imagenes">
+    <img th:src="@{/img/9-removebg-preview.png}" alt="letras1">
+    <img th:src="@{/img/10-removebg-preview.png}" alt="letras2">
+    <img th:src="@{/img/11-removebg-preview.png}" alt="letras3">
+  </article>
+
+  <article class="login">
+    <section>
+      <div>
+        <img style="width:25%" th:src="@{/img/logoletranegra.png}" alt="Imagen">
+      </div>
+      <form action="/" th:action="@{/registrobusiness}" th:object="${business}" method="post">
+
+        <p class="p-error" th:if="${errorusername}" th:text="#{Bussiness.ErrorUsername}"></p>
+        <p class="p-error" th:if="${erroremail}" th:text="#{Bussiness.ErrorEmail}"></p>
+
+        <div class="texto-formulario">
+          <h2 th:text="#{Business.Title}"></h2> <!-- <h2>Crear una nueva cuenta Meloner</h2> -->
+        </div>
+
+
+
+        <div class="input">
+          <label for="name" th:text="#{Business.name}" ></label>   <!-- <label for="Meloner">Elija tu nombre Meloner</label>>  -->
+          <input placeholder="" type="text" id="name" name="name"  required th:field="${business.username}" >
+        </div>
+        <div class="input">
+          <label for="email" th:text="#{Business.Email}"></label> <!--   for="email" th:text="#{Bussiness.Email}">Email</label>-->
+          <input placeholder="" type="email" id="email" name="email"  required th:field="${business.email}">
+        </div>
+        <div class="input">
+          <label for="password" th:text="#{Business.Password}"></label> <!--<label for="contraseña">Elija tu contraseña</label>-->
+          <input placeholder="" type="password" id="password" name="password"  required th:field="${business.password}" onkeyup='check();'>
+        </div>
+        <div class="input">
+          <label for="repassword" th:text="#{Business.RePassword}"></label>
+          <input placeholder="" type="password" id="repassword" name="repassword"  required th:field="${business.repassword}" onkeyup='check();' />
+          <span id='message'></span>
+        </div>
+
+        <div class="input">
+          <button class="" type="submit" th:text="#{Business.Button.Submit}" id="buttonOk" disabled="true" onkeyup='check();'></button>  <!-- >Crear cuenta</button> -->
+        </div>
+
+      </form>
+
+      <script src="/js/repassword.js"></script>
+
+    </section>
+  </article>
+</main>
+</body>
+</html>
