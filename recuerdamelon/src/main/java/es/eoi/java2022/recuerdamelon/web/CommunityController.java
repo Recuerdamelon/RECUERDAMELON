@@ -86,11 +86,13 @@ public class CommunityController {
             return "redirect:/community/create";
         } else {
             final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-            Set<User> Friends = new HashSet<>();
-            Friends.add(userService.findById(user.getId()));
-            dto.setUsers(Friends);
+//            Set<User> Friends = new HashSet<>();
+//            Friends.add(userService.findById(user.getId()));
+//            dto.setUsers(Friends);
             dto.setAdmin(user.getId());
-
+            Set<User> administrador = new HashSet<>();
+            administrador.add(user);
+            dto.setUsers(administrador);
             this.communityRepository.save(communityService.save(dto));
             return "redirect:/community/list";
         }

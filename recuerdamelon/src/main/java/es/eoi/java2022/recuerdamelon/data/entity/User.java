@@ -37,12 +37,9 @@ public class User {
     @Column(name = "business_avatar")
     private byte[] bavatar;
 
-    @OneToMany(mappedBy = "owner")
-    private Set<Task> ownedTasks;//esto que hace aqui pepe?
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private Set<Task> tasks;
-
 
 
     @ManyToMany
@@ -63,12 +60,12 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<Notification> notifications;
-    
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )
+
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private Set<Community> communities;
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY )
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private Set<Mensajes> mensajes;
 
 
@@ -134,13 +131,13 @@ public class User {
         this.avatar = avatar;
     }
 
-    public Set<Task> getOwnedTasks() {
-        return ownedTasks;
-    }
-
-    public void setOwnedTasks(Set<Task> ownedTasks) {
-        this.ownedTasks = ownedTasks;
-    }
+//    public Set<Task> getOwnedTasks() {
+//        return ownedTasks;
+//    }
+//
+//    public void setOwnedTasks(Set<Task> ownedTasks) {
+//        this.ownedTasks = ownedTasks;
+//    }
 
     public Set<Task> getTasks() {
         return tasks;
