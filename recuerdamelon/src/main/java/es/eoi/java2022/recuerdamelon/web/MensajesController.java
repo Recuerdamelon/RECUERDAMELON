@@ -192,13 +192,20 @@ public class MensajesController {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         LocalDateTime localDateTime = timestamp.toLocalDateTime();
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
+
+
         Community community = communityService.findByName(name);
         Set<User> toAdd = new HashSet<>();
+        for (User userin:community.getUsers()) {
+            toAdd.add(userin);
+        }
         toAdd.add(user);
         community.setUsers(toAdd);
         communityService.save(communityServiceMapper.toDto(community));
         Mensajes mensajes = service.findById(id);
         service.delete(mensajes);
+
+
         Mensajes mensajes1 = new Mensajes();
         mensajes1.setMensaje("El usuario " + user.getUsername() + " se ha unido a la comunidad " + name);
         mensajes1.setInvitation(true);
@@ -212,6 +219,8 @@ public class MensajesController {
         mensajes1.setUsers(friends);
         mensajes1.setSender(user.getUsername());
         service.save(mapper.toDto(mensajes1));
+
+
         return "redirect:/mensajes/invited";
     }
 

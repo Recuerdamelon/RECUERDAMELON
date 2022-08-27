@@ -20,7 +20,6 @@ public class ChatMessage {
         LEAVE
     }
 
-    public String roomId;
 
 
     public Integer getId() {
@@ -55,12 +54,5 @@ public class ChatMessage {
         this.sender = sender;
     }
 
-    public String getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
-    }
 }
 
