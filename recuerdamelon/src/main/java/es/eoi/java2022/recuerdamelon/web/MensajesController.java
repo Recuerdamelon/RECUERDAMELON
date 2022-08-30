@@ -27,10 +27,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class MensajesController {
@@ -109,7 +106,9 @@ public class MensajesController {
         List<User> mailed = new ArrayList<>();
         for (Community communities : userService.findCommunitiesByUserId(user.getId())) {
             mailed.addAll(communityService.findFriends(communities.getId()));
+            mailed.remove(userService.findById(user.getId()));
         }
+
         //dto.setUsers(mailed); //MANDAR LISTA CON COMMUNITIES??
         model.addAttribute("users", mailed);
         model.addAttribute("mensaje", dto);
@@ -123,28 +122,22 @@ public class MensajesController {
         LocalDateTime localDateTime = timestamp.toLocalDateTime();
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        //PARA EL QUE ENVIA EL MENSAJE
-            dto.setUserId(user.getId() );
-            dto.setSent(true);
-            dto.setSender(user.getUsername());
-            dto.setDate(DateUtil.dateToString(zonedDateTime));
-        this.repository.save(service.save(dto));
 
-        //PARA LOS QUE RECIBEN EL MENSAJE
-        for (User mailed: dto.getUsers()) {
             dto.setUserId(user.getId() );
-            dto.setRecieved(true);
             dto.setSender(user.getUsername());
             dto.setDate(DateUtil.dateToString(zonedDateTime));
+            dto.setRecieved(true);
+
             this.repository.save(service.save(dto));
-        }
+
+
         //Generar evento
         publicarMensaje.EnviarMensajeSaludo1(dto);
         return "redirect:/mensajes/list";
     }
 
-    @Transactional
-    @PostMapping({"/mensajes/save"})
+    //@Transactional GUARDAR EN BORRADORES
+    @GetMapping({"/mensajes/save"})
     public String toDraw(MensajesDTO dto) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         LocalDateTime localDateTime = timestamp.toLocalDateTime();
@@ -183,7 +176,17 @@ public class MensajesController {
     public String delete(@PathVariable("id") Integer id, ModelMap model) {
         Mensajes mensaje = service.findById(id);
         this.service.delete(mensaje);
-        return "redirect:/mensajes/list";
+        return "redirect:/mensajes/delete";
+    }
+
+    @GetMapping("/mensajes/DeleteAll")
+    public String deleteAll(ModelMap model) {
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        List<Mensajes> toDelete = service.findByDeleted(user.getId(), true);
+        for (Mensajes m : toDelete) {
+            this.service.delete(m);
+        }
+        return "redirect:/mensajes/delete";
     }
 
     @GetMapping("/mensajes/{id}/{community}/acept")
@@ -228,18 +231,20 @@ public class MensajesController {
     public String decline(@PathVariable("community") String name, @PathVariable("id") Integer id, ModelMap model) {
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         Community community = communityService.findByName(name);
-        Mensajes mensajes = new Mensajes();
-        mensajes.setMensaje("El usuario " + user.getUsername() + " ha rechazado la invitación a la comunidad " + name);
-        mensajes.setSender(user.getUsername());
-        mensajes.setCommunity(name);
-        mensajes.setInvitation(true);
-        Set<User> friends = new HashSet<>();
+        MensajesDTO dto = new MensajesDTO();
+        dto.setMensaje("El usuario " + user.getUsername() + " ha rechazado la invitación a la comunidad " + name);
+        dto.setSender(user.getUsername());
+        dto.setCommunity(name);
+        dto.setRecieved(true);
+        List<User> friends = new ArrayList<>();
         for (User friend : communityService.findFriends(community.getId())) {
 
             if (friend.getId() == community.getAdmin())
                 friends.add(friend);
         }
-        mensajes.setUsers(friends);
+        dto.setUsers(friends);
+        service.save(dto);
+        service.delete(service.findById(id));
         return "redirect:/mensajes/invited";
     }
 }

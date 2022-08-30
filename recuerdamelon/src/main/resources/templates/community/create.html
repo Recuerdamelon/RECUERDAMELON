@@ -27,15 +27,15 @@
                 <p class="p-error" th:if="${errorNamingCommunity}" th:text="#{NewComm.ErrorNaming}"></p>
 
                 <div class="texto-formulario">
-                    <h2 th:text="#{NewComm.Title}"></h2> <!-- <h2>Crear una nueva comunidad Meloner</h2> -->
+                    <h3 style="margin:auto; text-align:center;" th:text="#{NewComm.Title}"></h3> <!-- <h2>Crear una nueva comunidad Meloner</h2> -->
                 </div>
 
 
-                <div class="input">
+                <div class="input" style="margin:5%;text-align:center;">
                     <label for="name" th:text="#{NewComm.Name}" ></label>   <!-- <label for="Meloner">Elije tu nombre de comunidad</label>>  -->
                     <input placeholder="" type="text" id="name" name="name"  required th:field="${newCommunity.name}" >
                 </div>
-                <div class="input">
+                <div class="input"style="margin:5%;text-align:center;">
                     <button type="submit" th:text="#{NameNew.Submit}"></button>  <!-- >Crear cuenta</button> -->
                 </div>
 

@@ -35,6 +35,10 @@
                                             <th>Meloner</th>
                                             <th>Asunto</th>
                                             <th>Fecha</th>
+                                            <th><a th:href="@{/mensajes/DeleteAll}"
+                                                   class="box-title btn btn-success"
+                                                   onclick="return confirm('¿Estás seguro de que quieres vaciar
+                                                    la bandeja de eliminados definitivamente?')">Vaciar</a></th>
                                         </tr>
                                         </thead>
                                         <tbody>
