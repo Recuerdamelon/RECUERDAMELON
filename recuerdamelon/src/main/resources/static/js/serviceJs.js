@@ -94,4 +94,3 @@ jQuery(function contchar(){
         jQuery("#tasksForm").submit()
         // submit es que envía el formulario(https://api.jquery.com/submit/)
     })
-})

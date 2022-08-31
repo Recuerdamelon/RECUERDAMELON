@@ -110,6 +110,9 @@ CREATE TABLE IF NOT EXISTS `recuerdamelon`.`user` (
   `business` BIT(1) NOT NULL,
   `nif` VARCHAR(255) NULL DEFAULT NULL,
   `team` VARCHAR(255) NULL DEFAULT NULL,
+  `birthday` DATE NULL DEFAULT NULL,
+  `nationality` VARCHAR(255) NULL DEFAULT NULL,
+
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,

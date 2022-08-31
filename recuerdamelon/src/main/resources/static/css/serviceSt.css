@@ -428,22 +428,25 @@ html, .tasks.body {
     margin: auto;
 }
 
-.image-cropper {
-    width: 100px;
-    height: 100px;
-    position: relative;
-  }
-
-  .my-picture {
-    display: block;
-    margin: 0 auto;
-    height: 100%;
-    width: auto;
-    border: 2px solid white;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-  }
+        .container-my-picture {
+            width: 150px;
+            height: 150px;
+        }
+        .user-photo-preview {
+            background-image: url( https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80 );
+            background-size: cover;
+            background-position: center;
+        }
+        .middle-my-picture {
+            background-color: rgba( 255,255,255, 0.69 );
+        }
+        .container-my-picture:hover .middle-my-picture {
+            display: flex!important;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
 
 
 .tabla1{
