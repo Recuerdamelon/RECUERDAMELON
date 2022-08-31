@@ -2,11 +2,15 @@ package es.eoi.java2022.recuerdamelon.web;
 
 import es.eoi.java2022.recuerdamelon.data.entity.ConfirmationToken;
 import es.eoi.java2022.recuerdamelon.data.entity.User;
+import es.eoi.java2022.recuerdamelon.data.entity.UserRole;
 import es.eoi.java2022.recuerdamelon.data.repository.ConfirmationTokenRepository;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
 import es.eoi.java2022.recuerdamelon.dto.UserDTO;
+import es.eoi.java2022.recuerdamelon.dto.UserRoleDTO;
 import es.eoi.java2022.recuerdamelon.service.EmailService;
+import es.eoi.java2022.recuerdamelon.service.UserRoleService;
 import es.eoi.java2022.recuerdamelon.service.UserService;
+import es.eoi.java2022.recuerdamelon.service.mapper.UserRoleServiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -38,6 +43,11 @@ public class LoginController {
     @Resource
     UserService userService;
 
+    @Resource
+    UserRoleService userRoleService;
+
+    @Resource
+    UserRoleServiceMapper userRoleServiceMapper;
 
 //    @PostConstruct
 //    public void init(){
@@ -170,6 +180,15 @@ public class LoginController {
             userDTO.setBusiness(true);
             userDTO.setName("business");
             userDTO.setSurname("business");
+
+            List<UserRole> roles = new ArrayList<>();
+            List<UserRoleDTO> rolesDto = new ArrayList<>();
+            roles.add(userRoleService.findById(3));
+            for (UserRole role:roles) {
+                rolesDto.add(userRoleServiceMapper.toDto(role));
+            }
+            userDTO.setRoles(rolesDto);
+
             this.userRepository.save(userService.save(userDTO));
             return "login";
         }

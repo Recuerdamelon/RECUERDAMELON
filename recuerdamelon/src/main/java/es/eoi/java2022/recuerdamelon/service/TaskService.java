@@ -1,20 +1,17 @@
 package es.eoi.java2022.recuerdamelon.service;
 
-import es.eoi.java2022.recuerdamelon.data.entity.Community;
 import es.eoi.java2022.recuerdamelon.data.entity.Task;
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.data.repository.CommunityRepository;
 import es.eoi.java2022.recuerdamelon.data.repository.TaskRepository;
 import es.eoi.java2022.recuerdamelon.dto.TaskDTO;
 import es.eoi.java2022.recuerdamelon.service.mapper.TaskServiceMapper;
+import es.eoi.java2022.recuerdamelon.service.mapper.UserServiceMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class TaskService {
@@ -26,7 +23,7 @@ public class TaskService {
 
     private final UserService service;
 
-    public TaskService(TaskRepository repository, CommunityRepository communityRepository, TaskServiceMapper mapper, UserService service) {
+    public TaskService(TaskRepository repository, CommunityRepository communityRepository, UserService userService, UserServiceMapper mapperuser, TaskServiceMapper mapper, UserService service, CommunityService communityService) {
         this.repository = repository;
         this.communityRepository = communityRepository;
         this.mapper = mapper;
@@ -37,21 +34,6 @@ public class TaskService {
         return repository.findAll(pageable).toList();
 
     }
-    public List<TaskDTO> findByUser(User user) {
-        Set<Integer> userIdsFromCommunities = communityRepository
-                .findDistinctByUsersId(user.getId())
-                .stream()
-                .map(community -> community.getUsers().stream().map(User::getId).collect(Collectors.toSet()))
-                .flatMap(Set::stream)
-                .collect(Collectors.toSet());
-
-
-        return repository
-                .findByUsersIdIn(userIdsFromCommunities)
-                .stream()
-                .map(mapper::toDto).collect(Collectors.toList());
-    }
-
 
     public Task findById(Integer id) {
         return repository.findById(id).orElseThrow(() ->

@@ -3,6 +3,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:sd="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
         layout:decorate="~{layoutHome}">
 
 <head>
@@ -27,10 +28,10 @@
                 <!--<li id = "stateli">AÚN NO HAY TAREAS</li>-->
                 <p th:text="#{Task.AnyTask}"></p>
             </div>
-            <!--TODO: No mostrar en el caso de haber tareas registradas'-->
+            <!--TO.DO: No mostrar en el caso de haber tareas registradas'-->
             <div class="container-state" th:if="${!tasks.isEmpty()}">
-                <!--<li id = "stateli">HAY TAREAS</li>-->
-                <!--<p th:text="#{Task.haveTask}"></p>-->
+                <li id = "stateli">HAY TAREAS</li>
+                <p th:text="#{Task.haveTask}"></p>
             </div>
 
             <!-- SEARCH TASK -->
@@ -66,105 +67,11 @@
         </div>
 
 
-        <!-------------------------------------------------- POPUP CREAR TAREAS -->
-        <div class="popup-newTask" id="formNewTask">
-
-            <form class="form-newTask" th:action="@{/task/create}" th:object=${task} method="POST">
-                <button type="button" class="clear-btn" onclick=clearNewTask()></button>
-                <button type="submit" class="accept-btn" onclick=acceptNewTask()></button>
-                <button type="button" class="cancel-btn" onclick=cancelNewTask()></button>
-
-                <h2 th:text="#{NewTask.Tittle}"></h2>
-                <div class="form-textTask">
-<!--                    <label>Titulo (<span id="cont-span">0</span>/60)</label>-->
-                    <label th:text="#{NewTask.ContChar}">(<span id="cont-span">0</span>/60)</label>  <!-- ???????????????????????????????-->
-                    <input th:id="tittle-task" placeholder="" type="text" maxlength="60" required onclick="contchar()" >
-
-                    <label for="description-task" th:text="#{NewTask.Description}"></label>
-                    <textarea id="description-task" maxlength="150" ></textarea>
-
-                </div>
-                <div class="form-dateTask">
-                    <label th:text="#{NewTask.IniDate}"></label> <input class="" type="datetime-local" name="date-time" id="dateTask-ini" >
-                    <label th:text="#{NewTask.EndDate}"></label> <input class="" type="datetime-local" name="date-time" id="dateTask-fin" >
-                </div>
-
-                <div class="form-categoryTask" action="#">
-                    <label for="catTask" th:text="#{NewTask.SelectCat}"> </label>
-                    <input type="text" id="catTask" name="catTask" list="categoryTask" >
-
-                    <datalist id="categoryTask">
-                        <option value="Default"></option>
-                        <option value="Work"></option>
-                        <option value="Personal"></option>
-                        <option value="EOIjava"></option>
-                        <option value="Sport"></option>
-                    </datalist>
-                    <button type="button" class="selectCat-btn" onclick=AceptCat() th:text="#{NewTask.Button.Accept}"> </button>
-                </div>
-
-                <div class="form-shareTask">
-                    <label for="shareTask" th:text="#{NewTask.AddShare}"></label>
-                    <input type="text" id="shareTask" name="shareTask" list="contactToTask" >  <!--COMO INCLUIR EN UN ARRAY-->
-
-                    <datalist id="contactToTask">
-                        <option value="JGarcia"></option>
-                        <option value="Bflores"></option>
-                        <option value="JCarras"></option>
-                        <option value="EOIjava"></option>
-                        <option value="Pep"></option>
-                    </datalist>
-                    <button type="button" class="selectCat-btn" onclick=AceptCat() th:text="#{NewTask.Button.Share}"> </button>
-
-                    <!-- SHOW SHARED -->
-                    <!-- <div class="form-showShared"> -->
-                    <button  type="button" class="dropshare-btn" id="show-contshared" onclick="myShared()"><span th:text="#{NewTask.ContShare}"></span></button>
-                    <div id="myContacts" class="dropdown-shareTask">
-                        <!-- Podríamos evitar borrar compartir desde aqui....????????????????????? -->
-                        <li name="list" value="JGarcia">JGarcia <button></button></li>
-                        <li name="list" value="Bflores">Bflores <button></button></li>
-                        <li name="list" value="JCarras">JCarras <button onclick="deletShareTask()"></button></li>
-                        <li name="list" value="JGarcia">JGarcia <button></button></li>
-                        <li name="list" value="Bflores">Bflores <button></button></li>
-                    </div>
-                    <!-- </div> -->
-                </div>
-            </form>
-        </div>
-        <!----------------------------------------------------------------- POPUP NEWTASK -->
-
-
         <!--------  Ejemplo interfaz web de manejo de tareas  ------->
         <div class="container-tasks">
 
             <!-- TASK REG -->
             <div class="tasks">
-
-
-                <!-- task 2 -->
-<!--                <input id='label-2' type='checkbox' checked/>-->
-<!--                <label for='label-2'>-->
-<!--                    <tr th:each="task,iter : ${tasks}">-->
-<!--                    <h2>-->
-<!--                        <div class="task-title">-->
-<!--                            <img th:src="@{/img/icons/working.png}" alt="Imagen">-->
-<!--                            <label th:text="${task.title}"></label>-->
-<!--                        </div>-->
-<!--                        <div class="task-controls">-->
-<!--                            <button type="button" class="btn-edit" id="btEdit1">-->
-<!--                                <span>.</span>-->
-<!--                            </button>-->
-<!--                            <button type="button" class="btn-select" id="btSelect1">-->
-<!--                                <span>Select</span>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                        <label th:text="${task.description}"></label>-->
-<!--                    </h2>-->
-<!--                </label>-->
-
-
-
-
                     <form method="post" id="tasksForm">
                             <div th:each="task,iter : ${tasks}">
 
