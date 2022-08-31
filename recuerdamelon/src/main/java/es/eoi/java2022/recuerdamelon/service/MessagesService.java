@@ -1,9 +1,9 @@
-package es.eoi.java2022.recuerdamelon.dto.service;
+package es.eoi.java2022.recuerdamelon.service;
 
 import es.eoi.java2022.recuerdamelon.data.repository.MessagesRepository;
 import es.eoi.java2022.recuerdamelon.dto.MessagesDTO;
 import es.eoi.java2022.recuerdamelon.data.entity.ChatMessage;
-import es.eoi.java2022.recuerdamelon.dto.service.mapper.MessagesServiceMapper;
+import es.eoi.java2022.recuerdamelon.service.mapper.MessagesServiceMapper;
 import org.springframework.stereotype.Service;
 
 @Service

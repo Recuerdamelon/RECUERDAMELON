@@ -14,8 +14,8 @@ public class Calendar {
     @Column(nullable = false, name = "task_date")
     private ZonedDateTime taskDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "calendar")
-    private Set<Task> tasks;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "calendar")
+//    private Set<Task> tasks;
 
     @ManyToMany( mappedBy = "calendars")
     private Set<User> users;
@@ -36,13 +36,13 @@ public class Calendar {
         this.name = name;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
-    }
+//    public Set<Task> getTasks() {
+//        return tasks;
+//    }
+//
+//    public void setTasks(Set<Task> tasks) {
+//        this.tasks = tasks;
+//    }
 
     public Set<User> getUsers() {
         return users;

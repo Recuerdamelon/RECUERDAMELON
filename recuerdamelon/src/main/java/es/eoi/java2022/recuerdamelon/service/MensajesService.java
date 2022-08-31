@@ -1,10 +1,10 @@
-package es.eoi.java2022.recuerdamelon.dto.service;
+package es.eoi.java2022.recuerdamelon.service;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Mensajes;
 import es.eoi.java2022.recuerdamelon.data.repository.MensajesRepository;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
 import es.eoi.java2022.recuerdamelon.dto.MensajesDTO;
-import es.eoi.java2022.recuerdamelon.dto.service.mapper.MensajesServiceMapper;
+import es.eoi.java2022.recuerdamelon.service.mapper.MensajesServiceMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
