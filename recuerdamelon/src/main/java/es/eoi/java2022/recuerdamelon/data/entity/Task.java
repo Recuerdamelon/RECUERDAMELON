@@ -12,20 +12,22 @@ public class Task {
     @Column(nullable = false)
     private String title;
     @Column(nullable = false,name = "start_date")
-    private ZonedDateTime startDate;
+    private String startDate;
     @Column(nullable = false,name ="end_date" )
-    private ZonedDateTime endDate;
+    private String endDate;
     private String description;
     @Column(name ="location_url" )
     private String locationUrl;
     @Column(nullable = false)
-    private Boolean delete;
+    private Boolean deleted;
+    @Column
+    private Boolean horario;
     @ManyToOne
     private TaskType taskType;
-    @ManyToOne
-    private Calendar calendar;
-    @ManyToOne
-    private User owner;
+//    @ManyToOne
+//    private Calendar calendar;
+//    @ManyToOne
+//    private User owner;
 
     @ManyToMany
     @JoinTable(
@@ -54,19 +56,19 @@ public class Task {
         this.title = title;
     }
 
-    public ZonedDateTime getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(ZonedDateTime startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public ZonedDateTime getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(ZonedDateTime endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -86,12 +88,20 @@ public class Task {
         this.locationUrl = locationUrl;
     }
 
-    public Boolean getDelete() {
-        return delete;
+    public Boolean getDeleted() {
+        return deleted;
     }
 
-    public void setDelete(Boolean delete) {
-        this.delete = delete;
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public Boolean getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Boolean horario) {
+        this.horario = horario;
     }
 
     public TaskType getTaskType() {
@@ -102,21 +112,21 @@ public class Task {
         this.taskType = taskType;
     }
 
-    public Calendar getCalendar() {
-        return calendar;
-    }
+//    public Calendar getCalendar() {
+//        return calendar;
+//    }
+//
+//    public void setCalendar(Calendar calendar) {
+//        this.calendar = calendar;
+//    }
 
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
+//    public User getOwner() {
+//        return owner;
+//    }
+//
+//    public void setOwner(User owner) {
+//        this.owner = owner;
+//    }
 
     public Set<User> getUsers() {
         return users;

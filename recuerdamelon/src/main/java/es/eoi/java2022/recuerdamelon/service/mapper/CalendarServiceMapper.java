@@ -1,4 +1,4 @@
-package es.eoi.java2022.recuerdamelon.dto.service.mapper;
+package es.eoi.java2022.recuerdamelon.service.mapper;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Calendar;
 import es.eoi.java2022.recuerdamelon.dto.CalendarDTO;

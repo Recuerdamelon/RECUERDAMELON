@@ -1,7 +1,7 @@
 package es.eoi.java2022.recuerdamelon.web;
 
 import es.eoi.java2022.recuerdamelon.dto.NotificationDTO;
-import es.eoi.java2022.recuerdamelon.dto.service.NotificationService;
+import es.eoi.java2022.recuerdamelon.service.NotificationService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

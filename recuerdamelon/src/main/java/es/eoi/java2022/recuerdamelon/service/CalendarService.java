@@ -1,9 +1,9 @@
-package es.eoi.java2022.recuerdamelon.dto.service;
+package es.eoi.java2022.recuerdamelon.service;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Calendar;
 import es.eoi.java2022.recuerdamelon.data.repository.CalendarRepository;
 import es.eoi.java2022.recuerdamelon.dto.CalendarDTO;
-import es.eoi.java2022.recuerdamelon.dto.service.mapper.CalendarServiceMapper;
+import es.eoi.java2022.recuerdamelon.service.mapper.CalendarServiceMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 

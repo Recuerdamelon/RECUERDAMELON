@@ -1,4 +1,4 @@
-package es.eoi.java2022.recuerdamelon.dto.service;
+package es.eoi.java2022.recuerdamelon.service;
 
 
 import es.eoi.java2022.recuerdamelon.data.entity.Community;
@@ -6,7 +6,7 @@ import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.data.repository.CommunityRepository;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
 import es.eoi.java2022.recuerdamelon.dto.CommunityDTO;
-import es.eoi.java2022.recuerdamelon.dto.service.mapper.CommunityServiceMapper;
+import es.eoi.java2022.recuerdamelon.service.mapper.CommunityServiceMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 

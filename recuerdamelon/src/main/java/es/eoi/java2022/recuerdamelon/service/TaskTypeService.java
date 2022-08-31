@@ -1,9 +1,9 @@
-package es.eoi.java2022.recuerdamelon.dto.service;
+package es.eoi.java2022.recuerdamelon.service;
 
 import es.eoi.java2022.recuerdamelon.data.entity.TaskType;
 import es.eoi.java2022.recuerdamelon.data.repository.TaskTypeRepository;
 import es.eoi.java2022.recuerdamelon.dto.TaskTypeDTO;
-import es.eoi.java2022.recuerdamelon.dto.service.mapper.TaskTypeServiceMapper;
+import es.eoi.java2022.recuerdamelon.service.mapper.TaskTypeServiceMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +27,9 @@ public class TaskTypeService {
         return repository.findById(id).orElseThrow(() -> new RuntimeException(String.format("El Id %d no existe", id)));
     }
 
+    public TaskTypeDTO findByName(String name) {
+        return mapper.toDto( repository.findByName(name));
+    }
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
