@@ -76,6 +76,7 @@
                     </li>
 
                     <!--Perfil-->
+                    <div sec:authorize="hasRole('PLAIN_USER')">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Meloner</a>
                         <ul class="dropdown-menu">
@@ -84,6 +85,17 @@
                             <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
                         </ul>
                     </li>
+                    </div>
+                    <div sec:authorize="hasRole('BUSINESS')">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Empresa</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
+                                <li><a class="dropdown-item" href="index.html">Configuración</a></li>
+                                <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+                    </div>
                     <!--Sala chat-->
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/salachat}">Sala de chat</a>
