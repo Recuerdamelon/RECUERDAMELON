@@ -5,15 +5,16 @@ import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.dto.CommunityDTO;
 import es.eoi.java2022.recuerdamelon.dto.HorarioDTO;
 import es.eoi.java2022.recuerdamelon.dto.TaskDTO;
+import es.eoi.java2022.recuerdamelon.dto.UserDTO;
 import es.eoi.java2022.recuerdamelon.service.CommunityService;
 import es.eoi.java2022.recuerdamelon.service.TaskService;
 import es.eoi.java2022.recuerdamelon.service.TaskTypeService;
 import es.eoi.java2022.recuerdamelon.service.UserService;
+import es.eoi.java2022.recuerdamelon.service.mapper.CommunityServiceMapper;
+import es.eoi.java2022.recuerdamelon.service.mapper.UserServiceMapper;
 import es.eoi.java2022.recuerdamelon.utils.DateUtil;
 import es.eoi.java2022.recuerdamelon.utils.TaskHorario;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -33,20 +34,21 @@ public class TaskController {
 
     private  final TaskTypeService taskTypeService;
     private final CommunityService communityService;
-
+private final UserServiceMapper serviceMapper;
     private  final UserService userService;
 
-    public TaskController(TaskService taskService, TaskTypeService taskTypeService, CommunityService communityService, UserService userService) {
+    public TaskController(TaskService taskService, TaskTypeService taskTypeService, CommunityService communityService, CommunityServiceMapper communityServiceMapper, UserServiceMapper serviceMapper, UserService userService) {
         this.taskService = taskService;
         this.taskTypeService = taskTypeService;
         this.communityService = communityService;
+        this.serviceMapper = serviceMapper;
         this.userService = userService;
     }
 
 //********************************************    CRUD     *******************************************//
     //             ---------------------------GET Methods-----------------------------         //
     //# READ...
-//    @GetMapping("/tasks")
+//    @GetMapping("/tasks/admin")
 ////    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[tasks].ownerId == authentication.principal.id")
 //    public String findAll(@RequestParam("page") Optional<Integer> page,
 //                          @RequestParam("size") Optional<Integer> size, Model model) {
@@ -57,10 +59,10 @@ public class TaskController {
 //    }
 
     @GetMapping("/tasks")
-    @PostAuthorize("#model[task].userId == authentication.principal.id")
+//    @PostAuthorize("#model[task].userId == authentication.principal.id")
     public String findByUser( ModelMap model) {
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        model.addAttribute("task", this.taskService.findByUser(user));
+        model.addAttribute("tasks", this.userService.findTasksByUserId(user.getId()));
         return "tasks";
     }
 
@@ -142,6 +144,17 @@ public class TaskController {
 @PostMapping("/business/horario")
 public String saveHorario(TaskDTO taskDTO, HorarioDTO horarioDTO){
     final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+    System.out.println("SIZE" + horarioDTO.getEquipos().size());
+    List<Community> equipos = horarioDTO.getEquipos();
+    List<UserDTO> members = new ArrayList<>();
+    for (Community team:equipos) {
+        for (User member:communityService.findFriends(team.getId())){
+            members.add(serviceMapper.toDto(member));
+        }
+    }
+    taskDTO.setUsers(members);
+
     List<String > start = new ArrayList<>();
     for (String date: TaskHorario.starTime(horarioDTO)) {
       start.add(date);

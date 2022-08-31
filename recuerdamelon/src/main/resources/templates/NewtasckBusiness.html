@@ -39,9 +39,10 @@
                                 <div class="container">
                                     <p style="padding-top: 20px">Equipo: </p>
                                     <select style="height:auto; text-align:center" id="multiple-users"
-                                            multiple="multiple">
+                                            multiple="multiple"
+                                            th:field="*{equipos}">
                                         <option th:each="community : ${equipos}"
-                                                th:value="${community}"
+                                                th:value="${{community}}"
                                                 th:text="'&#127816;' + '  ' + ${community.name}">
                                         </option>
                                     </select>

@@ -57,7 +57,4 @@ public class CommunityService {
         return repository.save(mapper.toEntity(communityDTO));
     }
 
-//    public Page<CommunityDTO> findByUserId(Integer userId, Pageable pageable) {
-//        return repository.findByUserId(userId, pageable).map(mapper::toDto);
-//    }
 }
