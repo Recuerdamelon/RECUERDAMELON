@@ -58,7 +58,7 @@ public class TaskController {
 
     @GetMapping("/tasks")
     @PostAuthorize("#model[task].userId == authentication.principal.id")
-    public String findById( ModelMap model) {
+    public String findByUser( ModelMap model) {
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("task", this.taskService.findByUser(user));
         return "tasks";
