@@ -1,6 +1,6 @@
 package es.eoi.java2022.recuerdamelon.config;
 
-import es.eoi.java2022.recuerdamelon.dto.service.security.CustomUserAuthenticationProvider;
+import es.eoi.java2022.recuerdamelon.service.security.CustomUserAuthenticationProvider;
 import es.eoi.java2022.recuerdamelon.web.access.expression.CustomWebSecurityExpressionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;

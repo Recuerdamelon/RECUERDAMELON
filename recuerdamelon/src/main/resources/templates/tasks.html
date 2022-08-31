@@ -21,9 +21,16 @@
         <!-- USER BUTTON -->
         <div class="container-controls">
 
+
             <!-- ESTADO DE REGISTROS -->
-            <div class="container-state" >
-                <li id = "stateli">TAREAS REGISTRADAS / AÚN NO HAY TAREAS</li>
+            <div class="container-state" th:if="${tasks.isEmpty()}">
+                <!--<li id = "stateli">AÚN NO HAY TAREAS</li>-->
+                <p th:text="#{Task.AnyTask}"></p>
+            </div>
+            <!--TODO: No mostrar en el caso de haber tareas registradas'-->
+            <div class="container-state" th:if="${!tasks.isEmpty()}">
+                <!--<li id = "stateli">HAY TAREAS</li>-->
+                <!--<p th:text="#{Task.haveTask}"></p>-->
             </div>
 
             <!-- SEARCH TASK -->

@@ -1,4 +1,4 @@
-package es.eoi.java2022.recuerdamelon.dto.service.security;
+package es.eoi.java2022.recuerdamelon.service.security;
 
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.data.entity.UserRole;

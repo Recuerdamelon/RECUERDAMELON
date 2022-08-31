@@ -1,4 +1,4 @@
-package es.eoi.java2022.recuerdamelon.dto.service;
+package es.eoi.java2022.recuerdamelon.service;
 
 import es.eoi.java2022.recuerdamelon.dto.MensajesDTO;
 import es.eoi.java2022.recuerdamelon.dto.MessagesDTO;

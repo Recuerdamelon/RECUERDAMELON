@@ -9,7 +9,9 @@ public class TaskDTO {
     private String endDate;
     private String description;
     private String locationUrl;
-    private Boolean delete;
+    private Boolean deleted;
+
+    private Boolean horario;
 
     private TaskTypeDTO taskType;
 
@@ -65,12 +67,20 @@ public class TaskDTO {
         this.locationUrl = locationUrl;
     }
 
-    public Boolean getDelete() {
-        return delete;
+    public Boolean getDeleted() {
+        return deleted;
     }
 
-    public void setDelete(Boolean delete) {
-        this.delete = delete;
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public Boolean getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Boolean horario) {
+        this.horario = horario;
     }
 
     public TaskTypeDTO getTaskType() {
