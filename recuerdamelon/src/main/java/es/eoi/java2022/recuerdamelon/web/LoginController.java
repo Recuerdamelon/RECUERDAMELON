@@ -152,7 +152,7 @@ public class LoginController {
         } else {
             userDTO.setPassword(encoder.encode(userDTO.getPassword()));
             userDTO.setActive(true);
-            userDTO.setRoles(SetRoleToUser.setRole(1));
+            userDTO.setRoles(SetRoleToUser.setRole(1, userRoleService, userRoleServiceMapper));
             this.userRepository.save(userService.save(userDTO));
             return "login";
         }
@@ -183,7 +183,7 @@ public class LoginController {
             userDTO.setName("business");
             userDTO.setSurname("business");
 
-            userDTO.setRoles(SetRoleToUser.setRole(3));
+            userDTO.setRoles(SetRoleToUser.setRole(3, userRoleService, userRoleServiceMapper));
 
             this.userRepository.save(userService.save(userDTO));
             return "login";
