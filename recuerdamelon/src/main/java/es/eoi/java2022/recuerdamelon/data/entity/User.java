@@ -25,6 +25,12 @@ public class User {
     private boolean active;
     private String avatar;
 
+    @Column(nullable = true)
+    private String birthday;
+
+    @Column(nullable = true)
+    private String nationality;
+
 
     private boolean business;
 
@@ -131,7 +137,23 @@ public class User {
         this.avatar = avatar;
     }
 
-//    public Set<Task> getOwnedTasks() {
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    //    public Set<Task> getOwnedTasks() {
 //        return ownedTasks;
 //    }
 //

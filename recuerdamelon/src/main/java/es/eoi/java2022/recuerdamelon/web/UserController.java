@@ -1,9 +1,12 @@
 package es.eoi.java2022.recuerdamelon.web;
 
+import es.eoi.java2022.recuerdamelon.data.entity.Mensajes;
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
 import es.eoi.java2022.recuerdamelon.dto.UserDTO;
+
 import es.eoi.java2022.recuerdamelon.service.UserService;
+import es.eoi.java2022.recuerdamelon.utils.DateUtil;
 import es.eoi.java2022.recuerdamelon.utils.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -27,6 +30,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 @Controller
 public class UserController {
@@ -104,18 +110,25 @@ public class UserController {
         @Autowired
         private UserRepository repo;
         @PostMapping("/user/save")
-        public RedirectView saveUser(@AuthenticationPrincipal User user, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        public RedirectView saveUser(@AuthenticationPrincipal User user,
+                                     @RequestParam("image") MultipartFile multipartFile,
+                                     @RequestParam("birthday") String birthday,
+                                     @RequestParam("nationality") String nationality,
+                                     @RequestParam("name") String name) throws IOException {
+            if (!multipartFile.isEmpty()) {
+                String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+                user.setAvatar(fileName);
+                String uploadDir = "user-photos/" + user.getId();
+                FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            }
 
-            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            user.setAvatar(fileName);
+            user.setBirthday(birthday);
+            user.setNationality(nationality);
+            user.setName(name);
 
             repo.save(user);
-
-             String uploadDir = "user-photos/" + user.getId();
-
-              FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-
             return new RedirectView("/perfil", true);
+
         }
 
 }
