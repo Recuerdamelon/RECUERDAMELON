@@ -10,20 +10,13 @@ import java.util.List;
 
 public class SetRoleToUser {
 
-    static UserRoleService userRoleService;
-    static UserRoleServiceMapper userRoleServiceMapper;
 
-    public SetRoleToUser(UserRoleService userRoleService, UserRoleServiceMapper userRoleServiceMapper) {
-        this.userRoleService = userRoleService;
-        this.userRoleServiceMapper = userRoleServiceMapper;
-    }
-
-    public static List<UserRoleDTO> setRole (Integer rolId){
+    public static List<UserRoleDTO> setRole (Integer rolId, UserRoleService service, UserRoleServiceMapper mapper){
     List<UserRole> roles = new ArrayList<>();
     List<UserRoleDTO> rolesDto = new ArrayList<>();
-            roles.add(userRoleService.findById(rolId));
+            roles.add(service.findById(rolId));
             for (UserRole role:roles) {
-        rolesDto.add(userRoleServiceMapper.toDto(role));
+        rolesDto.add(mapper.toDto(role));
     }
             return rolesDto;
     }
