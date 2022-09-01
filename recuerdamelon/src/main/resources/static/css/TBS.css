@@ -1,0 +1,52 @@
+.content {
+    max-width: 50%;
+    margin: auto;
+    background-color: aqua;
+    border-radius: 20px;
+    padding: 3em;
+    text-align: center;
+}
+
+.titulos,
+div[id^="tarea"] {
+    display: grid;
+    grid-template-columns: 20% 20% 1fr;
+    text-align: center;
+    column-gap: 2%;
+    margin-bottom: 2%;
+}
+
+.equipos,
+.titulo {
+    display: grid;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.titulo label {
+    text-align: left;
+}
+
+select#team {
+    text-align: center;
+    width: 10em;
+}
+
+label {
+    margin: 2% 0;
+}
+
+.tituloi {
+    width: 428px;
+}
+
+.btns-compartir {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+    .tituloi {
+        width: 100%;
+    }
+}

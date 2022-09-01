@@ -6,7 +6,7 @@
                function addInput(){
                    inputCount++; // Increment input count by one
                    if(inputCount>5){
-                       alert('De 5 en 5 melón, estamos en la version Beta...');
+                       alert('De 5 en 5 melón, estamos en la version Beta... Puedes añadir más Meloners en un nuevo formulario' );
                        return;
                    }
                    let p = document.getElementById('name' + inputCount);
