@@ -138,14 +138,13 @@ private final UserServiceMapper serviceMapper;
     model.addAttribute("task",taskDTO);
     model.addAttribute("horarios",horarioDTO);
     model.addAttribute("equipos", equipos);
-    return "NewtasckBusiness";
+    return "TBS";
 }
 @Transactional
 @PostMapping("/business/horario")
 public String saveHorario(TaskDTO taskDTO, HorarioDTO horarioDTO){
     final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
-    System.out.println("SIZE" + horarioDTO.getEquipos().size());
     List<Community> equipos = horarioDTO.getEquipos();
     List<UserDTO> members = new ArrayList<>();
     for (Community team:equipos) {
@@ -155,20 +154,15 @@ public String saveHorario(TaskDTO taskDTO, HorarioDTO horarioDTO){
     }
     taskDTO.setUsers(members);
 
-    List<String > start = new ArrayList<>();
-    for (String date: TaskHorario.starTime(horarioDTO)) {
-      start.add(date);
-        System.out.println("date = " + date);
-    }
-    List<String > end = new ArrayList<>();
-    for (String date: TaskHorario.endTime(horarioDTO)) {
-        end.add(date);
-        System.out.println("date = " + date);
-    }
+    List<String > start = horarioDTO.getStartLocalDateTime();
+
+    List<String > end = horarioDTO.getEndLocalDateTime();
+
 
     Map<String,String> map = new HashMap<>();
-    map = TaskHorario.map(TaskHorario.starTime(horarioDTO), TaskHorario.endTime(horarioDTO));
-    for (String descripcion:TaskHorario.horarios(horarioDTO)) {
+
+    map = TaskHorario.map(start,end);
+    for (String descripcion:horarioDTO.getTask()) {
         for (var entry : map.entrySet()){
                 taskDTO.setHorario(true);
                 taskDTO.setDescription(descripcion);
