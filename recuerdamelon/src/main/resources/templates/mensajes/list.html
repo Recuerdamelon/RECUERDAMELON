@@ -28,6 +28,7 @@
                                 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9993; Buzón</span>
                             </div>
                             <div class="messages">
+                                <h3>Mensajes recibidos</h3>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -35,6 +36,10 @@
                                             <th>Meloner</th>
                                             <th>Asunto</th>
                                             <th>Fecha</th>
+                                            <th><a th:href="@{/mensajes/toDeleteRecieved}"
+                                                   class="box-title btn btn-success"
+                                                   onclick="return confirm('¿Estás seguro de que quieres eliminar
+                                                    la bandeja de entrada completa?')">Vaciar</a></th>
                                         </tr>
                                         </thead>
 

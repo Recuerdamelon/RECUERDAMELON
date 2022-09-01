@@ -11,6 +11,7 @@ import es.eoi.java2022.recuerdamelon.service.EmailService;
 import es.eoi.java2022.recuerdamelon.service.UserRoleService;
 import es.eoi.java2022.recuerdamelon.service.UserService;
 import es.eoi.java2022.recuerdamelon.service.mapper.UserRoleServiceMapper;
+import es.eoi.java2022.recuerdamelon.utils.SetRoleToUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -151,6 +152,7 @@ public class LoginController {
         } else {
             userDTO.setPassword(encoder.encode(userDTO.getPassword()));
             userDTO.setActive(true);
+            userDTO.setRoles(SetRoleToUser.setRole(1));
             this.userRepository.save(userService.save(userDTO));
             return "login";
         }
@@ -181,13 +183,7 @@ public class LoginController {
             userDTO.setName("business");
             userDTO.setSurname("business");
 
-            List<UserRole> roles = new ArrayList<>();
-            List<UserRoleDTO> rolesDto = new ArrayList<>();
-            roles.add(userRoleService.findById(3));
-            for (UserRole role:roles) {
-                rolesDto.add(userRoleServiceMapper.toDto(role));
-            }
-            userDTO.setRoles(rolesDto);
+            userDTO.setRoles(SetRoleToUser.setRole(3));
 
             this.userRepository.save(userService.save(userDTO));
             return "login";

@@ -14,6 +14,7 @@ import es.eoi.java2022.recuerdamelon.service.UserService;
 import es.eoi.java2022.recuerdamelon.service.mapper.CommunityServiceMapper;
 import es.eoi.java2022.recuerdamelon.service.mapper.MensajesServiceMapper;
 import es.eoi.java2022.recuerdamelon.utils.DateUtil;
+import es.eoi.java2022.recuerdamelon.utils.SentMensaje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class MensajesController {
@@ -108,9 +110,10 @@ public class MensajesController {
             mailed.addAll(communityService.findFriends(communities.getId()));
             mailed.remove(userService.findById(user.getId()));
         }
-
+        //Eliminamos repetidos...
+        List<User> mailedInd = mailed.stream().distinct().collect(Collectors.toList());
         //dto.setUsers(mailed); //MANDAR LISTA CON COMMUNITIES??
-        model.addAttribute("users", mailed);
+        model.addAttribute("users", mailedInd);
         model.addAttribute("mensaje", dto);
         return "mensajes/edit";
     }
@@ -122,14 +125,23 @@ public class MensajesController {
         LocalDateTime localDateTime = timestamp.toLocalDateTime();
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-
-            dto.setUserId(user.getId() );
+        List<User> all = new ArrayList<>();
+        for (User reciever:dto.getUsers()) {
+            List<User> one = new ArrayList<>();
+            all.add(reciever);
+            one.add(reciever);
+            dto.setUsers(one);
+            dto.setUserId(user.getId());
             dto.setSender(user.getUsername());
             dto.setDate(DateUtil.dateToString(zonedDateTime));
+            dto.setReciever(reciever.getId());
             dto.setRecieved(true);
-
             this.repository.save(service.save(dto));
+        }
 
+
+            //To sender...
+        this.repository.save(service.save(SentMensaje.SentRecord(user, dto, all)));
 
         //Generar evento
         publicarMensaje.EnviarMensajeSaludo1(dto);
@@ -189,6 +201,42 @@ public class MensajesController {
         return "redirect:/mensajes/delete";
     }
 
+    @GetMapping("/mensajes/toDeleteRecieved")
+    public String ToDeleteAllRecieved (ModelMap model) {
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        List<Mensajes> toDelete = service.findByRecieved(user.getId(), true);
+        for (Mensajes m : toDelete) {
+            m.setRecieved(false);
+            m.setDeleted(true);
+            this.service.save(mapper.toDto(m));
+        }
+        return "redirect:/mensajes/list";
+    }
+
+    @GetMapping("/mensajes/toDeleteSaved")
+    public String ToDeleteAllSaved (ModelMap model) {
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        List<Mensajes> toDelete = service.findByRecieved(user.getId(), true);
+        for (Mensajes m : toDelete) {
+            m.setSaved(false);
+            m.setDeleted(true);
+            this.service.save(mapper.toDto(m));
+        }
+        return "redirect:/mensajes/saved";
+    }
+
+    @GetMapping("/mensajes/toDeleteSent")
+    public String ToDeleteAllSent (ModelMap model) {
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        List<Mensajes> toDelete = service.findByRecieved(user.getId(), true);
+        for (Mensajes m : toDelete) {
+            m.setSent(false);
+            m.setDeleted(true);
+            this.service.save(mapper.toDto(m));
+        }
+        return "redirect:/mensajes/sent";
+    }
+
     @GetMapping("/mensajes/{id}/{community}/acept")
     public String acept(@PathVariable("community") String name, @PathVariable("id") Integer id, ModelMap model) {
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
@@ -208,22 +256,22 @@ public class MensajesController {
         Mensajes mensajes = service.findById(id);
         service.delete(mensajes);
 
-
-        Mensajes mensajes1 = new Mensajes();
-        mensajes1.setMensaje("El usuario " + user.getUsername() + " se ha unido a la comunidad " + name);
-        mensajes1.setInvitation(true);
-        mensajes1.setCommunity(name);
-        mensajes1.setAcepted(true);
-        mensajes1.setDate(DateUtil.dateToString(zonedDateTime));
         Set<User> friends = new HashSet<>();
         for (User friend : communityService.findFriends(community.getId())) {
+            Set<User> one = new HashSet<>();
             friends.add(friend);
+            one.add(friend);
+            Mensajes mensajes1 = new Mensajes();
+            mensajes1.setMensaje("El usuario " + user.getUsername() + " se ha unido a la comunidad " + name);
+            mensajes1.setInvitation(true);
+            mensajes1.setCommunity(name);
+            mensajes1.setAcepted(true);
+            mensajes1.setDate(DateUtil.dateToString(zonedDateTime));
+            mensajes1.setReciever(friend.getId());
+            mensajes1.setUsers(one);
+            mensajes1.setSender(user.getUsername());
+            service.save(mapper.toDto(mensajes1));
         }
-        mensajes1.setUsers(friends);
-        mensajes1.setSender(user.getUsername());
-        service.save(mapper.toDto(mensajes1));
-
-
         return "redirect:/mensajes/invited";
     }
 
@@ -238,12 +286,13 @@ public class MensajesController {
         dto.setRecieved(true);
         List<User> friends = new ArrayList<>();
         for (User friend : communityService.findFriends(community.getId())) {
-
             if (friend.getId() == community.getAdmin())
                 friends.add(friend);
+                dto.setReciever(friend.getId());
+                dto.setUsers(friends);
+                service.save(dto);
         }
-        dto.setUsers(friends);
-        service.save(dto);
+
         service.delete(service.findById(id));
         return "redirect:/mensajes/invited";
     }

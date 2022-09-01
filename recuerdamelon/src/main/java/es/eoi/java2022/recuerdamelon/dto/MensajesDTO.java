@@ -31,6 +31,8 @@ public class MensajesDTO {
 
     private String community;
 
+    private Integer reciever;
+
     public Integer getId() {
         return id;
     }
@@ -144,4 +146,11 @@ public class MensajesDTO {
         this.acepted = acepted;
     }
 
+    public Integer getReciever() {
+        return reciever;
+    }
+
+    public void setReciever(Integer reciever) {
+        this.reciever = reciever;
+    }
 }

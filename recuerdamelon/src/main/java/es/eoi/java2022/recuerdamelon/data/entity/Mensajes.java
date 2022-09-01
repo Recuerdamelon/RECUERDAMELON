@@ -40,6 +40,8 @@ public class Mensajes implements Serializable {
 
     private boolean acepted;
 
+    private Integer reciever;
+
     public Integer getId() {
         return id;
     }
@@ -142,5 +144,13 @@ public class Mensajes implements Serializable {
 
     public void setAcepted(boolean acepted) {
         this.acepted = acepted;
+    }
+
+    public Integer getReciever() {
+        return reciever;
+    }
+
+    public void setReciever(Integer reciever) {
+        this.reciever = reciever;
     }
 }
