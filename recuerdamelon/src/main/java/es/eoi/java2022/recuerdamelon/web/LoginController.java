@@ -152,6 +152,7 @@ public class LoginController {
         } else {
             userDTO.setPassword(encoder.encode(userDTO.getPassword()));
             userDTO.setActive(true);
+            userDTO.setRoles(SetRoleToUser.setRole(1, userRoleService, userRoleServiceMapper));
             this.userRepository.save(userService.save(userDTO));
             return "login";
         }
