@@ -2,6 +2,7 @@ package es.eoi.java2022.recuerdamelon.service;
 
 
 import es.eoi.java2022.recuerdamelon.data.entity.Community;
+import es.eoi.java2022.recuerdamelon.data.entity.Mensajes;
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.data.repository.CommunityRepository;
 import es.eoi.java2022.recuerdamelon.data.repository.UserRepository;
@@ -47,6 +48,11 @@ public class CommunityService {
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
+
+    public void delete (Community community){
+        this.repository.delete(community);
+    }
+
     public Community update(Community community) {
         if (community.getId() == null){
             throw new RuntimeException("No se puede actualizar tareas que no tengan Identificador");

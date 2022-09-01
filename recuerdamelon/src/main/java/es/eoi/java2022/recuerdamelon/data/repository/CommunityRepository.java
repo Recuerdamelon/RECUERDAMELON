@@ -14,4 +14,5 @@ public interface CommunityRepository extends JpaRepository<Community, Integer> {
 
     Community findByName (String name);
     List<Community> findDistinctByUsersId(Integer id);
+
 }

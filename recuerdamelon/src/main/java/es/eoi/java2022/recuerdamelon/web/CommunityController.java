@@ -1,6 +1,7 @@
 package es.eoi.java2022.recuerdamelon.web;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Community;
+import es.eoi.java2022.recuerdamelon.data.entity.Mensajes;
 import es.eoi.java2022.recuerdamelon.data.entity.User;
 import es.eoi.java2022.recuerdamelon.data.repository.CommunityRepository;
 import es.eoi.java2022.recuerdamelon.dto.CommunityDTO;
@@ -8,6 +9,9 @@ import es.eoi.java2022.recuerdamelon.dto.CommunityUserCreationDTO;
 import es.eoi.java2022.recuerdamelon.service.CommunityService;
 import es.eoi.java2022.recuerdamelon.service.MensajesService;
 import es.eoi.java2022.recuerdamelon.service.UserService;
+import es.eoi.java2022.recuerdamelon.service.mapper.CommunityServiceMapper;
+import es.eoi.java2022.recuerdamelon.service.mapper.MensajesServiceMapper;
+import es.eoi.java2022.recuerdamelon.utils.DateUtil;
 import es.eoi.java2022.recuerdamelon.utils.Invitation;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 @Controller
@@ -31,13 +36,17 @@ public class CommunityController {
     private final UserService userService;
     private final CommunityRepository communityRepository;
 
+    private  final CommunityServiceMapper communityServiceMapper;
     private final MensajesService mensajesService;
+    private final MensajesServiceMapper mapper;
 
-    public CommunityController(CommunityService communityService, UserService userService, CommunityRepository communityRepository, MensajesService mensajesService) {
+    public CommunityController(CommunityService communityService, UserService userService, CommunityRepository communityRepository, CommunityServiceMapper communityServiceMapper, MensajesService mensajesService, MensajesServiceMapper mapper) {
         this.communityService = communityService;
         this.userService = userService;
         this.communityRepository = communityRepository;
+        this.communityServiceMapper = communityServiceMapper;
         this.mensajesService = mensajesService;
+        this.mapper = mapper;
     }
 
     //********************************************    CRUD     *******************************************//
@@ -58,8 +67,10 @@ public class CommunityController {
 
     @GetMapping("/community/{id}")
     public String edit(@PathVariable("id") Integer id, ModelMap model) {
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("users", communityService.findFriends(id));
         model.addAttribute("community", communityService.findById(id));
+        model.addAttribute("user", user);
         return "community/detail";
     }
 
@@ -151,6 +162,58 @@ public class CommunityController {
         }
 //        return "Ha ocurrido un error";
 
+        return "redirect:/community/list";
+    }
+
+    @GetMapping("/community/{name}/delete")
+    public String deleted(@PathVariable("name") String name, ModelMap model) {
+        Community community = communityService.findByName(name);
+        List<User> membersIn = communityService.findFriends(community.getId());
+        Mensajes deleted = new Mensajes();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        deleted.setDate(DateUtil.dateToString(DateUtil.timeStamp(timestamp)));
+        Set<User> members = new HashSet<>();
+        for (User member:membersIn) {
+            members.add(member);
+            Set<User> one = new HashSet<>();
+            one.add(member);
+            deleted.setReciever(member.getId());
+            deleted.setUsers(one);
+            deleted.setTitle("Grupo " + name + " eliminado");
+            deleted.setMensaje("El usuario administrador del grupo " + name + " ha eliminado el grupo");
+            deleted.setRecieved(true);
+            mensajesService.save(mapper.toDto(deleted));
+        }
+
+        this.communityService.delete(community);
+        return "redirect:/community/list";
+    }
+
+    @GetMapping("/community/{name}/{username}/delete")
+    public String deleteUser(@PathVariable("name") String name,@PathVariable("username") String username, ModelMap model) {
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        Community community = communityService.findByName(name);
+        User toDelete = userService.findByUsername(username);
+        Mensajes deleted = new Mensajes();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        deleted.setDate(DateUtil.dateToString(DateUtil.timeStamp(timestamp)));
+        Set<User> members = new HashSet<>();
+        members.add(toDelete);
+        members.add(user);
+        for (User member:members) {
+            Set<User> one = new HashSet<>();
+            one.add(member);
+            deleted.setReciever(member.getId());
+            deleted.setUsers(one);
+            deleted.setTitle("Grupo " + name + " eliminado");
+            deleted.setMensaje("El usuario administrador del grupo " + name + " te ha eliminado del grupo");
+            deleted.setRecieved(true);
+            mensajesService.save(mapper.toDto(deleted));
+        }
+        Set<User> newComm = new HashSet<>(community.getUsers());
+        newComm.remove(toDelete);
+        community.setUsers(newComm);
+        this.communityRepository.save(community);
         return "redirect:/community/list";
     }
 }

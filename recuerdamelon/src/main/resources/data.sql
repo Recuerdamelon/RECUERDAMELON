@@ -194,6 +194,7 @@ CREATE TABLE IF NOT EXISTS `recuerdamelon`.`mensajes` (
   `community` VARCHAR(255) NULL DEFAULT '0',
   `invitation` TINYINT(1) NULL DEFAULT '0',
   `acepted` TINYINT(1) NULL DEFAULT '0',
+  `reciever` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 50
