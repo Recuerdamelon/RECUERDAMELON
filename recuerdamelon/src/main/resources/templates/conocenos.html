@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sd="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+    layout:decorate="~{layoutHome}">
+<head>
+    <title>Conocenos</title>
+
+    <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.css"></script>
+    <link rel="stylesheet" th:href="@{/css/extrasSt.css}">
+</head>
+
+<body>
+    <main>
+
+        <!-- fragment navbar -->
+        <div layout:fragment="navbar"></div>
+
+        <!-- fragment contenido html -->
+        <div layout:fragment="content">
+
+            <div class="teamInfo">
+                <h2>Somos un equipo interdisciplinar que hemos llevado a cabo el desarrollo de
+                una WebApp basado en Java bajo el nombre de RECUERDAMELÓN. El proyecto fue motivado por
+                la consolidación de los conocimientos adquiridos en el bootscamp sobre JavaWeb impartido
+                por EOI junto con Generation.</h2>
+            </div>
+            <div class="container-contacts">
+                <div class="row">
+
+                    <div class="col-3">
+                        <div class="card p-0">
+                            <div class="card-image">
+                                <img th:src="@{/img/perfil-JC.jpeg}"   alt="">
+                            </div>
+                            <div class="card-content d-flex flex-column align-items-center">
+                                <h2 class="pt-2">Juan Carrasco</h2>
+                                <h4>Java Developer</h4>
+                                <h5>juancarrascoguerrero@gmail.com</h5>
+
+                                <ul class="social-icons d-flex justify-content-center">
+                                    <li style="--i:1">
+                                        <a href="https://github.com/JuanCarrascoGuerrero" target="_blank">
+                                            <span class="fab fa-github"></span>
+                                        </a>
+                                    </li>
+                                    <li style="--i:2">
+                                        <a href="https://www.linkedin.com/in/juan-carrasco-guerrero/" target="_blank">
+                                            <span class="fab fa-linkedin"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="card p-0">
+                            <div class="card-image">
+                                <img th:src="@{/img/perfil-JG.jpeg}"
+                                        alt="">
+                            </div>
+                            <div class="card-content d-flex flex-column align-items-center">
+                                <h2 class="pt-2">Juan García</h2>
+                                <h4>Java Developer</h4>
+                                <h5>juancantillana84@gmail.com</h5>
+
+                                <ul class="social-icons d-flex justify-content-center">
+                                    <li style="--i:1">
+                                        <a href="https://github.com/Carreroj" target="_blank">
+                                            <span class="fab fa-github"></span>
+                                        </a>
+                                    </li>
+                                    <li style="--i:2">
+                                        <a href="https://www.linkedin.com/in/juan-garcia-moreno/" target="_blank">
+                                            <span class="fab fa-linkedin"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="card p-0">
+                            <div class="card-image">
+                                <img th:src="@{/img/perfil-B.jpeg}"
+                                        alt="">
+                            </div>
+                            <div class="card-content d-flex flex-column align-items-center">
+                                <h2 class="pt-2">Bárbara Flores</h2>
+                                <h4>Java Developer</h4>
+                                <h5>barbii.f26@gmail.com</h5>
+
+                                <ul class="social-icons d-flex justify-content-center">
+                                    <li style="--i:1">
+                                        <a href="https://github.com/bflores96" target="_blank">
+                                            <span class="fab fa-github"></span>
+                                        </a>
+                                    </li>
+                                    <li style="--i:2">
+                                        <a href="https://www.linkedin.com/in/barbara-flores-aranda/" target="_blank">
+                                            <span class="fab fa-linkedin"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="card p-0">
+                            <div class="card-image">
+                                <img th:src="@{/img/perfil-PP.jpg}"  alt="">
+                            </div>
+                            <div class="card-content d-flex flex-column align-items-center">
+                                <h2 class="pt-2">Pepe Fernández</h2>
+                                <h4>Java Developer</h4>
+                                <h5>jfernandezschez@gmail.com</h5>
+
+                                <ul class="social-icons d-flex justify-content-center">
+                                    <li style="--i:1">
+                                        <a href="https://github.com/fersanez" target="_blank">
+                                            <span class="fab fa-github"></span>
+                                        </a>
+                                    </li>
+                                    <li style="--i:2">
+                                        <a href="https://www.linkedin.com/in/jose-fernandez-sanchez-programador/" target="_blank">
+                                            <span class="fab fa-linkedin"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </main>
+</body>
+
+</html>

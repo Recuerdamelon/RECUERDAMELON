@@ -15,7 +15,9 @@ public class HomeController {
         return "home";
     }
 
-
+    @GetMapping("/conocenos")
+    public String conocenos()  { return "conocenos"; }
+    
     @GetMapping("/perfil")
 //    @PreAuthorize("hasRole('ROLE_ADMIN') or #model[user].userId == authentication.principal.id") //PRE
     public String perfil(Model model, @AuthenticationPrincipal User user)
