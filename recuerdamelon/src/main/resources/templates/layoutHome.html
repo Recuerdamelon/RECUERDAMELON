@@ -45,70 +45,100 @@
     <section layout:fragment="navbar"></section>
     <div class="container-bg">
         <!-- MENU -->
+<!-- TODO: INI RESPONSIVE NAVBAR-->
+        <nav class="navbar navbar-expand-lg sticky-top" >
 
-            <div class="navbar">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a class="nav-link-current" th:href="@{/tasks}">MyTasks</a>
-                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{conocenos.html}">Conocenos</a>
-                    </li>
+            <div class="container-fluid" style="width:100%; margin-left:0px;">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <div sec:authorize="hasRole('PLAIN_USER')">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/community/list}">Amigos</a>
-                    </li>
-                    </div>
-                    <div sec:authorize="hasRole('BUSINESS')">
+                <div class="collapse navbar-collapse" id="navbarToggler">
+                    <!--<a class="navbar-brand" href="#">
+                      <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:10%;">
+                    </a>-->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/community/list}">Equipos</a>
+                            <a class="nav-link-current" th:href="@{/tasks}">MyTasks</a>
                         </li>
-                    </div>
 
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/business/horario}">Horarios</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/mensajes/list}">Mensajes</a>
-                    </li>
-
-                    <!--Perfil-->
-                    <div sec:authorize="hasRole('PLAIN_USER')">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Meloner</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
-                            <li><a class="dropdown-item" href="index.html">Configuración</a></li>
-                            <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
-                        </ul>
-                    </li>
-                    </div>
-                    <div sec:authorize="hasRole('BUSINESS')">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Empresa</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
-                                <li><a class="dropdown-item" href="index.html">Configuración</a></li>
-                                <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
-                            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/meloner/newtask}">NewTask</a>
                         </li>
-                    </div>
-                    <!--Sala chat-->
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/salachat}">Sala de chat</a>
-                    </li>
-                    </li>
 
+                        <div sec:authorize="hasRole('PLAIN_USER')">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/community/list}">Amigos</a>
+                            </li>
+                        </div>
+
+                        <div sec:authorize="hasRole('BUSINESS')">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/community/list}">Equipos</a>
+                            </li>
+                        </div>
+
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/business/horario}">Horarios</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/mensajes/list}">Mensajes</a>
+                        </li>
+
+                        <!--Sala chat-->
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/salachat}">Sala de chat</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"  th:href="@{/conocenos}">Conocenos</a>
+                        </li>
+                        <!--Perfil-->
+                        <div sec:authorize="hasRole('PLAIN_USER')">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Meloner</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
+                                    <li><a class="dropdown-item" href="index.html">Configuración</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+                                </ul>
+                            </li>
+                        </div>
+                        <div sec:authorize="hasRole('BUSINESS')">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Empresa</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
+                                    <li><a class="dropdown-item" href="index.html">Configuración</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+                                </ul>
+                            </li>
+                        </div>
+
+
+                        </li> <!--TODO: PAKE?-->
+
+                    </ul>
+
+                </div>
+            </div>
+
+            <a class="navbar-brand" href="#">
+                <!--        <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:20%;">-->
+                <img  th:src="@{/img/logoletranegra.png}" alt="Imagen">
+            </a>
+
+        </nav>
                 </ul>
             </div>
             <!-- LOGO -->
+      <!--
             <div class="logo">
                 <img th:src="@{/img/logoletranegra.png}" alt="Imagen">
             </div>
-
+      -->
     </div>
 
 
