@@ -3,13 +3,18 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:sd="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
         layout:decorate="~{layoutHome}">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <!-- ESTILOS PROPIOS -->
-    <link rel="stylesheet" th:href="@{/css/amigos.css}">
+    <div sec:authorize="hasRole('PLAIN_USER')">
     <title>Nueva comunidad</title>
+    </div>
+
+    <div sec:authorize="hasRole('BUSINESS')">
+        <title>Nuevo Equipo</title>
+    </div>
 </head>
 
 <body>
@@ -18,28 +23,53 @@
 
 <!-- fragment contenido html -->
 <div layout:fragment="content">
-    <div class="tabla1">
+    <div class="tabla1" >
         <section>
 
             <form action="/" th:action="@{/community/create}" th:object="${newCommunity}" method="post">
-
+                <div sec:authorize="hasRole('PLAIN_USER')">
                 <p class="p-error" th:if="${errorCreatingCommunity}" th:text="#{NewComm.ErrorName}"></p>
                 <p class="p-error" th:if="${errorNamingCommunity}" th:text="#{NewComm.ErrorNaming}"></p>
-
+                </div>
+                <div sec:authorize="hasRole('BUSINESS')">
+                    <p class="p-error" th:if="${errorCreatingCommunity1}" th:text="#{NewComm.ErrorName}"></p>
+                    <p class="p-error" th:if="${errorNamingCommunity1}" th:text="#{NewComm.ErrorNaming}"></p>
+                </div>
+                <div sec:authorize="hasRole('BUSINESS')">
                 <div class="texto-formulario">
-                    <h3 style="margin:auto; text-align:center;" th:text="#{NewComm.Title}"></h3> <!-- <h2>Crear una nueva comunidad Meloner</h2> -->
+                    <h3 style="margin:auto; text-align:center;" th:text="#{NewComm.Title1}"></h3> <!-- <h2>Crear una nueva equipo</h2> -->
+                </div>
+                </div>
+                <div sec:authorize="hasRole('PLAIN_USER')">
+                    <div class="texto-formulario">
+                        <h3 style="margin:auto; text-align:center;" th:text="#{NewComm.Title}"></h3> <!-- <h2>Crear una nueva comunidad Meloner</h2> -->
+                    </div>
                 </div>
 
-
+                <div sec:authorize="hasRole('PLAIN_USER')">
                 <div class="input" style="margin:5%;text-align:center;">
                     <label for="name" th:text="#{NewComm.Name}" ></label>   <!-- <label for="Meloner">Elije tu nombre de comunidad</label>>  -->
                     <input placeholder="" type="text" id="name" name="name"  required th:field="${newCommunity.name}" >
                 </div>
+                </div>
 
+                <div sec:authorize="hasRole('BUSINESS')">
+                    <div class="input" style="margin:5%;text-align:center;">
+                        <label for="name" th:text="#{NewComm.Name1}" ></label>   <!-- <label for="Meloner">Elije tu nombre de comunidad</label>>  -->
+                        <input placeholder="" type="text" id="name" name="name"  required th:field="${newCommunity.name}" >
+                    </div>
+                </div>
+                <div sec:authorize="hasRole('PLAIN_USER')">
                 <div class="input"style="margin:5%;text-align:center;">
                     <button type="submit" th:text="#{NameNew.Submit}"></button>  <!-- >Crear cuenta</button> -->
                 </div>
+                </div>
 
+                <div sec:authorize="hasRole('BUSINESS')">
+                    <div class="input"style="margin:5%;text-align:center;">
+                        <button type="submit" th:text="#{NameNew.Submit1}"></button>  <!-- >Crear cuenta</button> -->
+                    </div>
+                </div>
     </form>
 
 

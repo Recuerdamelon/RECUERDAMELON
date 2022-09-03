@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       layout:decorate="~{layoutHome}">
 
 <head>
@@ -11,7 +12,13 @@
 <div layout:fragment="navbar"></div>
 
 <div layout:fragment="content">
+    <div sec:authorize="hasRole('PLAIN_USER')">
     <link rel="stylesheet" th:href="@{/css/mensajes.css}"/>
+    </div>
+
+    <div sec:authorize="hasRole('BUSINESS')">
+        <link rel="stylesheet" th:href="@{/css/mensajesB.css}"/>
+    </div>
     <script type="text/javascript" th:src="@{/js/sidebarNav.js}"></script>
 
                 <div class="box-body">
@@ -38,10 +45,19 @@
                                             <th>Meloner</th>
                                             <th>Asunto</th>
                                             <th>Fecha</th>
+                                            <div sec:authorize="hasRole('PLAIN_USER')">
                                             <th><a th:href="@{/mensajes/DeleteAll}"
                                                    class="box-title btn btn-success"
                                                    onclick="return confirm('¿Estás seguro de que quieres vaciar
                                                     la bandeja de eliminados definitivamente?')">Vaciar</a></th>
+                                            </div>
+
+                                            <div sec:authorize="hasRole('BUSINESS')">
+                                                <th><a th:href="@{/mensajes/DeleteAll}"
+                                                       class="box-title btn btn-primary"
+                                                       onclick="return confirm('¿Estás seguro de que quieres vaciar
+                                                    la bandeja de eliminados definitivamente?')">Vaciar</a></th>
+                                            </div>
                                         </tr>
                                         </thead>
                                         <tbody>

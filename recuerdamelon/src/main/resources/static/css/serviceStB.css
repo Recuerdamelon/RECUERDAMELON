@@ -1,0 +1,492 @@
+:root {
+    --verde: #6BF178;
+    --verdeOscuro: #288E4C;
+    --azulGris: #88a9db;
+    --amarilloMel: #EBC247;
+    --blanco: #FFFFFF;
+    --negro: #000000;
+    --fuente: 'Quicksand', sans-serif;
+
+}
+
+/*------- NAV INFERIOR DESPLEGABLE: Contacto, info, ... ----------*/
+
+.navbar
+{
+    display: absolute;
+    height: 4em;
+    background: var(--azulGris);
+    align-items: center;
+    padding: 0;
+    gap: lem;
+    font-size: 150%;
+    list-style: none;
+
+}
+
+.navbar li
+{
+    padding: 0px 15px;
+}
+
+.navbar a{
+    display: inline;
+    color: var(--blanco);
+    text-decoration: none;
+}
+
+.navbar a:hover
+{
+    color: var(--amarilloMel);
+    transition: .2s;
+}
+
+
+.nav-link-current{
+    color: var(--blanco);
+    background-color: var(--azulGris);
+    padding: 5%;
+    padding-inline: 10%; 
+    border-width: thick;     
+    border-radius: 5%;
+    border: solid var(--blanco);
+}
+.nav-link-current:hover{
+    
+    border: solid var(--amarilloMel);
+}
+
+
+.dropdown-menu
+{
+    background: var(--azulGris);
+    border-color: var(--blanco);    
+    color: var(--blanco);
+}
+
+.dropdown-menu a
+{
+    color: var(--azulGris);
+}
+
+.dropdown-menu a:hover
+{
+    padding: auto;
+    color: var(--blanco);
+    background-color: var(--azulGris);
+    border-radius: 15px;
+
+}
+
+/* -- LOGO NAVBAR --- */
+.logo{
+    position: absolute;
+    left: 90%;
+    top: 0%;
+    width: 10%;
+}
+
+.logo img{
+    width: 95%;
+}
+
+.container-bg{
+
+    height: 30%;
+    width: 100%;
+    background-color: var(--verdeOscuro);
+
+    display: inline-block;
+}
+/* --- CONTAINER DE TASKS STATE -----*/
+.container-state
+{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    /*background-color: var(--blanco);*/
+    height: 5%;
+    width: 5% auto;
+    left: 0%;
+
+    font-size: 200%;
+    color:  var(--azulGris);
+}
+
+.container-state li
+{
+    list-style: none;
+    margin-top: 1%;
+}
+
+/* --- CONTAINER CONTROL USR (crear/eliminar/compartir) -----*/
+.container-controls
+{
+    position: absolute;
+    display: grid;
+    grid-template-columns: 50% 10% 20%;
+    justify-content: right;
+
+    left: 0%;
+    color: var(--blanco);
+    height: 5%;
+    width: 95%;
+    padding-top: 1%;
+}
+
+/*search field*/
+.search-container button {
+    position: absolute;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+  .search-container button:hover {
+    background: #ccc;
+  }
+  @media screen and (max-width: 600px) {
+    .search-container {
+      float: none;
+    }
+    .navbar .search-container button {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+    .navbar input[type=text] {
+      border: 1px solid #ccc;
+    }
+}
+
+/* ----------- CONTAINER TASKS ------------*/
+
+.container-tasks
+{
+    position: relative;
+    display: block;
+    padding-top: 50em;
+    padding-left: 50em;
+    margin: 0;
+    top: 5vh;
+    width: 100%;
+    height: 85%;
+
+    align-items: left;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.container-tasks h1
+{
+    display: block;
+    position: inherit;
+    color: var(--blanco);
+    padding: 5vh;
+    left: 0;
+    align-items: center;
+}
+
+
+.container-tasks h3
+{
+    display: block;
+    color: var(--blanco);
+    top: 5%;
+    left: 5%;
+    padding: 3vh;
+    align-items: center;
+}
+
+/*---------  TASK -------------*/
+
+.task-tittle{
+    position: relative;
+    display: inline-block;
+    width: 85%;
+}
+.task-tittle img{
+    width: 6%;
+    padding-inline: 1%;
+}
+
+
+.task-controls{
+    position: absolute;
+    display: inline-block;
+
+    text-align: center;
+    width: 13%;
+}
+
+/* --- BUTTON-EDIT ---*/
+.task-controls img{
+    width: 80%;
+}
+.btn-edit img{
+
+    padding-inline: 5%;
+}
+
+.btn-edit{
+    background: url("/asset/img/icons/edit-iconW.svg") no-repeat center center;
+    background-color: var(--amarilloMel);
+    color: var(--blanco);
+
+    text-align: center;
+    border-radius: 10%;
+    width: 30%;
+
+
+}
+
+.btn-edit:hover span {
+    display:none
+}
+
+.btn-edit:hover{
+    background: none;
+    background-color: var(--blanco);
+    border-color: var(--amarilloMel);
+    border-width: 20%;
+
+    font-weight: bold;
+    font-size: small;
+    color: var(--amarilloMel);
+
+
+}
+
+.btn-edit:hover:before{
+    content: "Edit";
+
+}
+
+
+/* --- BUTTON-SELECT ---*/
+.btn-select{
+    color: var(--blanco);
+    background-color: var(--amarilloMel);
+    border-radius: 10%;
+    width: 50%;
+
+}
+
+.btn-select:hover span {
+    display:none
+}
+
+.btn-select:hover{
+    background-color: var(--blanco);
+    border-color: var(--amarilloMel);
+
+    color: var(--amarilloMel);
+    font-weight: bold;
+    font-size: small;
+}
+
+.btn-select:hover:before{
+    content: "Selected";
+
+}
+
+
+
+/* tiny reset */
+html, .tasks.body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+}
+
+.tasks{
+    position: absolute;
+    display: inline-block;
+    width: 300px;
+    height: 405px;
+    top: 10%;
+    left: -70vw;
+    right: 0px;
+    padding: 20px;
+    margin: 10px auto;
+
+}
+
+/*
+.tasks body{
+    background: var(--azulGris);
+    font-family: sans-serif;
+
+    padding: 20px;
+  }
+*/
+
+.tasks input[type=checkbox] {
+    display: none;
+  }
+
+.tasks label{
+
+    background: #89b4ec;
+    height: 10% auto;
+    width: 100em;
+    display: block;
+    border-bottom: 3px solid #56749c;
+    border-radius: 15px;
+    color: #fff;
+    text-transform: capitalize;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-indent: 20px;
+    cursor: pointer;
+    transition: all 0.7s ease;
+    position: relative;
+    padding: 10px 50px;
+    margin: 20px auto;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+
+}
+
+
+
+.tasks h2
+{
+
+    font-size: 20px;
+}
+
+.tasks label h2 span{
+
+    display: block;
+    font-size: 12px;
+    text-transform: capitalize;
+    font-weight: normal;
+    color: var(--blanco);
+    font-size: 15px;
+    padding: 1%;
+
+}
+
+.tasks label:before{
+    content:"";
+    width: 20px;
+    height: 20px;
+    background:  var(--blanco);
+    border-bottom: 2px solid #56749c;
+    display: block;
+    position: absolute;
+    border-radius: 100%;
+    left: 20px;
+    top: 10%;
+    transition: border 0.7s ease
+}
+
+
+
+
+.taskInput:checked ~ .taskLabel {
+  background: #56749c;
+  border-bottom: 3px solid #435975;
+  text-decoration:line-through;
+
+}
+.taskInput:checked ~ .taskLabel h2 span {
+    color: var(--blanco);
+}
+
+.taskInput:checked ~ .taskLabel:before {
+  background: url("/asset/img/icons/ok-iconW.svg") no-repeat center center;
+}
+
+.container-usuario {
+    background: #b9af5b;
+    width: auto;
+    border-radius: 15px;
+    color: #fff;
+    text-transform: capitalize;
+    font-weight: 900;
+    transition: all 0.7s ease;
+    position: relative;
+    padding: 10px 50px;
+    margin: 80px auto;
+}
+
+.tabla-usuario {
+    position: relative;
+    margin: auto;
+}
+
+        .container-my-picture {
+            width: 150px;
+            height: 150px;
+        }
+        .user-photo-preview {
+            background-image: url( https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80 );
+            background-size: cover;
+            background-position: center;
+        }
+        .middle-my-picture {
+            background-color: rgba( 255,255,255, 0.69 );
+        }
+        .container-my-picture:hover .middle-my-picture {
+            display: flex!important;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+
+
+.tabla1{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    background:var(--azulGris);
+    border-radius: 10px 10px 10px 10px;
+    width: 60%;
+    color: white;
+}
+
+.tabla2{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    background: #e8b14a;
+    border-radius: 10px 10px 10px 10px;
+    width: 30%;
+    color: white;
+    text-align:center;
+}
+
+.tabla3{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    background: #e8b14a;
+    border-radius: 10px 10px 10px 10px;
+    width: 33%;
+    color: white;
+    text-align:center;
+}
+
+.tabla1.input{
+text-align: center;
+}
+
+.h3{
+ color: #88ad58;
+ text-align: center;
+}
+

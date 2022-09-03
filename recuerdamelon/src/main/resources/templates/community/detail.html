@@ -3,12 +3,12 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:sd="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
         layout:decorate="~{layoutHome}">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <!-- ESTILOS PROPIOS -->
-    <link rel="stylesheet" th:href="@{/css/amigos.css}">
+
     <title>Contactos</title>
 </head>
 
@@ -26,8 +26,15 @@
                 <tr th:each="user,iter : ${users}">
                     <td th:text="${user.username}"></td>
                     <td th:if="${community.admin != user.id}">
+                        <div sec:authorize="hasRole('PLAIN_USER')">
                         <a th:href="@{'/community/' + ${community.name} + '/' + ${user.username} +'/delete'}"
-                           onclick="return confirm('¿Estás seguro de que quieres eliminar del grupo a este Meloner?')">&#128465;</a>
+                           onclick="return confirm('¿Estás seguro de que quieres eliminar de la comunidad a este Meloner?')">&#128465;</a>
+                        </div>
+
+                        <div sec:authorize="hasRole('BUSINESS')">
+                            <a th:href="@{'/community/' + ${community.name} + '/' + ${user.username} +'/delete'}"
+                               onclick="return confirm('¿Estás seguro de que quieres eliminar del equipo a este usuario?')">&#128465;</a>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
@@ -47,13 +54,22 @@
             <a class="box-title btn btn-success" th:href="@{'/community/' + ${community.name} + '/users'}">Añadir
                 usuario</a>
         </div>
+        <div sec:authorize="hasRole('PLAIN_USER')">
         <div th:if="${community.admin == user.id}">
             <div class="input" style="text-align:center; margin:5%;">
                 <a class="box-title btn btn-danger" th:href="@{'/community/' + ${community.name} + '/delete'}"
-                   onclick="return confirm('¿Estás seguro de que quieres eliminar este grupo?')">Eliminar Comunidad</a>
+                   onclick="return confirm('¿Estás seguro de que quieres eliminar esta comunidad?')">Eliminar Comunidad</a>
             </div>
         </div>
-
+        </div>
+        <div sec:authorize="hasRole('BUSINESS')">
+            <div th:if="${community.admin == user.id}">
+                <div class="input" style="text-align:center; margin:5%;">
+                    <a class="box-title btn btn-danger" th:href="@{'/community/' + ${community.name} + '/delete'}"
+                       onclick="return confirm('¿Estás seguro de que quieres eliminar este Equipo?')">Eliminar equipo</a>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

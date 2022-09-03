@@ -176,4 +176,46 @@ public String saveHorario(TaskDTO taskDTO, HorarioDTO horarioDTO){
 
  return "redirect:/tasks";
 }
+
+    //Horarios en tasck usuario
+    @GetMapping("/user/horario")
+    public  String gettask(WebRequest request, Model model){
+        HorarioDTO horarioDTO = new HorarioDTO();
+        TaskDTO taskDTO = new TaskDTO();
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        model.addAttribute("task",taskDTO);
+        model.addAttribute("horarios",horarioDTO);
+        return "THU";
+    }
+    @Transactional
+    @PostMapping("/user/horario")
+    public String saveTask(TaskDTO taskDTO, HorarioDTO horarioDTO){
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+        List<UserDTO> members = new ArrayList<>();
+        members.add(serviceMapper.toDto(userService.findByUsername(user.getUsername())));
+        taskDTO.setUsers(members);
+
+        List<String > start = horarioDTO.getStartLocalDateTime();
+
+        List<String > end = horarioDTO.getEndLocalDateTime();
+
+
+        Map<String,String> map = new HashMap<>();
+
+        map = TaskHorario.map(start,end);
+        for (String descripcion:horarioDTO.getTask()) {
+            for (var entry : map.entrySet()){
+                taskDTO.setHorario(true);
+                taskDTO.setDescription(descripcion);
+                taskDTO.setStartDate( DateUtil.dateToString1(DateUtil.stringToDate1(entry.getKey())));
+                taskDTO.setEndDate(DateUtil.dateToString1(DateUtil.stringToDate1( entry.getValue())));
+                taskDTO.setDeleted(false);
+                taskDTO.setTaskType(taskTypeService.findByName("user"));
+                this.taskService.save(taskDTO);
+            }
+        }
+
+        return "redirect:/tasks";
+    }
 }

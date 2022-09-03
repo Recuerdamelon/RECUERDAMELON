@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       layout:decorate="~{layoutHome}">
 
 <head>
@@ -11,7 +12,13 @@
 <div layout:fragment="navbar"></div>
 
 <div layout:fragment="content">
+    <div sec:authorize="hasRole('PLAIN_USER')">
     <link rel="stylesheet" th:href="@{/css/mensajes.css}"/>
+    </div>
+
+    <div sec:authorize="hasRole('BUSINESS')">
+        <link rel="stylesheet" th:href="@{/css/mensajesB.css}"/>
+    </div>
     <script type="text/javascript" th:src="@{/js/sidebarNav.js}"></script>
 
                 <div class="box-body">
