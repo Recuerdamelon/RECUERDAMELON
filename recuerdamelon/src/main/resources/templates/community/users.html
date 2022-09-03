@@ -3,12 +3,11 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:sd="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
         layout:decorate="~{layoutHome}">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <!-- ESTILOS PROPIOS -->
-    <link rel="stylesheet" th:href="@{/css/amigos.css}">
     <title>Añadir Usuario</title>
 </head>
 
@@ -19,7 +18,7 @@
 <!-- fragment contenido html -->
 <div layout:fragment="content">
     <div class="tabla2">
-
+        <div sec:authorize="hasRole('PLAIN_USER')">
             <h3>Introduce los nombres de usuario de los Meloner que quieres invitar a la comunidad...</h3>
 
 
@@ -58,7 +57,48 @@
                 </div>
 
             </form>
+        </div>
 
+        <div sec:authorize="hasRole('BUSINESS')">
+            <h3>Introduce los nombres de usuario de los usuarios que quieres invitar al equipo...</h3>
+
+
+            <script type="text/javascript" th:src="@{/js/addUser.js}"></script>
+            <form action="/" th:action="@{'/community/' + ${community.name} + '/usersAdded'}" th:object="${addUsers}" method="post"
+                  onsubmit="alert('Se ha enviado la invitación');">
+
+                <p class="p-error" th:if="${erroraddusername}" th:text="#{Adduser.ErrorUsername}"></p>
+
+                <div class="input" style="text-align:center; margin: 3px;">
+                    <input placeholder="" type="text" id="name1" name="name"   th:field="${addUsers.user1}" >
+                </div>
+
+                <div class="input" style="text-align:center; margin: 3px;">
+                    <input placeholder="" type="text" id="name2" name="name" hidden  th:field="${addUsers.user2}" >
+                </div>
+
+                <div class="input" style="text-align:center; margin: 3px;">
+                    <input placeholder="" type="text" id="name3" name="name" hidden  th:field="${addUsers.user3}" >
+                </div>
+
+                <div class="input" style="text-align:center; margin: 3px;">
+
+                    <input placeholder="" type="text" id="name4" name="name" hidden  th:field="${addUsers.user4}" >
+                </div>
+
+                <div class="input" style="text-align:center; margin: 3px;">
+                    <input placeholder="" type="text" id="name5" name="name" hidden  th:field="${addUsers.user5}" >
+                </div>
+
+
+                <button type="button" onclick='addInput()'>+ Añadir otro Usuario</button>
+
+                <div class="input">
+                    <button type="submit" style="margin:10%" th:text="#{Add.Button.Submit}"></button>  <!-- >Añadir meloners</button> -->
+                </div>
+
+            </form>
+        </div>
     </div>
 </div>
 </body>

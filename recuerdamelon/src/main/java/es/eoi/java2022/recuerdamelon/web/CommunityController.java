@@ -91,9 +91,11 @@ public class CommunityController {
         }
         if (dto.getName() == "") {
             redirectAttributes.addFlashAttribute("errorCreatingCommunity", true);
+            redirectAttributes.addFlashAttribute("errorCreatingCommunity1", true);
             return "redirect:/community/create";
         } else if (names.contains(dto.getName())) {
             redirectAttributes.addFlashAttribute("errorNamingCommunity", true);
+            redirectAttributes.addFlashAttribute("errorNamingCommunity1", true);
             return "redirect:/community/create";
         } else {
             final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
