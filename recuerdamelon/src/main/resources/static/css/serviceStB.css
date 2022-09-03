@@ -62,7 +62,7 @@
 @media (max-width: 767px) {
   .navbar-collapse
     {
-        background-color: var(--verdeGris);
+        background-color: var(--azulGris);
 
     }
 }
