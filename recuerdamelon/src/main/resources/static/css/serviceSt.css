@@ -38,6 +38,12 @@
     position: absolute;
     top: 0;
     left: 0;
+/*body:before {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     background: #128ff2;
     content: "";
     z-index: 0;
@@ -98,19 +104,19 @@
 }
 
 
-.nav-link-current{
+/*.nav-link-current{
     color: var(--blanco);
     background-color: var(--verdeGris);
     padding: 5%;
-    padding-inline: 10%; 
-    border-width: thick;     
+    padding-inline: 10%;
+    border-width: thick;
     border-radius: 5%;
     border: solid var(--blanco);
 }
 .nav-link-current:hover{
     
     border: solid var(--amarilloMel);
-}
+}*/
 
 
 .dropdown-menu

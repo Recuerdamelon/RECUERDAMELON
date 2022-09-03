@@ -105,9 +105,11 @@
                             <a class="nav-link" th:href="@{/salachat}">Sala de chat</a>
                         </li>
 
+                        <div sec:authorize="hasRole('PLAIN_USER')">
                         <li class="nav-item">
                             <a class="nav-link"  th:href="@{/conocenos}">Conocenos</a>
                         </li>
+                        </div>
                         <!--Perfil-->
                         <div sec:authorize="hasRole('PLAIN_USER')">
                             <li class="nav-item dropdown">
