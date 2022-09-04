@@ -15,7 +15,7 @@ public class TaskDTO {
 
     private TaskTypeDTO taskType;
 
-    private List<UserDTO> users;
+    private Set<UserDTO> users;
 
 
 
@@ -91,11 +91,11 @@ public class TaskDTO {
         this.taskType = taskType;
     }
 
-    public List<UserDTO> getUsers() {
+    public Set<UserDTO> getUsers() {
         return users;
     }
 
-    public void setUsers(List<UserDTO> users) {
+    public void setUsers(Set<UserDTO> users) {
         this.users = users;
     }
 }
