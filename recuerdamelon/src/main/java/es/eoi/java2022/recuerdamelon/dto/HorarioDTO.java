@@ -14,6 +14,7 @@ public class HorarioDTO {
 
     private List<String> task;
 
+    private List<User> friends;
 
     private List<String> startLocalDateTime;
 
@@ -46,6 +47,14 @@ public class HorarioDTO {
 
     public void setTask(List<String> task) {
         this.task = task;
+    }
+    
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
     }
 
     public List<String> getStartLocalDateTime() {
