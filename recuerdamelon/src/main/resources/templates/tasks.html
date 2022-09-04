@@ -85,9 +85,11 @@
                                             </div>
                                             <div class="task-controls">
                                                 <!--    <img src="./asset/img/icons/edit-iconW.svg" alt="Imagen"> -->
-                                                <button type="button" class="btn-edit" th:id="'botonedit-'+${iter.index}">
+<!--                                                 <button type="button" class="btn-edit" th:id="'botonedit-'+${iter.index}">
                                                     <span>.</span>
-                                                </button>
+                                                </button> -->
+                                                <a href="#" class="btn btn-default" th:href="@{'/task/' + ${task.id} + '/edit'}"
+                                                title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
                                                 <button type="button" class="btn-select" th:id="'botonselect-'+${iter.index}">
                                                     <span>Select</span>
                                                 </button>
