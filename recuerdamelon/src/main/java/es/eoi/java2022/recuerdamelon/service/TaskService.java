@@ -44,17 +44,17 @@ public class TaskService {
         repository.deleteById(id);
     }
 
+    /*
     public Task update(Task task) {
         if (task.getId() == null) {
             throw new RuntimeException("No se puede actualizar tareas que no tengan Identificador");
         }
         return repository.save(task);
     }
+    */
 
     public TaskDTO save(TaskDTO taskDTO) {
-        if (taskDTO.getId() != null) {
-            throw new RuntimeException("El Identificador no puede ser nulo");
-        }
+        
         return mapper.toDto(repository.save(mapper.toEntity(taskDTO)));
     }
 
