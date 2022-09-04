@@ -40,8 +40,10 @@ public class TaskRestController {
         return taskService.save(taskDTO);
     }
 
+    /*
     @PutMapping("/task")
     public Task update (Task task){
         return taskService.update(task);
     }
+    */
 }
