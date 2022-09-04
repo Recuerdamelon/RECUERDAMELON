@@ -66,52 +66,16 @@ private final UserServiceMapper serviceMapper;
         return "tasks";
     }
 
-    //# UPDATE % CREATE...
-    @GetMapping("/task/{id}/edit")//get de update -create&update-//
+    /*--- VER DETALLES DE LA TASK ¿?¿?*/
+    @GetMapping("/task/{id}")
     @PostAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id")
-    public String update (@PathVariable("id") Integer id, ModelMap model) {
-        model.addAttribute("task", this.taskService.findById(id));
-        return "task/edit";
+    public String detail(@PathVariable("id") Integer id, ModelMap model) {
+        model.addAttribute("task", this.taskService.findById(id) );
+        return "task/detail";
     }
 
 
-
-      //#CREATE USER TASK
-      @GetMapping("/task/create")
-      public String getTask(WebRequest request, Model model) {
-          TaskDTO taskDTO = new TaskDTO();
-          model.addAttribute("task", taskDTO);
-          return "task";
-      }
-
-   /* @Transactional
-    @PostMapping("/task/create")*/
-//    public String saveTask(TaskDTO taskDTO, Model model, Errors errors, RedirectAttributes redirectAttributes) {
-//        List<Task> allTask = taskService.findAll(Pageable.unpaged());
-//        if (allTask.contains(taskService.findByTitle(taskDTO.getTitle()))) {
-//            redirectAttributes.addFlashAttribute("errortitle", true);
-//            return "redirect:/task"; /*return "redirect:/task/create";*/
-//        }
-//        else {
-
-//            this.taskRepository.save(taskService.save(taskDTO));
-//            return "task"; /*return "redirect:/task/create";*/
-//        }
-//    }
-
-
-
-    //             ---------------------------POST Methods-----------------------------         //
-
-    @Transactional //post transaccional del get de update//
-    @PostMapping(value = {"/task/{id}/edit"})
-    @PostAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id")
-    public String save(TaskDTO dto) {
-        return String.format("redirect:/tasks/%s",
-                this.taskService.save(dto).getId());
-    }
-
-    //# DELETE
+    /* ====== DELETE ======= */
     @PostMapping("/task/delete")
     // @PreAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id") //es una `LISTA` de tareas, como asegurar que toda la lista es nuestra?
     public Object deleteById(@RequestParam Integer[] taskid, SessionStatus status, ModelMap model) {
@@ -125,57 +89,58 @@ private final UserServiceMapper serviceMapper;
         status.setComplete();//Restablecemos atributos de session tras eliminar y...
         return "redirect:/tasks";//...redirigimos a "/tasks"
     }
+    
         //Horarios en tasck Business
-@GetMapping("/business/horario")
-    public  String getHorario(WebRequest request, Model model){
-    HorarioDTO horarioDTO = new HorarioDTO();
-    TaskDTO taskDTO = new TaskDTO();
-    CommunityDTO communityDTO = new CommunityDTO();
-    final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    @GetMapping("/business/horario")
+        public  String getHorario(WebRequest request, Model model){
+        HorarioDTO horarioDTO = new HorarioDTO();
+        TaskDTO taskDTO = new TaskDTO();
+        CommunityDTO communityDTO = new CommunityDTO();
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
-    List<Community> equipos = userService.findCommunitiesByUserId(user.getId());
-//    horarioDTO.setEquipo(equipos);
-    model.addAttribute("task",taskDTO);
-    model.addAttribute("horarios",horarioDTO);
-    model.addAttribute("equipos", equipos);
-    return "TBS";
-}
-@Transactional
-@PostMapping("/business/horario")
-public String saveHorario(TaskDTO taskDTO, HorarioDTO horarioDTO){
-    final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-
-    List<Community> equipos = horarioDTO.getEquipos();
-    List<UserDTO> members = new ArrayList<>();
-    for (Community team:equipos) {
-        for (User member:communityService.findFriends(team.getId())){
-            members.add(serviceMapper.toDto(member));
-        }
+        List<Community> equipos = userService.findCommunitiesByUserId(user.getId());
+    //    horarioDTO.setEquipo(equipos);
+        model.addAttribute("task",taskDTO);
+        model.addAttribute("horarios",horarioDTO);
+        model.addAttribute("equipos", equipos);
+        return "TBS";
     }
-    taskDTO.setUsers(members);
+    @Transactional
+    @PostMapping("/business/horario")
+    public String saveHorario(TaskDTO taskDTO, HorarioDTO horarioDTO){
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
-    List<String > start = horarioDTO.getStartLocalDateTime();
-
-    List<String > end = horarioDTO.getEndLocalDateTime();
-
-
-    Map<String,String> map = new HashMap<>();
-
-    map = TaskHorario.map(start,end);
-    for (String descripcion:horarioDTO.getTask()) {
-        for (var entry : map.entrySet()){
-                taskDTO.setHorario(true);
-                taskDTO.setDescription(descripcion);
-                taskDTO.setStartDate( DateUtil.dateToString1(DateUtil.stringToDate1(entry.getKey())));
-                taskDTO.setEndDate(DateUtil.dateToString1(DateUtil.stringToDate1( entry.getValue())));
-                taskDTO.setDeleted(false);
-                taskDTO.setTaskType(taskTypeService.findByName("business"));
-                this.taskService.save(taskDTO);
+        List<Community> equipos = horarioDTO.getEquipos();
+        List<UserDTO> members = new ArrayList<>();
+        for (Community team:equipos) {
+            for (User member:communityService.findFriends(team.getId())){
+                members.add(serviceMapper.toDto(member));
             }
         }
+        taskDTO.setUsers(members);
 
- return "redirect:/tasks";
-}
+        List<String > start = horarioDTO.getStartLocalDateTime();
+
+        List<String > end = horarioDTO.getEndLocalDateTime();
+
+
+        Map<String,String> map = new HashMap<>();
+
+        map = TaskHorario.map(start,end);
+        for (String descripcion:horarioDTO.getTask()) {
+            for (var entry : map.entrySet()){
+                    taskDTO.setHorario(true);
+                    taskDTO.setDescription(descripcion);
+                    taskDTO.setStartDate( DateUtil.dateToString1(DateUtil.stringToDate1(entry.getKey())));
+                    taskDTO.setEndDate(DateUtil.dateToString1(DateUtil.stringToDate1( entry.getValue())));
+                    taskDTO.setDeleted(false);
+                    taskDTO.setTaskType(taskTypeService.findByName("business"));
+                    this.taskService.save(taskDTO);
+                }
+            }
+
+     return "redirect:/tasks";
+    }
 
     //Horarios en tasck usuario
     @GetMapping("/user/horario")
@@ -218,4 +183,127 @@ public String saveHorario(TaskDTO taskDTO, HorarioDTO horarioDTO){
 
         return "redirect:/tasks";
     }
+    
+    /* =========== TASK EDIT ============ */
+
+    @GetMapping("/task/{id}/edit")//get de update -create&update-//
+    /*@PostAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id")*/
+    public String update (@PathVariable("id") Integer id, ModelMap model) {
+
+        HorarioDTO horarioDTO = new HorarioDTO();
+        TaskDTO taskDTO = new TaskDTO();
+        CommunityDTO communityDTO = new CommunityDTO();
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+        /* SELECT: Incluye comunities a las que pertenezco */
+        List<Community> equipos = userService.findCommunitiesByUserId(user.getId());
+
+
+        /* SELECT: Incluye usr de mis friends */
+        List<User> friends = new ArrayList<>();
+        for (Community team:equipos) {
+            for (User member:communityService.findFriends(team.getId())){
+                if (!friends.contains(member) ) {
+                    friends.add(member);
+                }
+            }
+        }
+        /*hacer foreach en caso de edit tarea BUSINESS*/
+        /*
+            if(this.taskService.findById(id).getHorario())
+            }
+
+            }
+        */
+
+        model.addAttribute("task", this.taskService.findById(id));
+        model.addAttribute("horarios",horarioDTO);
+        model.addAttribute("equipos", equipos);
+        model.addAttribute("friends", friends);
+
+        if(!this.taskService.findById(id).getHorario())
+            return "TUS";
+        else{
+            return "TBS";
+        }
+    }
+
+    /*======= CREATE USER TASK =======*/
+
+    @GetMapping("/task/create")
+    public  String getUserTask(WebRequest request, Model model){
+        HorarioDTO horarioDTO = new HorarioDTO();
+        TaskDTO taskDTO = new TaskDTO();
+        CommunityDTO communityDTO = new CommunityDTO();
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+        /* SELECT: Incluye comunities a las que pertenezco */
+        List<Community> equipos = userService.findCommunitiesByUserId(user.getId());
+        /*equipos.remove(userService.findCommunitiesByUserId(user.getId()));*/ /*TODO: necesario si seleciona varias comunity*/
+
+
+        /* SELECT: Incluye usr de mis friends */
+        List<User> friends = new ArrayList<>();
+        for (Community team:equipos) {
+            for (User member:communityService.findFriends(team.getId())){
+                if (!friends.contains(member) ) {
+                    friends.add(member);
+                }
+            }
+        }
+
+        model.addAttribute("task",taskDTO);
+        model.addAttribute("horarios",horarioDTO);
+        model.addAttribute("equipos", equipos);
+        model.addAttribute("friends", friends);
+        return "TUS";
+    }
+
+    @Transactional
+    /*@PostMapping("/task/create")*/
+    @PostMapping(value = {"/task/{id}/edit", "/task/create"})
+    public String saveUserTask(TaskDTO taskDTO, HorarioDTO horarioDTO){
+    /*public String saveUserTask(TaskDTO taskDTO){*/
+        final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+        /* INICIALIZAMOS si es nueva la tarea */
+        taskDTO.setHorario(false);
+        taskDTO.setDeleted(false);
+        taskDTO.setTaskType(taskTypeService.findByName("user"));
+
+
+        /* ------------ COMPARTIR USER TASK ------------- */
+        Set<UserDTO> members = new HashSet<>();
+        List<Integer>idShare = new ArrayList<>();
+
+            /* ADD: usr de comunities a las que pertenezco */
+            List<Community> equipos = horarioDTO.getEquipos();
+            for (Community team : equipos) {
+                for (User member : communityService.findFriends(team.getId())) {
+                    if (!idShare.contains(member.getId())) {
+                        members.add(serviceMapper.toDto(member));
+                        idShare.add(member.getId());
+                    }
+                }
+            }
+
+            /* ADD: usr de mis friends */
+            List<User> friends = horarioDTO.getFriends();
+            for (User member:friends){
+                if (!idShare.contains(member.getId())){
+                    members.add(serviceMapper.toDto(member));
+                }
+            }
+
+            /* OWN: para tareas que no se comparten */
+            if(equipos.isEmpty()){
+            members.add(serviceMapper.toDto(user));
+            }
+
+            taskDTO.setUsers(members);
+
+        this.taskService.save(taskDTO);
+        return "redirect:/tasks";
+    }
+    
 }
