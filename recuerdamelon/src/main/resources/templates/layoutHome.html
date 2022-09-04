@@ -61,16 +61,28 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarToggler">
+                    <div sec:authorize="hasRole('PLAIN_USER')">
+                        <a class="navbar-brand" href="#">
+                            <!--        <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:20%;">-->
+                            <img  th:src="@{/img/logoletranegra.png}" alt="Imagen">
+                        </a>
+                    </div>
+                    <div sec:authorize="hasRole('BUSINESS')">
+                        <a class="navbar-brand" href="#">
+                            <!--        <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:20%;">-->
+                            <img  th:src="@{/img/nuevologoempresa.png}" alt="Imagen">
+                        </a>
+                    </div>
                     <!--<a class="navbar-brand" href="#">
                       <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:10%;">
                     </a>-->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link-current" th:href="@{/tasks}">MyTasks</a>
+                            <a class="nav-link-current" th:href="@{/tasks}">Tareas</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/meloner/newtask}">NewTask</a>
+                            <a class="nav-link" th:href="@{/meloner/newtask}">Nueva Tarea</a>
                         </li>
 
                         <div sec:authorize="hasRole('PLAIN_USER')">
@@ -107,8 +119,10 @@
 
                         <div sec:authorize="hasRole('PLAIN_USER')">
                         <li class="nav-item">
-                            <a class="nav-link"  th:href="@{/conocenos}">Conocenos</a>
+                            <a class="nav-link"  th:href="@{/conocenos}">Conócenos</a>
                         </li>
+
+
                         </div>
                         <!--Perfil-->
                         <div sec:authorize="hasRole('PLAIN_USER')">
@@ -121,6 +135,7 @@
                                 </ul>
                             </li>
                         </div>
+
                         <div sec:authorize="hasRole('BUSINESS')">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Empresa</a>
@@ -132,6 +147,10 @@
                             </li>
                         </div>
 
+                        <div class="container-my-picture card rounded-circle overflow-hidden photo-container " onclick="document.querySelector('#fileUpload').click()">
+                            <img class="my-picture photo-user" th:src="${userData.getAvatarUrl() == null ? '/img/usermelon.png' : userData.getAvatarUrl() }" alt="Avatar" />
+                        </div>
+
 
                         </li> <!--TODO: PAKE?-->
 
@@ -140,18 +159,7 @@
                 </div>
             </div>
 
-            <div sec:authorize="hasRole('PLAIN_USER')">
-            <a class="navbar-brand" href="#">
-                <!--        <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:20%;">-->
-                <img  th:src="@{/img/logoletranegra.png}" alt="Imagen">
-            </a>
-            </div>
-            <div sec:authorize="hasRole('BUSINESS')">
-                <a class="navbar-brand" href="#">
-                    <!--        <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:20%;">-->
-                    <img  th:src="@{/img/logo_empresa.png}" alt="Imagen">
-                </a>
-            </div>
+
 
         </nav>
         </ul>

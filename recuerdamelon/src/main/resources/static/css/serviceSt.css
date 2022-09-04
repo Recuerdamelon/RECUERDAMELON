@@ -552,3 +552,15 @@ text-align: center;
  text-align: center;
 }
 
+        .photo-user {
+            width: 100%;
+            height: auto;
+
+
+        }
+        .photo-container{
+                    width: 80px;
+                    height: 80px;
+                    margin-right: 100px;
+
+        }
