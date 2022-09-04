@@ -1,0 +1,62 @@
+:root {
+    --verde: #6BF178;
+    --verdeOscuro: #288E4C;
+    --verdeGris: #88ad58;
+    --amarilloMel: #EBC247;
+    --blanco: #FFFFFF;
+    --negro: #000000;
+    --fuente: 'Quicksand', sans-serif;
+}
+.content {
+    max-width: 50%;
+    margin: auto;
+    background-color: var(--verdeGris);
+    border-radius: 20px;
+    padding: 3em;
+    text-align: center;
+    color: var(--blanco);
+}
+
+.titulos,
+div[id^="tarea"] {
+    display: grid;
+    grid-template-columns: 20% 20% 1fr;
+    text-align: center;
+    column-gap: 2%;
+    margin-bottom: 2%;
+}
+
+.equipos,
+.titulo {
+    display: grid;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.titulo label {
+    text-align: left;
+}
+
+select#team {
+    text-align: center;
+    width: 10em;
+}
+
+label {
+    margin: 2% 0;
+}
+
+.tituloi {
+    width: 428px;
+}
+
+.btns-compartir {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+    .tituloi {
+        width: 100%;
+    }
+}
