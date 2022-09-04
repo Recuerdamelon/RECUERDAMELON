@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sd="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+        layout:decorate="~{layoutHome}">
+
+<head>
+    <title>Horario</title>
+    <link rel="stylesheet" th:href="@{/css/mensajes.css}">
+    <link rel="stylesheet" th:href="@{/css/TUS.css}">
+    <script type="text/javascript" th:src="@{/js/TUS.js}"></script>
+
+</head>
+
+<body>
+<main>
+    <!-- fragment navbar -->
+    <div layout:fragment="navbar"></div>
+
+    <!-- fragment contenido html -->
+    <div layout:fragment="content">
+        <div class="messages">
+            <div class="box-body">
+
+                <form style="margin:3%" class="form-newTask" action="/" th:action="@{/task/create}"
+                      th:object="${horarios}" method="post">
+                    <div class="content">
+                        <h2>Crear tarea nueva</h2>
+
+                        <input th:type="hidden" th:field="${task.id}"/>
+                        <!--<input th:type="hidden" th:field="${task.userId}"/>-->
+
+                        <div class="titulo">
+                            <label for="Titulo">Titulo (0/60)</label>
+                            <input type="text" class="form-control"
+                                   id="Titulo" placeholder=""
+                                   th:field="${task.title}" th:value="${task.title}"
+                                   maxlength="60" style="width:60%;text-align:center;display:flex;margin:auto;"
+                                   required onclick="contchar()">
+
+                            <!-- Descripcion -->
+                            <label for="descripcion">Descripción</label>
+                            <textarea style="max-width:100%;" placeholder="" type="text"  name="descripcion" id="descripcion" cols="100" rows="10"
+                                      th:field="${{task.description}}" th:value="${task.description}" ></textarea>
+                        </div>
+
+                        <div class="iniciofintarea">
+                            <!--<div class="titulos">
+                                <h3>Inicio</h3>
+                                <h3>Fin</h3>&lt;!&ndash;
+                                <h3>Tarea</h3>&ndash;&gt;
+                            </div>-->
+                            <div id="resultados">
+                                <div id="tarea">
+                                    <label for="taskinicio">Inicio</label>
+                                    <input class="iresultados" type="datetime-local" name="taskinicio" id="taskinicio"
+                                           th:field="${{task.startDate}}" th:value="${task.startDate}" required>
+                                    <label for="taskfin">Fin</label>
+                                    <input class="iresultados" type="datetime-local" name="taskfin" id="taskfin"
+                                           th:field="${{task.endDate}}" th:value="${task.endDate}" required>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- OCULTAR SI NO SE QUIERE COMPARTIR LA TAREA-->
+                        <div class="equipos">
+                            <label for="team">Equipo:</label>
+                            <select style="height:auto; text-align:center" name="team" id="team"
+                                    multiple="multiple"
+                                    th:field="*{equipos}">
+                                <option th:each="community : ${equipos}"
+                                        th:value="${{community}}"
+                                        th:text="'&#127816;' + '  ' + ${community.name}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="friends">
+                            <label for="zozio">Friends:</label>
+                            <select style="height:auto; text-align:center" name="zozio" id="zozio"
+                                    multiple="multiple"
+                                    th:field="*{friends}">
+                                <option th:each="user : ${friends}"
+                                        th:value="${{user}}"
+                                        th:text="'&#127816;' + '  ' + ${user.username}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="btns-compartir">
+                            <!--<button id="tareaadd" type="button">Añadir Tareas</button>-->
+                            <button id="compartir" type="submit">Crear</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
