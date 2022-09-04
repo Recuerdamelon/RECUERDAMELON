@@ -1,6 +1,7 @@
 package es.eoi.java2022.recuerdamelon.dto;
 
 import java.util.List;
+import java.util.Set;
 
 public class TaskDTO {
     private Integer id;
