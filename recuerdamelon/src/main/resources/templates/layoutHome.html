@@ -87,18 +87,6 @@
 
                         <div sec:authorize="hasRole('PLAIN_USER')">
                             <li class="nav-item">
-                                <a class="nav-link" th:href="@{/community/list}">Amigos</a>
-                            </li>
-                        </div>
-
-                        <div sec:authorize="hasRole('BUSINESS')">
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/community/list}">Equipos</a>
-                            </li>
-                        </div>
-
-                        <div sec:authorize="hasRole('PLAIN_USER')">
-                            <li class="nav-item">
                                 <a class="nav-link" th:href="@{/user/horario}">Horarios</a>
                             </li>
                         </div>
@@ -112,6 +100,18 @@
                             <a class="nav-link" th:href="@{/mensajes/list}">Mensajes</a>
                         </li>
 
+                        <div sec:authorize="hasRole('PLAIN_USER')">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/community/list}">Amigos</a>
+                            </li>
+                        </div>
+
+                        <div sec:authorize="hasRole('BUSINESS')">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/community/list}">Equipos</a>
+                            </li>
+                        </div>
+                          
                         <!--Sala chat-->
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/salachat}">Sala de chat</a>
