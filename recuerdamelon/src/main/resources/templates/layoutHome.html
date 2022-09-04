@@ -140,10 +140,18 @@
                 </div>
             </div>
 
+            <div sec:authorize="hasRole('PLAIN_USER')">
             <a class="navbar-brand" href="#">
                 <!--        <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:20%;">-->
                 <img  th:src="@{/img/logoletranegra.png}" alt="Imagen">
             </a>
+            </div>
+            <div sec:authorize="hasRole('BUSINESS')">
+                <a class="navbar-brand" href="#">
+                    <!--        <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:20%;">-->
+                    <img  th:src="@{/img/logo_empresa.png}" alt="Imagen">
+                </a>
+            </div>
 
         </nav>
         </ul>

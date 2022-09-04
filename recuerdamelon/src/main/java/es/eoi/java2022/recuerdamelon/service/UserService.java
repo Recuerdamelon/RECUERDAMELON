@@ -67,10 +67,10 @@ public class UserService {
         return repository.save(user);
     }
     public User save(UserDTO userDTO) {
-        if (userDTO.getId() != null){
-            throw new RuntimeException("Conflicto de tipo id");
+        if (userDTO.getId() == null){
+            return repository.save(mapper.toEntity(userDTO));
         }
-        return repository.save(mapper.toEntity(userDTO));
+        throw new RuntimeException("Conflicto de tipo id");
     }
 
 }
