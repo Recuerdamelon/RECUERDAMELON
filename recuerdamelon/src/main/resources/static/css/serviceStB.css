@@ -23,6 +23,66 @@
     list-style: none;
 
 }
+   /*------- NAV BURGER ----------*/
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*body:before {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+/*body:before {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #128ff2;
+    content: "";
+    z-index: 0;
+}*/
+
+.clearfix:after {  /* To Clear Floats automatically */
+    display: block;
+    content: "";
+    clear: both;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* AUX Collapse Navbar*/
+@media (max-width: 767px) {
+  .navbar-collapse
+    {
+        background-color: var(--azulGris);
+
+    }
+}
+
+.navbar-collapse:
+{
+    background: var(--verdeGris);
+    border-width: thick;
+    border-radius: 5%;
+    border: solid var(--verdeGris);
+    /*margin-top: 5%;*/
+}
+
+.navbar-brand img{
+
+    width: 20%;
+}
+/* AUX END*/
+    /*------- NAV BURGER ---------- END */
+
 
 .navbar li
 {
@@ -42,7 +102,7 @@
 }
 
 
-.nav-link-current{
+/*.nav-link-current{
     color: var(--blanco);
     background-color: var(--azulGris);
     padding: 5%;
@@ -54,7 +114,7 @@
 .nav-link-current:hover{
     
     border: solid var(--amarilloMel);
-}
+}*/
 
 
 .dropdown-menu
