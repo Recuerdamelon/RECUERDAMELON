@@ -111,7 +111,7 @@ private final UserServiceMapper serviceMapper;
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
         List<Community> equipos = horarioDTO.getEquipos();
-        List<UserDTO> members = new ArrayList<>();
+        Set<UserDTO> members = new HashSet<>();
         for (Community team:equipos) {
             for (User member:communityService.findFriends(team.getId())){
                 members.add(serviceMapper.toDto(member));
@@ -157,7 +157,7 @@ private final UserServiceMapper serviceMapper;
     public String saveTask(TaskDTO taskDTO, HorarioDTO horarioDTO){
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
-        List<UserDTO> members = new ArrayList<>();
+        Set<UserDTO> members = new HashSet<>();
         members.add(serviceMapper.toDto(userService.findByUsername(user.getUsername())));
         taskDTO.setUsers(members);
 
