@@ -30,8 +30,8 @@ public class TaskService {
         this.service = service;
     }
 
-    public List<Task> findAll(Pageable pageable) {
-        return repository.findAll(pageable).toList();
+    public List<Task> findAll() {
+        return repository.findAll();
 
     }
 
@@ -53,9 +53,9 @@ public class TaskService {
     }
     */
 
-    public TaskDTO save(TaskDTO taskDTO) {
-        
-        return mapper.toDto(repository.save(mapper.toEntity(taskDTO)));
+    public Task save(TaskDTO taskDTO) {
+
+        return repository.save(mapper.toEntity(taskDTO));
     }
 
 }
