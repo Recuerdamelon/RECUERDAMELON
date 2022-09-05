@@ -36,7 +36,7 @@
                             <input type="text" class="form-control"
                                    id="Titulo" placeholder=""
                                    th:field="${task.title}" th:value="${task.title}"
-                                   maxlength="60" style="width:60%;text-align:center;display:flex;margin:auto;"
+                                   maxlength="60" style="width:100%;text-align:center;display:flex;margin:auto;"
                                    required onclick="contchar()">
 
                             <!-- Descripcion -->
@@ -46,45 +46,50 @@
                         </div>
 
                         <div class="iniciofintarea">
-                            <!--<div class="titulos">
-                                <h3>Inicio</h3>
-                                <h3>Fin</h3>&lt;!&ndash;
-                                <h3>Tarea</h3>&ndash;&gt;
-                            </div>-->
                             <div id="resultados">
                                 <div id="tarea">
-                                    <label for="taskinicio">Inicio</label>
-                                    <input class="iresultados" type="datetime-local" name="taskinicio" id="taskinicio"
-                                           th:field="${{task.startDate}}" th:value="${task.startDate}" required>
-                                    <label for="taskfin">Fin</label>
-                                    <input class="iresultados" type="datetime-local" name="taskfin" id="taskfin"
-                                           th:field="${{task.endDate}}" th:value="${task.endDate}" required>
-
+                                    <div class="row" >
+                                        <div class="col" ><label for="taskinicio">Inicio de la tarea</label></div>
+                                        <div class="col" ><input class="iresultados" type="datetime-local" name="taskinicio" id="taskinicio"
+                                           th:field="${{task.startDate}}" th:value="${task.startDate}" required></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" ><label for="taskfin">Fin de la tarea</label></div>
+                                        <div class="col" ><input class="iresultados" type="datetime-local" name="taskfin" id="taskfin"
+                                           th:field="${{task.endDate}}" th:value="${task.endDate}" required></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!-- OCULTAR SI NO SE QUIERE COMPARTIR LA TAREA-->
-                        <div class="equipos">
-                            <label for="team">Equipo:</label>
-                            <select style="height:auto; text-align:center" name="team" id="team"
-                                    multiple="multiple"
-                                    th:field="*{equipos}">
-                                <option th:each="community : ${equipos}"
-                                        th:value="${{community}}"
-                                        th:text="'&#127816;' + '  ' + ${community.name}">
-                                </option>
-                            </select>
-                        </div>
-                        <div class="friends">
-                            <label for="zozio">Friends:</label>
-                            <select style="height:auto; text-align:center" name="zozio" id="zozio"
-                                    multiple="multiple"
-                                    th:field="*{friends}">
-                                <option th:each="user : ${friends}"
-                                        th:value="${{user}}"
-                                        th:text="'&#127816;' + '  ' + ${user.username}">
-                                </option>
-                            </select>
+                        <div class="row">
+                            <h3>Compartir tarea</h3>
+                            <div class="col">
+                                <div class="equipos">
+                                    <label for="team">Equipo:</label>
+                                    <select style="height:auto; text-align:center" name="team" id="team"
+                                            multiple="multiple"
+                                            th:field="*{equipos}">
+                                        <option th:each="community : ${equipos}"
+                                                th:value="${{community}}"
+                                                th:text="'&#127816;' + '  ' + ${community.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col" >
+                                <div class="equipos">
+                                    <label for="zozio">Friends:</label>
+                                    <select style="height:auto; text-align:center" name="zozio" id="zozio"
+                                            multiple="multiple"
+                                            th:field="*{friends}">
+                                        <option th:each="user : ${friends}"
+                                                th:value="${{user}}"
+                                                th:text="'&#127816;' + '  ' + ${user.username}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="btns-compartir">
                             <!--<button id="tareaadd" type="button">Añadir Tareas</button>-->
