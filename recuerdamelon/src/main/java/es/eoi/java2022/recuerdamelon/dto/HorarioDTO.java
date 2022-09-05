@@ -1,6 +1,7 @@
 package es.eoi.java2022.recuerdamelon.dto;
 
 import es.eoi.java2022.recuerdamelon.data.entity.Community;
+import es.eoi.java2022.recuerdamelon.data.entity.User;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
