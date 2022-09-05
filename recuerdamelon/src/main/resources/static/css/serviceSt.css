@@ -275,11 +275,30 @@
     display: inline-block;
     width: 85%;
 }
+.col span{
+
+      width: 50%;
+}
+.task-tittle span{
+
+      width: 50%;
+}
+.col img,
 .task-tittle img{
-    width: 6%;
+    width: 20%;
     padding-inline: 1%;
 }
-
+.col button{
+    width: 25%;
+    padding-inline: 1%;
+}
+.col button:hover{
+    width: 30%;
+}
+.col h1{
+    width: auto;
+    font-size: large;
+}
 
 .task-controls{
     position: absolute;
