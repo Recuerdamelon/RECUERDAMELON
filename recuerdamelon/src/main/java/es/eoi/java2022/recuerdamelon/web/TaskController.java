@@ -123,34 +123,32 @@ public class TaskController {
         }
         taskDTO.setUsers(members);
 
-        System.out.println("members = " + horarioDTO.getTask().size());
-        List<String > start = horarioDTO.getStartLocalDateTime();
 
-        List<String > end = horarioDTO.getEndLocalDateTime();
-
+        List<String > start = TaskHorario.starTime(horarioDTO);
+        List<String > end = TaskHorario.endTime(horarioDTO);
+        List<String> tasks= TaskHorario.horarios(horarioDTO);
 
         Map<String,String> map = new HashMap<>();
 
         map = TaskHorario.map(start,end);
-        for (String descripcion:horarioDTO.getTask()) {
+        int i = 0;
             for (var entry : map.entrySet()){
                 taskDTO.setHorario(true);
-                taskDTO.setDescription(descripcion);
+                taskDTO.setDescription(tasks.get(i));
                 taskDTO.setStartDate( DateUtil.dateToString1(DateUtil.stringToDate1(entry.getKey())));
                 taskDTO.setEndDate(DateUtil.dateToString1(DateUtil.stringToDate1( entry.getValue())));
                 taskDTO.setDeleted(false);
                 taskDTO.setTaskType(taskTypeService.findByName("business"));
                 this.taskService.save(taskDTO);
+                i++;
             }
-        }
-
         return "redirect:/tasks";
     }
 
     //Horarios para usuario
     @GetMapping("/user/horario")
     public  String getHorarioUser(WebRequest request, Model model){
-        HorarioUserDTO horarioUserDTO = new HorarioUserDTO();
+        HorarioDTO horarioUserDTO = new HorarioDTO();
         TaskDTO taskDTO = new TaskDTO();
         CommunityDTO communityDTO = new CommunityDTO();
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
@@ -164,7 +162,7 @@ public class TaskController {
     }
     @Transactional
     @PostMapping("/user/horario")
-    public String saveHorarioUser(TaskDTO taskDTO, HorarioUserDTO horarioUserDTO){
+    public String saveHorarioUser(TaskDTO taskDTO, HorarioDTO horarioUserDTO){
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         Set<UserDTO> creator = new HashSet<>();
         creator.add(serviceMapper.toDto(user));

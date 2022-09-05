@@ -1,10 +1,7 @@
 package es.eoi.java2022.recuerdamelon.utils;
 
 import es.eoi.java2022.recuerdamelon.dto.HorarioDTO;
-import es.eoi.java2022.recuerdamelon.dto.HorarioUserDTO;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
 
 public  class TaskHorario {
@@ -17,7 +14,7 @@ public  class TaskHorario {
         return map;
 
     }
-    public static List<String> horarios (HorarioUserDTO horarioDTO){
+    public static List<String> horarios (HorarioDTO horarioDTO){
         List<String> tareas = new ArrayList<>();
         tareas.add(horarioDTO.getTask1());
         if (!Objects.equals(horarioDTO.getTask2(), "")) {
@@ -43,7 +40,7 @@ public  class TaskHorario {
         }
         return tareas;
     }
-    public static List<String> starTime (HorarioUserDTO horarioDTO){
+    public static List<String> starTime (HorarioDTO horarioDTO){
         List<String> starTime = new ArrayList<>();
         starTime.add(horarioDTO.getStartLocalDateTime1());
         if (!Objects.equals(horarioDTO.getStartLocalDateTime2(), "")) {
@@ -69,7 +66,7 @@ public  class TaskHorario {
         }
         return starTime;
     }
-    public static List<String> endTime (HorarioUserDTO horarioDTO){
+    public static List<String> endTime (HorarioDTO horarioDTO){
         List<String> endTime = new ArrayList<>();
         endTime.add(horarioDTO.getEndLocalDateTime1());
         if (!Objects.equals(horarioDTO.getEndLocalDateTime2(), "")) {
