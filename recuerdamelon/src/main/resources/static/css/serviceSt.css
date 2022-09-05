@@ -78,14 +78,14 @@
     /*margin-top: 5%;*/
 }
 
-.navbar-brand img{
+.navbar-brand{
+width: 70px;
 
-    width: 20%;
 }
-/* AUX END*/
-    /*------- NAV BURGER ---------- END */
+.navbar-brand img{
+width: 100%;
 
-
+}
 .navbar li
 {
     padding: 0px 15px;

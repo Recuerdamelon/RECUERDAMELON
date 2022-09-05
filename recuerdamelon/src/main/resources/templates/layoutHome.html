@@ -56,27 +56,24 @@
 
 
             <div class="container-fluid" style="width:100%; margin-left:0px;">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
                 <div class="collapse navbar-collapse" id="navbarToggler">
-                    <div sec:authorize="hasRole('PLAIN_USER')">
-                        <a class="navbar-brand" href="#">
-                            <!--        <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:20%;">-->
-                            <img  th:src="@{/img/logoletranegra.png}" alt="Imagen">
-                        </a>
-                    </div>
-                    <div sec:authorize="hasRole('BUSINESS')">
-                        <a class="navbar-brand" href="#">
-                            <!--        <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:20%;">-->
-                            <img  th:src="@{/img/nuevologoempresa.png}" alt="Imagen">
-                        </a>
-                    </div>
+
+
                     <!--<a class="navbar-brand" href="#">
                       <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:10%;">
                     </a>-->
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+                            <a sec:authorize="hasRole('PLAIN_USER')" class="navbar-brand" href="#">
+                                <!--        <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:20%;">-->
+                                <img  th:src="@{/img/logoletranegra.png}" alt="Imagen">
+                            </a>
+
+                            <a sec:authorize="hasRole('BUSINESS')" class="navbar-brand" href="#">
+                                <!--        <img  th:src="@{/img/logoletranegra.png}" alt="Imagen" class="d-inline-block align-text-top" style="width:20%;">-->
+                                <img  th:src="@{/img/nuevologoempresa.png}" alt="Imagen">
+                            </a>
+
                         <li class="nav-item">
                             <a class="nav-link-current" th:href="@{/tasks}">Tareas</a>
                         </li>
@@ -122,15 +119,20 @@
                             <a class="nav-link"  th:href="@{/conocenos}">Conócenos</a>
                         </li>
 
-
                         </div>
-                        <!--Perfil-->
+
+                        </li> <!--TODO: PAKE?-->
+
+                    </ul>
+
+
+                    <!--Perfil-->
+                    <div class="nav navbar-nav navbar-right align-items-center">
                         <div sec:authorize="hasRole('PLAIN_USER')">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Meloner</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
-                                    <li><a class="dropdown-item" href="index.html">Configuración</a></li>
                                     <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
                                 </ul>
                             </li>
@@ -141,7 +143,6 @@
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Empresa</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
-                                    <li><a class="dropdown-item" href="index.html">Configuración</a></li>
                                     <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
                                 </ul>
                             </li>
@@ -150,11 +151,7 @@
                         <div class="container-my-picture card rounded-circle overflow-hidden photo-container " onclick="document.querySelector('#fileUpload').click()">
                             <img class="my-picture photo-user" th:src="${userData.getAvatarUrl() == null ? '/img/usermelon.png' : userData.getAvatarUrl() }" alt="Avatar" />
                         </div>
-
-
-                        </li> <!--TODO: PAKE?-->
-
-                    </ul>
+                    </div>
 
                 </div>
             </div>
