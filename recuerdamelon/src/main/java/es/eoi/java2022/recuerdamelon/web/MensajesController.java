@@ -119,14 +119,25 @@ public class MensajesController {
     }
 
     @Transactional     //IF THE LIST IS EMPTY?
-    @PostMapping({"/mensajes/edit", "/mensajes/create"})
+    @PostMapping({"/mensajes/edit", "/mensajes/create", "/mensajes/toDraw"})
     public String save(MensajesDTO dto) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         LocalDateTime localDateTime = timestamp.toLocalDateTime();
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         List<User> all = new ArrayList<>();
-        for (User reciever:dto.getUsers()) {
+//        if(user.getUsername()==name){
+//                List<User> one = new ArrayList<>();
+//                one.add(userService.findByUsername(name));
+//                dto.setUsers(one);
+//                dto.setUserId(user.getId());
+//                dto.setSender(user.getUsername());
+//                dto.setDate(DateUtil.dateToString(zonedDateTime));
+//                dto.setSaved(true);
+//                this.repository.save(service.save(dto));
+//
+//        }else {
+        for (User reciever : dto.getUsers()) {
             List<User> one = new ArrayList<>();
             all.add(reciever);
             one.add(reciever);
@@ -138,9 +149,9 @@ public class MensajesController {
             dto.setRecieved(true);
             this.repository.save(service.save(dto));
         }
+//        }
 
-
-            //To sender...
+        //To sender...
         this.repository.save(service.save(SentMensaje.SentRecord(user, dto, all)));
 
         //Generar evento
@@ -155,11 +166,11 @@ public class MensajesController {
         LocalDateTime localDateTime = timestamp.toLocalDateTime();
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
         final User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-            dto.setMensaje(dto.getMensaje());
-            dto.setTitle(dto.getTitle());
-            dto.setSender(user.getUsername());
-            dto.setDate(DateUtil.dateToString(zonedDateTime));
-            dto.setSaved(true);
+        dto.setMensaje(dto.getMensaje());
+        dto.setTitle(dto.getTitle());
+        dto.setSender(user.getUsername());
+        dto.setDate(DateUtil.dateToString(zonedDateTime));
+        dto.setSaved(true);
         this.repository.save(service.save(dto));
         //Generar evento
         publicarMensaje.EnviarMensajeSaludo1(dto);
@@ -288,12 +299,13 @@ public class MensajesController {
         for (User friend : communityService.findFriends(community.getId())) {
             if (friend.getId() == community.getAdmin())
                 friends.add(friend);
-                dto.setReciever(friend.getId());
-                dto.setUsers(friends);
-                service.save(dto);
+            dto.setReciever(friend.getId());
+            dto.setUsers(friends);
+            service.save(dto);
         }
 
         service.delete(service.findById(id));
         return "redirect:/mensajes/invited";
     }
+
 }

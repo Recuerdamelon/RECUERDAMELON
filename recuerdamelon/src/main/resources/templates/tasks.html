@@ -68,60 +68,69 @@
         <!--------  Ejemplo interfaz web de manejo de tareas  ------->
         <div class="container-tasks">
 
+            <!-- JS PROPIOS -->
+            <script src="/js/serviceJs.js"></script>
+
+
             <!-- TASK REG -->
             <div class="tasks">
-                    <form method="post" id="tasksForm">
-                            <div th:each="task,iter : ${tasks}">
+                <form method="post" id="tasksForm">
+                    <div th:each="task,iter : ${tasks}">
 
-                                    <input class="taskInput" th:id="'label-'+${iter.index + 1}" type='checkbox' name="taskid" th:value="${task.id}"/>
-                                    <label class="taskLabel" th:for="'label-'+${iter.index + 1}">
+                        <input class="taskInput" th:id="'label-'+${iter.index + 1}" name="taskid" th:value="${task.id}" hidden/>
+                        <label class="taskLabel" th:for="'label-'+${iter.index + 1}">
 
-                                        <div class="typetask"> </div>
+                            <div class="typetask"> </div>
 
-                                        <h2>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <img th:src="@{/img/icons/working.png}" alt="Imagen">
-                                                </div>
+                            <h2>
+                                <div class="row">
+                                    <div class="col">
+                                        <img th:if="${task.deleted} == false" th:src="@{/img/icons/working.png}" alt="Imagen">
+                                        <img th:if="${task.deleted} == true" th:src="@{/img/icons/expired.png}" alt="Imagen">
+                                    </div>
 
-                                                <div class="col">
-                                                    <span th:text="${task.startDate}"/>
-                                                </div>
-                                                <div class="col">
-                                                    <span th:text="${task.endDate}"/>
-                                                </div>
-                                                <div class="col">
-                                                    <!--    <img src="./asset/img/icons/edit-iconW.svg" alt="Imagen"> -->
-    <!--                                                 <button type="button" class="btn-edit" th:id="'botonedit-'+${iter.index}">
-                                                        <span>.</span>
-                                                    </button> -->
-                                                    <a th:src="@{/img/icons/edit-iconW.svg}" class="btn btn-primary" th:href="@{'/task/' + ${task.id} + '/edit'}"
-                                                    title="Edit"><span class="glyphicon glyphicon-edit">Edit</span></a>
-                                                    <button type="button" class="btn-select" th:id="'botonselect-'+${iter.index}">
-                                                        <span>Select</span>
-                                                    </button>
+                                    <div class="col">
+                                        <span th:if="${task.deleted} == false" th:text="${task.startDate}"/>
+                                        <span th:if="${task.deleted} == true" style="color:red" th:text="${task.startDate}"/>
+                                    </div>
+                                    <div class="col">
+                                        <span th:if="${task.deleted} == false" th:text="${task.endDate}"/>
+                                        <span th:if="${task.deleted} == true" style="color:red" th:text="${task.endDate}"/>
+                                    </div>
+                                    <div class="col">
+                                        <!--    <img src="./asset/img/icons/edit-iconW.svg" alt="Imagen"> -->
+                                        <!--                                                 <button type="button" class="btn-edit" th:id="'botonedit-'+${iter.index}">
+                                                                                            <span>.</span>
+                                                                                        </button> -->
+                                        <a th:src="@{/img/icons/edit-iconW.svg}" class="btn btn-primary" th:href="@{'/task/' + ${task.id} + '/edit'}"
+                                           title="Edit"><span class="glyphicon glyphicon-edit">Edit</span></a>
+                                        <button type="button" class="btn-select" th:id="'botonselect-'+${iter.index}">
+                                            <span>Select</span>
+                                        </button>
 
-                                                    <!--  SELECT BUTTON -->
-                                                    <!--
-                                                        <input class="btn-check" type="radio" value="" id="select-1">
-                                                        <label class="btn btn-primary" for="select-1">select</label>
-                                                    -->
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <h1  th:text="${task.title}"></h1>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <span th:text="${task.description}"/>
-                                            </div>
-                                        </h2>
-                                    </label>
+                                        <!--  SELECT BUTTON -->
+                                        <!--
+                                            <input class="btn-check" type="radio" value="" id="select-1">
+                                            <label class="btn btn-primary" for="select-1">select</label>
+                                        -->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h1 th:if="${task.deleted} == false" th:text="${task.title}"></h1>
+                                        <h1 th:if="${task.deleted} == true" style="color:red" th:text="${task.title}"></h1>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <span th:if="${task.deleted} == false" th:text="${task.description}"/>
+                                    <span th:if="${task.deleted} == true" style="color:red" th:text="${task.description}"/>
+                                </div>
+                            </h2>
+                        </label>
 
 
-                            </div>
-                    </form>
+                    </div>
+                </form>
 
             </div>
 
