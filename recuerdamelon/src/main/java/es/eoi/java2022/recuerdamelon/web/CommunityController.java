@@ -82,7 +82,7 @@ public class CommunityController {
     }
 
     @Transactional
-    @PostMapping(value = {"/community/{id}/edit", "/community/create"})
+    @PostMapping("/community/create")
     public String save(CommunityDTO dto, Errors errors, RedirectAttributes redirectAttributes) {
         List<Community> communities = communityService.findAll(Pageable.unpaged());
         List<String> names = new ArrayList<>();
@@ -173,7 +173,7 @@ public class CommunityController {
         List<User> membersIn = communityService.findFriends(community.getId());
         Mensajes deleted = new Mensajes();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        deleted.setDate(DateUtil.dateToString(DateUtil.timeStamp(timestamp)));
+        deleted.setDate(DateUtil.dateToString(DateUtil.timeStamp()));
         Set<User> members = new HashSet<>();
         for (User member:membersIn) {
             members.add(member);
@@ -198,7 +198,7 @@ public class CommunityController {
         User toDelete = userService.findByUsername(username);
         Mensajes deleted = new Mensajes();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        deleted.setDate(DateUtil.dateToString(DateUtil.timeStamp(timestamp)));
+        deleted.setDate(DateUtil.dateToString(DateUtil.timeStamp()));
         Set<User> members = new HashSet<>();
         members.add(toDelete);
         members.add(user);

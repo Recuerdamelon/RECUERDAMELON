@@ -20,9 +20,8 @@ public class TaskRestController {
     }
 
     @GetMapping("/task")
-    public List<Task> findAll (@RequestParam("page") Optional<Integer> page,
-                               @RequestParam("size") Optional<Integer> size){
-        return taskService.findAll(PageRequest.of(page.orElse(1), size.orElse(10))); //Optional?¿?
+    public List<Task> findAll (){
+        return taskService.findAll(); //Optional?¿?
     }
 
     @GetMapping("task/{id}")
@@ -36,7 +35,7 @@ public class TaskRestController {
     }
 
     @PostMapping("/task")
-    public TaskDTO save (TaskDTO taskDTO){
+    public Task save (TaskDTO taskDTO){
         return taskService.save(taskDTO);
     }
 
