@@ -79,28 +79,43 @@
                                         <div class="typetask"> </div>
 
                                         <h2>
-                                            <div class="task-tittle">
-                                                <img th:src="@{/img/icons/working.png}" alt="Imagen">
-                                                <span th:text="${task.title}"/>
-                                            </div>
-                                            <div class="task-controls">
-                                                <!--    <img src="./asset/img/icons/edit-iconW.svg" alt="Imagen"> -->
-<!--                                                 <button type="button" class="btn-edit" th:id="'botonedit-'+${iter.index}">
-                                                    <span>.</span>
-                                                </button> -->
-                                                <a href="#" class="btn btn-default" th:href="@{'/task/' + ${task.id} + '/edit'}"
-                                                title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                                <button type="button" class="btn-select" th:id="'botonselect-'+${iter.index}">
-                                                    <span>Select</span>
-                                                </button>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <img th:src="@{/img/icons/working.png}" alt="Imagen">
+                                                </div>
 
-                                                <!--  SELECT BUTTON -->
-                                                <!--
-                                                    <input class="btn-check" type="radio" value="" id="select-1">
-                                                    <label class="btn btn-primary" for="select-1">select</label>
-                                                -->
+                                                <div class="col">
+                                                    <span th:text="${task.startDate}"/>
+                                                </div>
+                                                <div class="col">
+                                                    <span th:text="${task.endDate}"/>
+                                                </div>
+                                                <div class="col">
+                                                    <!--    <img src="./asset/img/icons/edit-iconW.svg" alt="Imagen"> -->
+    <!--                                                 <button type="button" class="btn-edit" th:id="'botonedit-'+${iter.index}">
+                                                        <span>.</span>
+                                                    </button> -->
+                                                    <a th:src="@{/img/icons/edit-iconW.svg}" class="btn btn-primary" th:href="@{'/task/' + ${task.id} + '/edit'}"
+                                                    title="Edit"><span class="glyphicon glyphicon-edit">Edit</span></a>
+                                                    <button type="button" class="btn-select" th:id="'botonselect-'+${iter.index}">
+                                                        <span>Select</span>
+                                                    </button>
+
+                                                    <!--  SELECT BUTTON -->
+                                                    <!--
+                                                        <input class="btn-check" type="radio" value="" id="select-1">
+                                                        <label class="btn btn-primary" for="select-1">select</label>
+                                                    -->
+                                                </div>
                                             </div>
-                                            <span th:text="${task.description}"/>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1  th:text="${task.title}"></h1>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <span th:text="${task.description}"/>
+                                            </div>
                                         </h2>
                                     </label>
 
