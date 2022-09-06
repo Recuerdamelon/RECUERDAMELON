@@ -53,11 +53,10 @@
 
             <!-- BUTTON TASK -->
             <div class="follow">
-                <div class="icon deletetarea"><img th:src="@{/img/icons/trash-iconW.svg}" alt="Eliminar tarea"></div>
-                <div class="icon"><img th:src="@{/img/icons/mark-iconsW.svg}" alt="Seleccionar todo"></div>
-                <div class="icon last"><img th:src="@{/img/icons/share_iconW.svg}" alt="Compartir Tarea"></div>
+                <div class="icon deletetarea"><img th:src="@{/img/icons/trash-iconW.svg}" onclick="return confirm('¿Estás seguro de que quieres borrar
+                todas las tareas melón?')" alt="Eliminar tarea"></div>
                 <div class="label">
-                    TAREAS
+                    Eliminar todas
                     <!-- <img src="./asset/img/menu-lateral/help_icon.svg" alt="Usuario"> -->
                 </div>
             </div>
