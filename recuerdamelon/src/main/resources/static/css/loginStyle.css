@@ -187,7 +187,7 @@ a,
 
 .input button[type="submit"]:hover {
     cursor: pointer;
-    color: var(--verde);
+    color: var(--verdeGris);
     background-color: var(--blanco);
 
 
