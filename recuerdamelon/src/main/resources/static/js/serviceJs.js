@@ -36,21 +36,6 @@ function filterFunction() {
 }
 
 
-// -------- POPUP CREAR TASK ---------------// 
- 
-function openNewTask(){
-  document.getElementById("formNewTask").style.display ="block";
-}
-
-function cancelNewTask(){
-  document.getElementById("formNewTask").style.display ="none";
-}
-
-function acceptNewTask(){
-  document.getElementById("formNewTask").style.display ="none";
-}
-
-
 // -------- CONTADOR CHAR TITTLES CREAR TASK
 // -------- AUX
 

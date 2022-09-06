@@ -70,6 +70,14 @@ public class TaskController {
         return "tasks";
     }
 
+
+    @GetMapping("/task/{id}/delete")
+    public String deleteOne (@PathVariable("id") Integer id, ModelMap model) {
+        taskService.deleteById(id);
+        return "redirect:/tasks";
+    }
+
+
     /*--- VER DETALLES DE LA TASK ¿?¿?*/
     @GetMapping("/task/{id}")
     @PostAuthorize("hasRole('ROLE_ADMIN') or #model[task].userId == authentication.principal.id")
@@ -132,16 +140,16 @@ public class TaskController {
 
         map = TaskHorario.map(start,end);
         int i = 0;
-            for (var entry : map.entrySet()){
-                taskDTO.setHorario(true);
-                taskDTO.setDescription(tasks.get(i));
-                taskDTO.setStartDate( DateUtil.dateToString1(DateUtil.stringToDate1(entry.getKey())));
-                taskDTO.setEndDate(DateUtil.dateToString1(DateUtil.stringToDate1( entry.getValue())));
-                taskDTO.setDeleted(false);
-                taskDTO.setTaskType(taskTypeService.findByName("business"));
-                this.taskService.save(taskDTO);
-                i++;
-            }
+        for (var entry : map.entrySet()){
+            taskDTO.setHorario(true);
+            taskDTO.setDescription(tasks.get(i));
+            taskDTO.setStartDate( DateUtil.dateToString1(DateUtil.stringToDate1(entry.getKey())));
+            taskDTO.setEndDate(DateUtil.dateToString1(DateUtil.stringToDate1( entry.getValue())));
+            taskDTO.setDeleted(false);
+            taskDTO.setTaskType(taskTypeService.findByName("business"));
+            this.taskService.save(taskDTO);
+            i++;
+        }
         return "redirect:/tasks";
     }
 
@@ -320,5 +328,6 @@ public class TaskController {
         this.taskService.save(taskDTO);
         return "redirect:/tasks";
     }
+
 
 }
