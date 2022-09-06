@@ -52,7 +52,10 @@
 
             <!-- BUTTON TASK -->
             <div class="follow">
+                <div class="icon first"><img th:src="@{/img/icons/plus-iconsW.svg}" alt="Crear Tarea"></div>
                 <div class="icon deletetarea"><img th:src="@{/img/icons/trash-iconW.svg}" alt="Eliminar tarea"></div>
+                <div class="icon"><img th:src="@{/img/icons/mark-iconsW.svg}" alt="Seleccionar todo"></div>
+                <div class="icon last"><img th:src="@{/img/icons/share_iconW.svg}" alt="Compartir Tarea"></div>
                 <div class="label">
                     tasks
                     <!-- <img src="./asset/img/menu-lateral/help_icon.svg" alt="Usuario"> -->
@@ -95,21 +98,13 @@
                                         <span th:if="${task.deleted} == true" style="color:red" th:text="${task.endDate}"/>
                                     </div>
                                     <div class="col">
-                                        <!--    <img src="./asset/img/icons/edit-iconW.svg" alt="Imagen"> -->
-                                        <!--                                                 <button type="button" class="btn-edit" th:id="'botonedit-'+${iter.index}">
-                                                                                            <span>.</span>
-                                                                                        </button> -->
-                                        <a th:src="@{/img/icons/edit-iconW.svg}" class="btn btn-primary" th:href="@{'/task/' + ${task.id} + '/edit'}"
-                                           title="Edit"><span class="glyphicon glyphicon-edit">Edit</span></a>
-                                        <button type="button" class="btn-select" th:id="'botonselect-'+${iter.index}">
-                                            <span>Select</span>
-                                        </button>
-
-                                        <!--  SELECT BUTTON -->
-                                        <!--
-                                            <input class="btn-check" type="radio" value="" id="select-1">
-                                            <label class="btn btn-primary" for="select-1">select</label>
-                                        -->
+                                        <a class="btn btn-primary" th:href="@{'/task/' + ${task.id} + '/edit'}"
+                                           title="Edit"><span>Edit</span></a>
+                                    </div>
+                                    <div class="col">
+                                        <a class="btn btn-danger" th:href="@{'/task/' + ${task.id} + '/delete'}"
+                                           title="Delete"><span>Delete</span>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="row">
