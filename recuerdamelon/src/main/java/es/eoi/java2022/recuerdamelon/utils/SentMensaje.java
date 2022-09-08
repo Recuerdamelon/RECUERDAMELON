@@ -20,7 +20,11 @@ public class SentMensaje {
         sender.add(user);
         dtoSender.setUsers(sender);
         dtoSender.setDate(dto.getDate());
-        String sendToo = (Arrays.toString(recievers.toArray()));
+        List<String> names = new ArrayList<>();
+        for (User sent:recievers) {
+            names.add(sent.getUsername());
+        }
+        String sendToo = (Arrays.toString(names.toArray()));
         dtoSender.setSender(sendToo);
         return dtoSender;
     }

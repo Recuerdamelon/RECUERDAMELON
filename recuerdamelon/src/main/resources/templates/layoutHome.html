@@ -22,6 +22,7 @@
     <!-- ESTILOS PROPIOS -->
 <!--    <link rel="stylesheet" th:href="@{/css/normalize.css}">-->
     <link rel="stylesheet" th:href="@{/css/menu-usuario.css}"/>
+
     <div sec:authorize="hasRole('PLAIN_USER')">
         <link rel="stylesheet" th:href="@{/css/serviceSt.css}">
     </div>
