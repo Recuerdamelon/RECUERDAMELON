@@ -68,7 +68,7 @@ El script de la base de datos viene en el archivo ../src/java/resources/data.sql
 
 * user-photos-------------------Directorio local para archivar fotos de perfil
 ----------------------------------------------------------------------------
-**Para una descripción más detallada del proyecto consultar >> <br />
-/RECUERDAMELON/Memoria Recuerda Melón/Memoria tecnica Recuerda Melón.pdf
+Para una descripción más detallada del proyecto consultar >> <br />
+###../RECUERDAMELON/Memoria Recuerda Melón/Memoria tecnica Recuerda Melón.pdf
 
 
