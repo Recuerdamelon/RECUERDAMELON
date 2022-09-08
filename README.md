@@ -9,7 +9,8 @@
 
 ## PONLO EN MARCHA
 
-Ejecutar `mvn spring-boot:run`
+Limpieza del módulo Maven > mvn clean install
+Ejecutable > mvn spring-boot:run
 
 A continuación, inicie su navegador favorito y vaya a `http://localhost:8080` [Url de ejecución](http://localhost:8080)
 
@@ -18,18 +19,19 @@ A continuación, inicie su navegador favorito y vaya a `http://localhost:8080` [
 * JAVA - Arquitectura de la aplicación
 * HTML - Visualización Web
 * CSS - Estilo HTML
+* Javascript - Funcionalidades añadidas a algunos elementos concretos de la vista
 
-## Diagrama de la Base de Datos (H2)
+## Diagrama de la Base de Datos (MySQL)
+Para la correcta ejecución hay que crear un nuevo esquema de MySQL con nombre 'recuerdamelon'
+El script de la base de datos viene en el archivo ../src/java/resources/data.sql 
 
-<img width="265" alt="h2" src="https://user-images.githubusercontent.com/106087948/175396589-bf3743c3-9a07-466a-b28d-82bc9b5522e5.png">
-
-[Url de ejecución](http://localhost:8080/h2-console)
+<img width="1029" alt="bbdd" src="https://user-images.githubusercontent.com/106087948/189113601-2ef3e824-c07d-4037-ba53-c48964678f7e.png">
 
 ## CONTENIDO hasta ahora...
 
 ## POM
 
-* Dependencias de: maven, jpa, thymeleaf, starter web, spring security, h2 DDBB, MySql, test, openapi-ui (rest)
+* Dependencias de: maven, jpa, thymeleaf, starter web, spring security, h2, MySql, test, openapi-ui (swagger), mapstruct, lombok, web-socket
 
 ## JAVA
 ----------------------------------------------------------------------------
@@ -44,17 +46,28 @@ A continuación, inicie su navegador favorito y vaya a `http://localhost:8080` [
 * AbstractService
 * Service
 ----------------------------------------------------------------------------
+* EVENT
+----------------------------------------------------------------------------
+* LISTENERS
+----------------------------------------------------------------------------
 * UTILS
-* DateUtil
 ----------------------------------------------------------------------------
 * WEB
 * Rest
-
-[Url de ejecución](http://localhost:8080/swagger-ui/index.html#/)
-
 ----------------------------------------------------------------------------
-
-
+* RecuerdaMelonApplication.java
+----------------------------------------------------------------------------
+[Url de ejecución en producción](http://localhost:8080/swagger-ui/index.html#/)
+----------------------------------------------------------------------------
 ## RESOURCES
 * data.sql
 * yaml
+* templates
+* static
+* properties
+-------------------Directorio local de fotos de perfil
+* user-photos
+----------------------------------------------------------------------------
+**Para una descripción más detallada del proyecto consultar /RECUERDAMELON/Memoria Recuerda Melón/Memoria tecnica Recuerda Melón.pdf
+
+
