@@ -155,9 +155,8 @@ public class CommunityController {
             List<User> recieveInvitation = new ArrayList<>();
             for (String invited : toAdd) {
                 recieveInvitation.add(userService.findByUsername(invited));
-                mensajesService.save(Invitation.makeInvitation(toAdd, name, userAdmin, recieveInvitation));
-
             }
+            Invitation.makeInvitation(toAdd, name, userAdmin, recieveInvitation, userService, mensajesService);
         }else{
             redirectAttributes.addFlashAttribute("erroraddusername", true);
             return "redirect:/community/{name}/users";

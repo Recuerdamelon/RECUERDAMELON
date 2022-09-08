@@ -61,7 +61,7 @@ public class DateUtil {
     public static List<Task> setTasksOutOfDate (Timestamp timestamp, List<Task> all, TaskService service, TaskServiceMapper mapper){
         List<Task> endings = new ArrayList<>();
         for (Task task:all) {
-            if(DateUtil.stringToDate2(task.getEndDate()).isAfter(DateUtil.timeStamp().toLocalDateTime())){
+            if(DateUtil.stringToDate2(task.getEndDate()).plusDays(1).isAfter(DateUtil.timeStamp().toLocalDateTime())){
                 task.setDeleted(false);
                 endings.add(task);
                 service.save(mapper.toDto(task));
@@ -75,6 +75,9 @@ public class DateUtil {
         return endings;
 
     }
+
+
+
 
 }
 
